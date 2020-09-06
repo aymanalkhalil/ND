@@ -1,4 +1,6 @@
 <?php include_once('includes/header.php');
+
+
 if (!isset($_SESSION['user_id']) && !isset($_SESSION['merchant_id']) && !isset($_SESSION['sponsor_id'])) {
 
     echo "<script>window.location.href='index.php'</script>";
@@ -355,9 +357,9 @@ if (isset($_POST['edit'])) {
 
 switch (key($_GET)) {
     case 'me':
-        if (key($_SESSION) != 'merchant_id') {
-            echo "<script>window.location.href='my-account.php'</script>";
-        }
+        // if (key($_SESSION) != 'merchant_id') {
+        //     echo "<script>window.location.href='my-account.php'</script>";
+        // }
         $share_id = $_GET['me'];
         $share_m = "SELECT * from uploads_merchants WHERE upload_merchant_id=$share_id";
         $result_m = mysqli_query($conn, $share_m);
@@ -366,9 +368,9 @@ switch (key($_GET)) {
         }
         break;
     case 'sp';
-        if (key($_SESSION) != 'sponsor_id') {
-            echo "<script>window.location.href='my-account.php'</script>";
-        }
+        // if (key($_SESSION) != 'sponsor_id') {
+        //     echo "<script>window.location.href='my-account.php'</script>";
+        // }
         $share_id = $_GET['sp'];
         $share_s = "SELECT * from uploads_sponsors WHERE upload_sponsor_id=$share_id";
         $result_s = mysqli_query($conn, $share_s);
@@ -378,9 +380,9 @@ switch (key($_GET)) {
         break;
 
     case 'us';
-        if (key($_SESSION) != 'user_id') {
-            echo "<script>window.location.href='my-account.php'</script>";
-        }
+        // if (key($_SESSION) != 'user_id') {
+        //     echo "<script>window.location.href='my-account.php'</script>";
+        // }
         $share_id = $_GET['us'];
         $share_u = "SELECT * from uploads_users WHERE upload_user_id=$share_id";
         $result_u = mysqli_query($conn, $share_u);
@@ -444,7 +446,7 @@ if (isset($_GET['sp_id'])) {
     $delete_m_data = mysqli_query($conn, "DELETE from uploads_merchants where upload_merchant_id='$share_m_id'");
     if ($delete_m_data) {
 
-                           echo "<script type='text/Javascript'>
+        echo "<script type='text/Javascript'>
                        window.setTimeout(function() {
                        window.location.href = 'my-account.php?s=1';
                        }, 2000);</script>";
@@ -476,11 +478,11 @@ if (isset($_GET['sp_id'])) {
         </div>
     </div>
 </section>
-<!-- <style>
+<style>
     .position-absolute {
         position: relative !important;
     }
-</style> -->
+</style>
 <?php
 if (isset($success)) {
     echo $success;

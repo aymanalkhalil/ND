@@ -19,6 +19,6 @@ switch ($checkpage) {
         echo " عرض مشاركاتي";
     break;
     default:
-        echo "الرئيسية|منصة اليوم الوطني السعودي ٩٠";
+        echo "منصة اليوم الوطني السعودي ٩٠";
         break;
 }

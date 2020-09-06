@@ -1,4 +1,5 @@
 <?php include_once('includes/header.php');
+
 if (isset($_POST['add'])) {
   $allowed_types = array('mp3', 'mp4', 'png', 'jpeg', 'jpg', 'svg', '3gp', 'mov');
   if ($_POST['type'] == 'users') {
@@ -134,7 +135,7 @@ if (isset($_POST['add'])) {
 }
 if (isset($_GET['s'])) {
   $s
-  = "<div class='alert alert-success text-center mt-2 alert-dismissible text-center'>
+    = "<div class='alert alert-success text-center mt-2 alert-dismissible text-center'>
              <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
                <h4><i class='icon fa fa-check'></i> تم حذف المشاركة بنجاح! </h4>
               </div>
@@ -142,9 +143,14 @@ if (isset($_GET['s'])) {
                        window.setTimeout(function() {
                        window.location.href = 'my-account.php';
                        }, 2000);</script>";
-
 }
-
+if (isset($_GET['pageno'])) {
+  $pageno = $_GET['pageno'];
+} else {
+  $pageno = 1;
+}
+$num_records_per_page = 6;
+$offset = ($pageno - 1) * $num_records_per_page;
 
 ?>
 
@@ -187,6 +193,7 @@ if (isset($s)) {
     position: relative !important;
   }
 
+
   .badge {
     font-size: 100%;
   }
@@ -218,7 +225,7 @@ if (isset($s)) {
           $result = mysqli_query($conn, $query);
           $data_u = mysqli_fetch_assoc($result);
         ?>
-          <div class="col-lg-7 col-12">
+          <div class="col-lg-7 col-12 ">
             <div class="owl-carousel" data-items="1" data-autoplay="true">
               <div class="item">
                 <img class="img-fluid" style='width:55%' src="assets/images/talent1.jpeg" alt="">
@@ -262,6 +269,8 @@ if (isset($s)) {
                       <div class="form-group col-md-12">
                         <label for="">مشاركة صورة او فيديو او مقطع صوتي</label>
                         <input type="file" dir='rtl' name="upload" class="form-control" required>
+                        <strong class='text-danger'>الصيغ المسموحة للصور :(png-jpeg-jpg-svg)<br>الصيغ المسموحة للفيديوهات:(MP4-MOV)<br>الصيغ المسموحة للملفات الصوتية:(MP3)</strong>
+
                       </div>
                       <div class="form-group col-md-12">
                         <label for="">اضافة تعليق (ليست اجبارية)</label>
@@ -274,14 +283,9 @@ if (isset($s)) {
                       </div>
                     </form>
                   </div>
-
                 </div>
-
               </div>
-
             </section>
-
-
             <section class='col-lg-12'>
               <div class="container">
                 <div class="row justify-content-center text-center">
@@ -289,12 +293,16 @@ if (isset($s)) {
                     <div class="mb-6">
                       <h2 class="mt-3 text-success">مشاركاتي</h2>
                       <?php
-                      $share_s = "SELECT * FROM uploads_users where user_id='{$_SESSION['user_id']}'";
+                      $share_s = "SELECT * FROM uploads_users where user_id='{$_SESSION['user_id']}' ORDER BY upload_user_id DESC LIMIT $offset, $num_records_per_page";
                       $share_s_res = mysqli_query($conn, $share_s);
                       if (mysqli_num_rows($share_s_res) == 0) {
                         echo "<h5 class='text-danger'>لا توجد مشاركات لديك !</h5>";
                       ?>
-                      <?php  } else { ?>
+                      <?php  } else {
+                        $total_user_uploads_pages = mysqli_query($conn, "SELECT * FROM uploads_users where user_id='{$_SESSION['user_id']}'");
+                        $total_rows_s = mysqli_num_rows($total_user_uploads_pages);
+                        $total_pages_s = ceil($total_rows_s / $num_records_per_page);
+                      ?>
                     </div>
                   </div>
                 </div>
@@ -316,9 +324,7 @@ if (isset($s)) {
                     <div class="grid columns-3 row popup-gallery">
                       <div class="grid-sizer"></div>
                       <?php while ($s_shares = mysqli_fetch_assoc($share_s_res)) :
-
                           $typeArr = explode('.', $s_shares['upload_user_file']);
-                          // var_dump(end($typeArr));
                           global $type;
                           switch (end($typeArr)) {
                             case 'jpeg':
@@ -342,7 +348,7 @@ if (isset($s)) {
                           }
                       ?>
                         <?php if ($type == 'cat1') { ?>
-                          <div class="grid-item  col-lg-4 col-md-6 mb-5 <?php echo $type == 'cat1' ? 'cat1' : "" ?> ?>">
+                          <div class="grid-item  col-lg-4 col-md-6 mb-5 <?php echo $type == 'cat1' ? 'cat1' : "" ?>">
                             <div class="portfolio-item position-relative overflow-hidden">
                               <img class="img-center w-100" src="assets/upload_users/<?php echo $s_shares['upload_user_file'] ?>">
                               <div class="portfolio-title d-flex justify-content-between align-items-center">
@@ -355,9 +361,7 @@ if (isset($s)) {
                             </div>
                           </div>
                         <?php } elseif ($type == 'cat2') { ?>
-
-
-                          <div class="grid-item col-lg-4 col-md-6 mb-5 <?php echo $type == 'cat2' ? 'cat2' : "" ?> ?> ">
+                          <div class="grid-item col-lg-4 col-md-6 mb-5 <?php echo $type == 'cat2' ? 'cat2' : "" ?> ">
                             <div class="portfolio-item position-relative overflow-hidden">
                               <video class="img-center w-100" controls>
                                 <source src="assets/upload_users/<?php echo $s_shares['upload_user_file'] ?>">
@@ -386,16 +390,40 @@ if (isset($s)) {
                               </div>
                             </div>
                           </div>
-                    <?php
+                      <?php
                           }
                         endwhile;
-                      } ?>
-
+                      ?>
                     </div>
-
                   </div>
                 </div>
               </div>
+              <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-center">
+                  <li class="page-item"><a class="page-link" href="?pageno=1">الصفحة الاولى</a></li>
+                  <li class="page-item <?php if ($pageno <= 1) {
+                                          echo 'disabled';
+                                        }   ?>" tabindex="-1">
+                    <a class="page-link" href="<?php if ($pageno <= 1) {
+                                                  echo '#';
+                                                } else {
+                                                  echo "?pageno=" . ($pageno - 1);
+                                                } ?>" tabindex="-1">الصفحة السابقة</a>
+                  </li>
+
+                  <li class="page-item <?php if ($pageno >= $total_pages_s) {
+                                          echo 'disabled';
+                                        }   ?>">
+                    <a class="page-link" href="<?php if ($pageno >= $total_pages_s) {
+                                                  echo '#';
+                                                } else {
+                                                  echo "?pageno=" . ($pageno + 1);
+                                                } ?>">الصفحة التالية</a>
+                  </li>
+                  <li class="page-item"><a class="page-link" href="?pageno=<?php echo $total_pages_s; ?>">الصفحة الاخيرة</a></li>
+                </ul>
+              </nav>
+            <?php } ?>
             </section>
           <?php } ?>
 
@@ -415,7 +443,6 @@ if (isset($s)) {
               </div> -->
             </div>
           </div>
-
           <div class="col-lg-5 col-12">
             <h2 class="title">البيانات الشخصية</h2>
             <p class="lead mb-5">مرحباً بك في منصة اليوم الوطني السعودي ٩٠ </p>
@@ -457,18 +484,14 @@ if (isset($s)) {
                       </div>
                       <div class="col-12 text-center mt-4">
                         <input type="hidden" name="type" value='sponsors'>
-
                         <button type="submit" name='add' class="btn btn-outline-success btn-block"><span>ارفاق المشاركة</span>
                         </button>
                       </div>
                     </form>
                   </div>
-
                 </div>
-
               </div>
             </section>
-
             <section class='col-lg-12'>
               <div class="container">
                 <div class="row justify-content-center text-center">
@@ -476,12 +499,15 @@ if (isset($s)) {
                     <div class="mb-6">
                       <h2 class="mt-3 text-success">مشاركاتي</h2>
                       <?php
-                      $share_sp = "SELECT * FROM uploads_sponsors where sponsor_id='{$_SESSION['sponsor_id']}'";
+                      $share_sp = "SELECT * FROM uploads_sponsors where sponsor_id='{$_SESSION['sponsor_id']}' ORDER BY upload_sponsor_id DESC LIMIT $offset, $num_records_per_page";
                       $share_sp_res = mysqli_query($conn, $share_sp);
                       if (mysqli_num_rows($share_sp_res) == 0) {
                         echo "<h5 class='text-danger'>لا توجد مشاركات لديك !</h5>";
+                      } else {
+                        $total_sponsor_uploads_pages = mysqli_query($conn, "SELECT * FROM uploads_sponsors where sponsor_id='{$_SESSION['sponsor_id']}'");
+                        $total_rows_sp = mysqli_num_rows($total_sponsor_uploads_pages);
+                        $total_pages_sp = ceil($total_rows_sp / $num_records_per_page);
                       ?>
-                      <?php  } else { ?>
                     </div>
                   </div>
                 </div>
@@ -503,7 +529,6 @@ if (isset($s)) {
                     <div class="grid columns-3 row popup-gallery">
                       <div class="grid-sizer"></div>
                       <?php while ($sp_shares = mysqli_fetch_assoc($share_sp_res)) :
-
                           $typeArr = explode('.', $sp_shares['upload_sponsor_file']);
                           // var_dump(end($typeArr));
                           global $type;
@@ -527,9 +552,8 @@ if (isset($s)) {
                               "not defined";
                               break;
                           }
-                      ?>
-                        <?php if ($type == 'cat1') { ?>
-                          <div class="grid-item  col-lg-4 col-md-6 mb-5 <?php echo $type == 'cat1' ? 'cat1' : "" ?> ?>">
+                          if ($type == 'cat1') { ?>
+                          <div class="grid-item  col-lg-4 col-md-6 mb-5 <?php echo $type == 'cat1' ? 'cat1' : "" ?>">
                             <div class="portfolio-item position-relative overflow-hidden">
                               <img class="img-center w-100" src="assets/upload_sponsors/<?php echo $sp_shares['upload_sponsor_file'] ?>">
                               <div class="portfolio-title d-flex justify-content-between align-items-center">
@@ -542,9 +566,7 @@ if (isset($s)) {
                             </div>
                           </div>
                         <?php } elseif ($type == 'cat2') { ?>
-
-
-                          <div class="grid-item col-lg-4 col-md-6 mb-5 <?php echo $type == 'cat2' ? 'cat2' : "" ?> ?> ">
+                          <div class="grid-item col-lg-4 col-md-6 mb-5 <?php echo $type == 'cat2' ? 'cat2' : "" ?>  ">
                             <div class="portfolio-item position-relative overflow-hidden">
                               <video class="img-center w-100" controls>
                                 <source src="assets/upload_sponsors/<?php echo $sp_shares['upload_sponsor_file'] ?>">
@@ -573,16 +595,39 @@ if (isset($s)) {
                               </div>
                             </div>
                           </div>
-                    <?php
+                      <?php
                           }
                         endwhile;
-                      } ?>
-
+                      ?>
                     </div>
-
                   </div>
                 </div>
               </div>
+              <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-center">
+                  <li class="page-item"><a class="page-link" href="?pageno=1">الصفحة الاولى</a></li>
+                  <li class="page-item <?php if ($pageno <= 1) {
+                                          echo 'disabled';
+                                        }   ?>" tabindex="-1">
+                    <a class="page-link" href="<?php if ($pageno <= 1) {
+                                                  echo '#';
+                                                } else {
+                                                  echo "?pageno=" . ($pageno - 1);
+                                                } ?>" tabindex="-1">الصفحة السابقة</a>
+                  </li>
+                  <li class="page-item <?php if ($pageno >= $total_pages_sp) {
+                                          echo 'disabled';
+                                        }   ?>">
+                    <a class="page-link" href="<?php if ($pageno >= $total_pages_sp) {
+                                                  echo '#';
+                                                } else {
+                                                  echo "?pageno=" . ($pageno + 1);
+                                                } ?>">الصفحة التالية</a>
+                  </li>
+                  <li class="page-item"><a class="page-link" href="?pageno=<?php echo $total_pages_sp; ?>">الصفحة الاخيرة</a></li>
+                </ul>
+              </nav>
+            <?php } ?>
             </section>
           <?php } ?>
         <?php
@@ -642,7 +687,6 @@ if (isset($s)) {
                       </div>
                       <div class="col-12 text-center mt-4">
                         <input type="hidden" name="type" value='merchants'>
-
                         <button type="submit" name='add' class="btn btn-outline-success btn-block"><span>ارفاق المشاركة</span>
                         </button>
                       </div>
@@ -658,12 +702,16 @@ if (isset($s)) {
                     <div class="mb-6">
                       <h2 class="mt-3 text-success">مشاركاتي</h2>
                       <?php
-                      $share_m = "SELECT * FROM uploads_merchants where merchant_id='{$_SESSION['merchant_id']}'";
+                      $share_m = "SELECT * FROM uploads_merchants where merchant_id='{$_SESSION['merchant_id']}' ORDER BY upload_merchant_id DESC LIMIT $offset, $num_records_per_page";
                       $share_m_res = mysqli_query($conn, $share_m);
                       if (mysqli_num_rows($share_m_res) == 0) {
                         echo "<h5 class='text-danger'>لا توجد مشاركات لديك !</h5>";
+                      } else {
+
+                        $total_merchant_uploads_pages = mysqli_query($conn, "SELECT * FROM uploads_merchants where merchant_id='{$_SESSION['merchant_id']}'");
+                        $total_rows_mer = mysqli_num_rows($total_merchant_uploads_pages);
+                        $total_pages_mer = ceil($total_rows_mer / $num_records_per_page);
                       ?>
-                      <?php  } else { ?>
                     </div>
                   </div>
                 </div>
@@ -685,7 +733,6 @@ if (isset($s)) {
                     <div class="grid columns-3 row popup-gallery">
                       <div class="grid-sizer"></div>
                       <?php while ($m_shares = mysqli_fetch_assoc($share_m_res)) :
-
                           $typeArr = explode('.', $m_shares['upload_merchant_file']);
                           // var_dump(end($typeArr));
                           global $type;
@@ -711,7 +758,7 @@ if (isset($s)) {
                           }
                       ?>
                         <?php if ($type == 'cat1') { ?>
-                          <div class="grid-item  col-lg-4 col-md-6 mb-5 <?php echo $type == 'cat1' ? 'cat1' : "" ?> ?>">
+                          <div class="grid-item  col-lg-4 col-md-6 mb-5 <?php echo $type == 'cat1' ? 'cat1' : "" ?> ">
                             <div class="portfolio-item position-relative overflow-hidden">
                               <img class="img-center w-100" src="assets/upload_merchants/<?php echo $m_shares['upload_merchant_file'] ?>">
                               <div class="portfolio-title d-flex justify-content-between align-items-center">
@@ -724,9 +771,7 @@ if (isset($s)) {
                             </div>
                           </div>
                         <?php } elseif ($type == 'cat2') { ?>
-
-
-                          <div class="grid-item col-lg-4 col-md-6 mb-5 <?php echo $type == 'cat2' ? 'cat2' : "" ?> ?> ">
+                          <div class="grid-item col-lg-4 col-md-6 mb-5 <?php echo $type == 'cat2' ? 'cat2' : "" ?> ">
                             <div class="portfolio-item position-relative overflow-hidden">
                               <video class="img-center w-100" controls>
                                 <source src="assets/upload_merchants/<?php echo $m_shares['upload_merchant_file'] ?>">
@@ -755,26 +800,47 @@ if (isset($s)) {
                               </div>
                             </div>
                           </div>
-                    <?php
+                      <?php
                           }
                         endwhile;
-                      } ?>
-
+                      ?>
                     </div>
-
                   </div>
                 </div>
               </div>
-            </section>
+              <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-center">
+                  <li class="page-item"><a class="page-link" href="?pageno=1">الصفحة الاولى</a></li>
+                  <li class="page-item <?php if ($pageno <= 1) {
+                                          echo 'disabled';
+                                        }   ?>" tabindex="-1">
+                    <a class="page-link" href="<?php if ($pageno <= 1) {
+                                                  echo '#';
+                                                } else {
+                                                  echo "?pageno=" . ($pageno - 1);
+                                                } ?>" tabindex="-1">الصفحة السابقة</a>
+                  </li>
 
+                  <li class="page-item <?php if ($pageno >= $total_pages_mer) {
+                                          echo 'disabled';
+                                        }   ?>">
+                    <a class="page-link" href="<?php if ($pageno >= $total_pages_mer) {
+                                                  echo '#';
+                                                } else {
+                                                  echo "?pageno=" . ($pageno + 1);
+                                                } ?>">الصفحة التالية</a>
+                  </li>
+                  <li class="page-item"><a class="page-link" href="?pageno=<?php echo $total_pages_mer; ?>">الصفحة الاخيرة</a></li>
+                </ul>
+              </nav>
+            <?php } ?>
+            </section>
           <?php } ?>
         <?php
-
         } else {
           echo "<script>window.location.href='index.php'</script>";
         }
         ?>
-
       </div>
     </div>
   </section>

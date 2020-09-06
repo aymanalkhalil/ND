@@ -11,14 +11,13 @@ if (isset($_POST['login'])) {
       $row = mysqli_fetch_assoc($result);
       $_SESSION['user_id'] = $row['user_id'];
       $_SESSION['user_name'] = $row['user_name'];
-     echo "<script>window.location.href='index.php'</script>";
+      echo "<script>window.location.href='index.php'</script>";
     } else {
       $error = " <div class='alert alert-danger text-center alert-dismissible text-center'>
                <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
                  <h4><i class='icon fa fa-ban'></i>عذراً هذا الحساب غير مسجل لدينا</h4>
                 </div>";
     }
-
   } elseif ($type == 2) {
     $query = "SELECT * from merchants where merchant_email='$email' AND merchant_password='$password'";
     $result = mysqli_query($conn, $query);
@@ -77,7 +76,11 @@ if (isset($_POST['login'])) {
 </section>
 
 <!--hero section end-->
-
+<style>
+  .position-absolute {
+    position: relative !important;
+  }
+</style>
 
 <!--body content start-->
 
@@ -139,4 +142,4 @@ if (isset($_POST['login'])) {
 
 
 
-<?php include_once('includes/footer.php') ?>
+  <?php include_once('includes/footer.php') ?>

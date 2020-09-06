@@ -201,6 +201,32 @@
                 </section>
             </div>
         </div>
+
+        <div class="container">
+            <div class="row align-items-center justify-content-center">
+                <section>
+                    <div class="container">
+                        <div class="row align-items-center justify-content-between">
+                            <div class="col-12 col-lg-6 mb-8 mb-lg-0 text-center">
+                                <img src="assets/images/talent1.jpeg" width='400px' alt="Image" class="img-fluid">
+                            </div>
+                            <div class="col-12 col-lg-6 col-xl-5">
+                                <div class='text-center'>
+                                    <span class="badge badge-success-soft p-2 bg-success">
+                                        <img src="assets/images/gif/KSA-flag.gif" alt="" srcset="">
+                                    </span>
+                                    <!-- <h2 class="mt-3">بسم الله الرحمن الرحيم</h2> -->
+                                    <p class="lead mb-0">
+                                        ‎أنتم الأبطال
+
+                                        ‎في ظل جائحة الوباء ، و البحث عن السلامة و الدواء ، لن تكفي الإشادة و الثناء لمن اختاروا التصدي للوباء ، للمواطنين الملتزمين و الأطباء المضحيين ، للوزارات و القطاعات ، و الهيئات و المؤسسات ، لمن تفقد الأحوال و لبى المنادي بالسؤال ، شكراً لكم أنتم الأبطال .</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
     </section>
 </div>
 <!--body content end-->

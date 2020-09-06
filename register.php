@@ -101,7 +101,11 @@ if (isset($_POST['register'])) {
 ?>
 
 <!--hero section start-->
-لا
+<style>
+  .position-absolute {
+    position: relative !important;
+  }
+</style>
 <section class="position-relative">
   <div id="particles-js"></div>
   <div class="container">
