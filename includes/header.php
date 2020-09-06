@@ -61,12 +61,15 @@ include_once('includes/connection.php');
                                 منصة اليوم الوطني <span class="text-light font-weight-bold">السعودي ٩٠</span>
 
                             </a>
+                            <?php $style = "style='color:#f94f15'";  ?>
                             <nav class="navbar navbar-expand-lg mr-auto">
                                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span>
                                 </button>
                                 <div class="collapse navbar-collapse" id="navbarNav">
                                     <ul class="navbar-nav">
-                                        <li class="nav-item"> <a class="nav-link  active" href="index.php">الرئيسية</a>
+                                        <li class="nav-item">
+
+                                            <a class="nav-link  active" href="index.php" <?php echo (basename($_SERVER['PHP_SELF'], ".php")) == "index" ? $style  : ""; ?>>الرئيسية</a>
 
 
                                         </li>
@@ -75,7 +78,7 @@ include_once('includes/connection.php');
                                         <li class="nav-item"> <a class="nav-link  active" href="index.php">التخفيضات والعروض
                                             </a>
                                         </li>
-                                        <li class="nav-item"> <a class="nav-link  active" href="subscriptions.php"> الاشتراكات
+                                        <li class="nav-item"> <a class="nav-link  active" <?php echo (basename($_SERVER['PHP_SELF'], ".php")) == "subscriptions" ? $style  : ""; ?> href="subscriptions.php"> الاشتراكات
                                             </a>
                                         </li>
                                         <!-- <li class="nav-item"> <a class="nav-link  active" href="index.php">الرئيسية</a>
@@ -91,6 +94,7 @@ include_once('includes/connection.php');
 
                                         </li>
                                         <?php
+
                                         if (isset($_SESSION['user_id'])) {
                                         ?>
                                             <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
@@ -99,7 +103,8 @@ include_once('includes/connection.php');
                                                     ?>
                                                 </a>
                                                 <ul class="dropdown-menu">
-                                                    <li><a class="dropdown-item" href="my-account.php">صفحتي الشخصية</a>
+                                                    <li>
+                                                        <a class="dropdown-item active" href="my-account.php">صفحتي الشخصية</a>
                                                     </li>
                                                     <li><a class="dropdown-item" href="logout.php?u=<?php echo $_SESSION['user_id'] ?>">تسجيل الخروج</a>
                                                     </li>

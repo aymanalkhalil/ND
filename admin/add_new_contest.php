@@ -7,7 +7,7 @@ if (isset($_POST['add'])) {
     $path = '../uploads/';
     $file_name = $_FILES['upload_file']['name'];
     $tmp_name = $_FILES['upload_file']['tmp_name'];
-    $file_ext = time() . $file_name;
+    $file_ext = time() . strtolower($file_name);
     move_uploaded_file($tmp_name, $path . $file_ext);
 
     if (empty($_POST['r2'])) {
@@ -53,7 +53,7 @@ if (isset($_POST['update'])) {
         unlink($path . $old_file['upload_file_admin']);
         $file_name = $_FILES['update_file']['name'];
         $tmp_name = $_FILES['update_file']['tmp_name'];
-        $file_ext = time() . $file_name;
+        $file_ext = time() . strtolower($file_name);
         move_uploaded_file($tmp_name, $path . $file_ext);
         if (empty($_POST['r5'])) {
             $update = "UPDATE uploads_admin SET upload_file_admin='$file_ext',upload_for_all=1,admin_id={$_SESSION['admin_id']}  WHERE upload_admin_id='$upload_id'";
@@ -270,9 +270,30 @@ if (isset($_POST['delete'])) {
 
                                         $file_from_db = $row['upload_file_admin'];
 
+                                        $allowed_types = array('mp3', 'mp4', 'png', 'jpeg', 'jpg', 'svg', '3gp', 'mov');
 
                                         $check_type = explode(".", $file_from_db);
+                                        switch (end($check_type)) {
+                                            case 'png':
+                                            case 'jpeg':
+                                            case 'jpg':
+                                            case 'svg':
+                                                $type = 'image';
+                                                break;
+                                            case 'mp4':
+                                            case 'mov':
+                                            case '3gp':
+                                                $type = 'video';
+                                                break;
+                                            case 'mp3':
+                                            case 'm4a':
+                                                $type = 'audio';
+                                                break;
 
+                                            default:
+                                                echo 'undefined';
+                                                break;
+                                        }
 
                                 ?>
                                         <tr>
@@ -281,22 +302,24 @@ if (isset($_POST['delete'])) {
                                             <td>
                                                 <?php
 
-                                                if (end($check_type) == 'png' || end($check_type) == 'jpeg') {
+                                                if ($type == 'image') {
 
                                                 ?>
                                                     <img src="../uploads/<?php echo $row['upload_file_admin'] ?>" width='250px' alt="" srcset="">
                                                 <?php
-                                                } elseif (end($check_type) == 'mp4') {
+                                                } elseif ($type == 'video') {
                                                 ?>
                                                     <video width="320" controls>
                                                         <source src="../uploads/<?php echo $row['upload_file_admin'] ?>" width="200px">
                                                     </video>
                                                 <?php
-                                                } else {
+                                                } elseif ($type == 'audio') {
                                                 ?>
                                                     <audio controls style="margin-top: 51px">
                                                         <source src=" ../uploads/<?php echo $row['upload_file_admin'] ?>"> </audio>
                                                 <?php
+                                                } else {
+                                                   echo "";
                                                 }
                                                 ?> </td>
                                             <td colspan='2' class=<?php echo $style ?>style=" width:180px;margin:10px;margin-top: 70px;">
@@ -352,7 +375,7 @@ if (isset($_POST['delete'])) {
                                                                     </div>
                                                                     <?php
 
-                                                                    if (end($check_type) == 'png' || end($check_type) == 'jpeg') {
+                                                                    if ($type == 'image') {
 
                                                                     ?>
 
@@ -363,7 +386,7 @@ if (isset($_POST['delete'])) {
                                                                         </div>
 
                                                                     <?php
-                                                                    } elseif (end($check_type) == 'mp4') {
+                                                                    } elseif ($type == 'video') {
                                                                     ?>
                                                                         <div class="form-group">
                                                                             <label for="">Old File - الفيديو الحالي</label><br>
@@ -373,13 +396,15 @@ if (isset($_POST['delete'])) {
                                                                         </div>
 
                                                                     <?php
-                                                                    } else {
+                                                                    } elseif ($type == 'audio') {
                                                                     ?>
                                                                         <label for="">Old File - مقطع الصوت الحالي</label><br>
                                                                         <audio controls>
                                                                             <source src="../uploads/<?php echo $row['upload_file_admin'] ?>">
                                                                         </audio>
                                                                     <?php
+                                                                    } else {
+                                                                       echo "";
                                                                     }
 
                                                                     ?>

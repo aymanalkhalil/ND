@@ -3,7 +3,7 @@ if (isset($_POST['add'])) {
   $allowed_types = array('mp3', 'mp4', 'png', 'jpeg', 'jpg', 'svg', '3gp', 'mov');
   if ($_POST['type'] == 'users') {
     $path = 'assets/upload_users/';
-    $file_name = strtolower($_FILES['upload']['name']);
+    $file_name = $_FILES['upload']['name'];
     $type = explode('.', $file_name);
     if (in_array(end($type), $allowed_types)) {
       $tmp_name = $_FILES['upload']['tmp_name'];
@@ -46,7 +46,7 @@ if (isset($_POST['add'])) {
     }
   } elseif ($_POST['type'] == 'merchants') {
     $path = 'assets/upload_merchants/';
-    $file_name = strtolower($_FILES['upload']['name']);
+    $file_name = $_FILES['upload']['name'];
     $type = explode('.', $file_name);
     if (in_array(end($type), $allowed_types)) {
       $tmp_name = $_FILES['upload']['tmp_name'];
@@ -89,7 +89,7 @@ if (isset($_POST['add'])) {
     }
   } elseif ($_POST['type'] == 'sponsors') {
     $path = 'assets/upload_sponsors/';
-    $file_name = strtolower($_FILES['upload']['name']);
+    $file_name = $_FILES['upload']['name'];
     $type = explode('.', $file_name);
     if (in_array(end($type), $allowed_types)) {
       $tmp_name = $_FILES['upload']['tmp_name'];
