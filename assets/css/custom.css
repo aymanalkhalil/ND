@@ -1,0 +1,53 @@
+.navbar-dark #header-wrap.fixed-header {
+    background: #28a745 !important;
+}
+
+@font-face {
+    font-family: "RB";
+    src: url("../fonts/RB.ttf") format("truetype");
+}
+
+* {
+
+    font-family: "RB";
+
+}
+
+  #header-wrap {
+    background-color: #28a745 !important
+  }
+.scroll-top a, .scroll-top a:visited {
+    font-size: 24px;
+    color: #ffffff;
+    background: #28a745;
+    display: block;
+    height: 40px;
+    width: 40px;
+    line-height: 40px;
+    text-align: center;
+    border-radius: 0.25rem;
+    -webkit-box-shadow: 0 10px 55px 5px rgba(137, 173, 255, .15);
+    -moz-box-shadow: 0 10px 55px 5px rgba(137, 173, 255, .15);
+    box-shadow: 0 10px 55px 5px rgba(137, 173, 255, .15);
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+.scroll-top a:hover, .scroll-top a:focus {
+    color: #28a745;
+    background: #ffffff;
+}
+
+.btn-color:hover{
+background-color: #28a745;
+color:#ffffff;
+}
+.lead {
+    font-size: 1.15rem;
+    font-weight: 300;
+    margin-top:50px;
+    text-align:justify;
+}
+.dropdown-item:focus, .dropdown-item:hover {
+    background: #28a745;
+    color: #000;
+}
