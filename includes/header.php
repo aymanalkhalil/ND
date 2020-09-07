@@ -2,6 +2,9 @@
 session_start();
 include_once('includes/connection.php');
 // session_destroy();
+
+ini_set('upload_max_filesize', '70M');
+// phpinfo();
 ?>
 
 <!DOCTYPE html>
@@ -12,7 +15,7 @@ include_once('includes/connection.php');
     <meta charset="utf-8">
     <meta name="keywords" content="منصة اليوم الوطني السعودي ٩٠ , اليوم الوطني السعودي التسعون , مسابقات اليوم الوطني " />
     <meta name="description" content="منصة اليوم الوطني السعودي التسعون" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content ="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Title -->
     <title><?php require_once('title.php') ?></title>
     <!-- Favicon Icon -->
@@ -67,6 +70,7 @@ include_once('includes/connection.php');
                                         <li class="nav-item"> <a class="nav-link" href="merchants-feed.php" <?php echo (basename($_SERVER['PHP_SELF'], ".php")) == "merchants-feed" ? $style  : ""; ?>>التخفيضات والعروض
                                             </a>
                                         </li>
+
                                         <li class="nav-item"> <a class="nav-link " <?php echo (basename($_SERVER['PHP_SELF'], ".php")) == "national-feeds" ? $style  : ""; ?> href="national-feeds.php"> المشاركات الوطنية
                                             </a>
                                         </li>

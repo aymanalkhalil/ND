@@ -27,8 +27,9 @@ $offset = ($pageno - 1) * $num_records_per_page;
                     <ol class="breadcrumb justify-content-center bg-transparent p-0 m-0">
                         <li class="breadcrumb-item"><a class="text-dark" href="index.php">الرئيسية</a>
                         </li>
-
-                        <li class="breadcrumb-item active text-success" aria-current="page">شركاء النجاح</li>
+                        <li class="breadcrumb-item active text-success" aria-current="page"> شركاء النجاح والرعايات</li>
+                        <li class="breadcrumb-item"><a class="text-dark" href="sponsor-contests.php">مسابقات </a>
+                        </li>
                     </ol>
                 </nav>
             </div>
@@ -114,7 +115,7 @@ $offset = ($pageno - 1) * $num_records_per_page;
 
                                 <a class="popup-img h2 text-white" href="assets/upload_sponsors/<?php echo $all_feeds['upload_sponsor_file'] ?>">
 
-                                    <audio controls class="img-center w-100 mt-11" >
+                                    <audio controls class="img-center w-100 mt-11">
                                         <source src="assets/upload_sponsors/<?php echo $all_feeds['upload_sponsor_file'] ?>">
                                     </audio>
                                 </a>

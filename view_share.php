@@ -457,7 +457,6 @@ if (isset($_GET['sp_id'])) {
               </div>";
     }
 }
-
 ?>
 <!--hero section start-->
 <section class="position-relative">
