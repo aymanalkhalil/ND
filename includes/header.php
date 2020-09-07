@@ -52,7 +52,7 @@ include_once('includes/connection.php');
                                 <span><img src="assets/images/primary/nav-gray-logo.png" alt="" style='width: 320px;height: 130px;'></span>
                                 <!-- منصة اليوم الوطني <span class="text-light font-weight-bold">السعودي ٩٠</span> -->
                             </a>
-                            <?php $style = "style='color:#f94f15'";?>
+                            <?php $style = "style='color:#f94f15'"; ?>
 
                             <nav class="navbar navbar-expand-lg mr-auto">
                                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span>
@@ -62,22 +62,21 @@ include_once('includes/connection.php');
                                         <li class="nav-item">
                                             <a class="nav-link  active" href="index.php" <?php echo (basename($_SERVER['PHP_SELF'], ".php")) == "index" ? $style  : ""; ?>>الرئيسية</a>
                                         </li>
-                                        <li class="nav-item"> <a class="nav-link  active" href="index.php">شركاء النجاح و الرعايات</a>
+                                        <li class="nav-item"> <a class="nav-link" href="sponsors-feed.php" <?php echo (basename($_SERVER['PHP_SELF'], ".php")) == "sponsors-feed" ? $style  : ""; ?>>شركاء النجاح و الرعايات</a>
                                         </li>
-                                        <li class="nav-item"> <a class="nav-link  active" href="index.php">التخفيضات والعروض
+                                        <li class="nav-item"> <a class="nav-link" href="merchants-feed.php" <?php echo (basename($_SERVER['PHP_SELF'], ".php")) == "merchants-feed" ? $style  : ""; ?>>التخفيضات والعروض
                                             </a>
                                         </li>
-                                        <li class="nav-item"> <a class="nav-link  active" <?php echo (basename($_SERVER['PHP_SELF'], ".php")) == "subscriptions" ? $style  : ""; ?> href="subscriptions.php"> الاشتراكات
+                                        <li class="nav-item"> <a class="nav-link " <?php echo (basename($_SERVER['PHP_SELF'], ".php")) == "national-feeds" ? $style  : ""; ?> href="national-feeds.php"> المشاركات الوطنية
                                             </a>
                                         </li>
-                                        <!-- <li class="nav-item"> <a class="nav-link  active" href="index.php">الرئيسية</a>
-                                        </li>
-                                        <li class="nav-item"> <a class="nav-link  active" href="index.php">الرئيسية</a>
+                                        <!-- <li class="nav-item"> <a class="nav-link " <?php echo (basename($_SERVER['PHP_SELF'], ".php")) == "subscriptions" ? $style  : ""; ?> href="subscriptions.php"> الاشتراكات
+                                            </a>
                                         </li> -->
                                         <?php
                                         if (isset($_SESSION['user_id'])) {
                                         ?>
-                                          <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
+                                            <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
                                                     <?php
                                                     echo "مرحباً " . $_SESSION['user_name'];
                                                     ?>

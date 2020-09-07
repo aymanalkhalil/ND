@@ -17,7 +17,16 @@ switch ($checkpage) {
         break;
     case 'view_share';
         echo " عرض مشاركاتي";
-    break;
+        break;
+    case 'sponsors-feed':
+        echo "شركاء النجاح ";
+        break;
+    case 'merchants-feed':
+        echo "التخفيضات والعروض";
+        break;
+        case 'national-feeds':
+        echo "المشاركات الوطنية";
+            break;
     default:
         echo "منصة اليوم الوطني السعودي ٩٠";
         break;

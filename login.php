@@ -1,5 +1,8 @@
 <?php include_once('includes/header.php');
-// session_destroy();
+if (isset($_SESSION['merchant_id']) or isset($_SESSION['sponsor_id']) or isset($_SESSION['user_id'])) {
+  echo "<script>window.location.href='index.php'</script>";
+}
+
 if (isset($_POST['login'])) {
   $email = $_POST['email'];
   $password = $_POST['password'];

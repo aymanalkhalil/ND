@@ -82,3 +82,7 @@
     text-decoration: none;
     background-color: #28a745;
 }
+    .position-absolute {
+        position: relative !important;
+    }
+

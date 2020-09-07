@@ -477,6 +477,8 @@ if (isset($s)) {
                       <div class="form-group col-md-12">
                         <label for="">مشاركة صورة او فيديو او مقطع صوتي</label>
                         <input type="file" dir='rtl' name="upload" class="form-control" required>
+                        <strong class='text-danger'>الصيغ المسموحة للصور :(png-jpeg-jpg-svg)<br>الصيغ المسموحة للفيديوهات:(MP4-MOV)<br>الصيغ المسموحة للملفات الصوتية:(MP3)</strong>
+
                       </div>
                       <div class="form-group col-md-12">
                         <label for="">اضافة تعليق (ليست اجبارية)</label>
@@ -680,6 +682,8 @@ if (isset($s)) {
                       <div class="form-group col-md-12">
                         <label for="">مشاركة صورة او فيديو او مقطع صوتي</label>
                         <input type="file" dir='rtl' name="upload" class="form-control" required>
+                        <strong class='text-danger'>الصيغ المسموحة للصور :(png-jpeg-jpg-svg)<br>الصيغ المسموحة للفيديوهات:(MP4-MOV)<br>الصيغ المسموحة للملفات الصوتية:(MP3)</strong>
+
                       </div>
                       <div class="form-group col-md-12">
                         <label for="">اضافة تعليق (ليست اجبارية)</label>
