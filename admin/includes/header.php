@@ -9,6 +9,8 @@ if (isset($_GET['s'])) {
     unset($_SESSION['admin_id'], $_SESSION['admin_name']);
     header("location:login.php?s=true");
 }
+ini_set('upload_max_filesize', '120M');
+ini_set('post_max_size', '120M');
 ?>
 
 

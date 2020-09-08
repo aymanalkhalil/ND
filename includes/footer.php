@@ -6,25 +6,41 @@
         </svg>
     </div>
     <div class="container mt-11">
-        <!-- <div class="row">
+        <div class="row">
             <div class="col-12 col-lg-5 col-xl-4 ml-auto mb-6 mb-lg-0 text-center">
                 <div class="subscribe-form bg-warning-soft p-5 rounded">
-                <h5 class="mb-4 text-white">Newsletter</h5>
+                    <!-- <h5 class="mb-4 text-white">Newsletter</h5>
                     <h6 class="text-light">Subscribe Our Newsletter</h6>
                     <form id="mc-form" class="group">
                         <input type="email" value="" name="EMAIL" class="email form-control" id="mc-email" placeholder="Email Address" required="" style="height: 60px;">
                         <input class="btn btn-outline-light btn-block mt-3 mb-2" type="submit" name="subscribe" value="Subscribe">
                     </form> <small class="text-light">Get started for 1 Month free trial No Purchace
-                        required.</small>
-                <img src="assets/images/mi-logos/hqdefault.png" alt="" width='250px' srcset="">
+                        required.</small> -->
+                    <img src="assets/images/mi-logos/hqdefault.png" alt="" width='250px' srcset="">
                 </div>
+
             </div>
-            <div class="col-12 col-lg-6 col-xl-7">
-                <div class="row">
-                    <div class="col-12 col-sm-4 navbar-dark text-center">
-                        <h5 class="mb-4 text-white">Pages</h5>
+            <div class="col-12 col-lg-6 col-xl-7 text-center">
+                <div class="row mt-5">
+                    <div class="col-12 col-sm-6 text-cneter ">
+                        <a class="footer-logo text-white h2 mb-0" href="index.php">
+                            <span><img src="assets/images/primary/nav-gray-logo.png" alt="" style='width: 350px;'></span>
+                        </a>
+                        <ul class="list-inline mt-0 text-center">
+                            <h6 class='text-light'> تواصل معنا عبر منصات التواصل الإجتماعي</h6>
+                            <li class="list-inline-item"><a class="text-light ic-2x" href="#"><i class="la la-facebook"></i></a>
+                            </li>
+                            <li class="list-inline-item"><a class="text-light ic-2x" href="#"><i class="la la-instagram"></i></a>
+                            </li>
+                            <li class="list-inline-item"><a class="text-light ic-2x" href="#"><i class="la la-twitter"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-12 col-sm-6 mt-6 mt-sm-0 navbar-dark">
+
+                        <h5 class="mb-4 text-white">روابط سريعة</h5>
                         <ul class="navbar-nav list-unstyled mb-0">
-                            <li class="mb-3 nav-item"><a class="nav-link" href="about-us-1.html">About</a>
+                            <li class="mb-3 nav-item"><a class="nav-link" href="subscriptions.php">الاشتراكات</a>
                             </li>
                             <li class="mb-3 nav-item"><a class="nav-link" href="product-grid.html">Shop</a>
                             </li>
@@ -36,58 +52,27 @@
                             </li>
                         </ul>
                     </div>
-                    <div class="col-12 col-sm-4 mt-6 mt-sm-0 navbar-dark">
-                        <h5 class="mb-4 text-white">Service</h5>
-                        <ul class="navbar-nav list-unstyled mb-0">
-                            <li class="mb-3 nav-item"><a class="nav-link" href="#">Content Writing</a>
+                </div>
+                <!-- <div class="col-12 col-sm-6 mt-6 mt-sm-0">
+                        <ul class="list-inline mt-0 text-center">
+                            <li class="list-inline-item"><a class="text-light ic-2x" href="#"><i class="la la-facebook"></i></a>
                             </li>
-                            <li class="mb-3 nav-item"><a class="nav-link" href="#">Documentation</a>
+                            <li class="list-inline-item"><a class="text-light ic-2x" href="#"><i class="la la-instagram"></i></a>
                             </li>
-                            <li class="mb-3 nav-item"><a class="nav-link" href="login.html">Account</a>
-                            </li>
-                            <li class="nav-item"><a class="nav-link" href="career.html">Careers</a>
+                            <li class="list-inline-item"><a class="text-light ic-2x" href="#"><i class="la la-twitter"></i></a>
                             </li>
                         </ul>
-                    </div>
-                    <div class="col-12 col-sm-4 mt-6 mt-sm-0 navbar-dark">
-                        <h5 class="mb-4 text-white">Legal</h5>
-                        <ul class="navbar-nav list-unstyled mb-0">
-                            <li class="mb-3 nav-item"><a class="nav-link" href="terms-and-conditions.html">Term
-                                    Of Service</a>
-                            </li>
-                            <li class="mb-3 nav-item"><a class="nav-link" href="privacy-policy.html">Privacy
-                                    Policy</a>
-                            </li>
-                            <li class="nav-item"><a class="nav-link" href="#">Support</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="row mt-5">
-                    <div class="col-12 col-sm-6 text-center">
-                        <a class="footer-logo text-white h2 mb-0" href="index.php">
-                            <span><img src="assets/images/primary/nav-gray-logo.png" alt=""
-                                    style='width: 350px;'></span>
-                        </a>
-                    </div>
-                </div>
+                    </div> -->
             </div>
-        </div> -->
-        <div class="row text-white text-center mt-8">
-            <div class="col">
-                <hr class="mb-8">جميع الحقوق محفوظة<u><a class="text-white" href=""></a></u> | منصة اليوم الوطني السعودي
-                ٩٠ </div>
-            <!-- <div class="col-12 col-sm-6 mt-10 mt-sm-0">
-                <ul class="list-inline mt-5 text-center">
-                    <li class="list-inline-item"><a class="text-light ic-2x" href="#"><i class="la la-facebook"></i></a>
-                    </li>
-                    <li class="list-inline-item"><a class="text-light ic-2x" href="#"><i class="la la-instagram"></i></a>
-                    </li>
-                    <li class="list-inline-item"><a class="text-light ic-2x" href="#"><i class="la la-twitter"></i></a>
-                    </li>
-                </ul>
-            </div> -->
         </div>
+
+    </div>
+    <div class="row text-white text-center mt-8">
+        <div class="col">
+            <hr class="mb-8">جميع الحقوق محفوظة<u><a class="text-white" href=""></a></u> | منصة اليوم الوطني السعودي
+            ٩٠
+        </div>
+    </div>
     </div>
 </footer>
 <!--footer end-->

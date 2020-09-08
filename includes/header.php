@@ -2,9 +2,8 @@
 session_start();
 include_once('includes/connection.php');
 // session_destroy();
-
-ini_set('upload_max_filesize', '70M');
-// phpinfo();
+ini_set('upload_max_filesize','120M');
+ini_set('post_max_size','120M');
 ?>
 
 <!DOCTYPE html>

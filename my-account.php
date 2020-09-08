@@ -46,6 +46,7 @@ if (isset($_POST['add'])) {
                 </div>";
     }
   } elseif ($_POST['type'] == 'merchants') {
+
     $path = 'assets/upload_merchants/';
     $file_name = $_FILES['upload']['name'];
     $type = explode('.', $file_name);
@@ -144,6 +145,44 @@ if (isset($_GET['s'])) {
                        window.location.href = 'my-account.php';
                        }, 2000);</script>";
 }
+
+if (isset($_POST['edit'])) {
+  if ($_POST['type_user'] == 'sponsor') {
+    $desc = $_POST['change_desc'];
+    $sponsor_id = $_POST['sponsor_id'];
+    $update = "UPDATE sponsors SET sponsor_desc='$desc' WHERE sponsor_id='$sponsor_id'";
+  } elseif ($_POST['type_user'] == 'merchant') {
+    $desc = $_POST['change_desc'];
+    $merchant_id = $_POST['merchant_id'];
+    $update = "UPDATE merchants SET merchant_desc='$desc' WHERE merchant_id='$merchant_id'";
+  } elseif ($_POST['type_user'] == 'user') {
+    $desc = $_POST['change_desc'];
+    $user_id = $_POST['user_id'];
+    $update = "UPDATE users SET user_desc='$desc' WHERE user_id='$user_id'";
+  }
+  $res_update = mysqli_query($conn, $update);
+  if ($res_update) {
+    $success
+      = "<div class='alert alert-success text-center mt-2 alert-dismissible text-center'>
+             <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
+               <h4><i class='icon fa fa-check'></i> تم تعديل وصف الحساب بنجاح! </h4>
+              </div>
+              <script type='text/Javascript'>
+                       window.setTimeout(function() {
+                       window.location.href = 'my-account.php';
+                       }, 2000);</script>";
+  } else {
+
+    $error = " <div class='alert alert-danger text-center alert-dismissible text-center'>
+             <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
+               <h4><i class='icon fa fa-ban'></i>عذراً حدث خطأ يرجى المحاولة لاحقاً</h4>
+              </div>";
+  }
+}
+
+
+
+
 if (isset($_GET['pageno'])) {
   $pageno = $_GET['pageno'];
 } else {
@@ -221,7 +260,7 @@ if (isset($s)) {
       <div class="row">
         <?php
         if (isset($_SESSION['user_id'])) {
-          $query = "SELECT user_id,user_name,active from users where user_id='{$_SESSION['user_id']}'";
+          $query = "SELECT user_id,user_name,active,user_desc from users where user_id='{$_SESSION['user_id']}'";
           $result = mysqli_query($conn, $query);
           $data_u = mysqli_fetch_assoc($result);
         ?>
@@ -234,6 +273,8 @@ if (isset($s)) {
                 <img class="img-fluid" src="assets/images/portfolio/large/02.jpg" alt="">
               </div> -->
             </div>
+
+
           </div>
           <div class="col-lg-5 col-12 mt-5">
             <h2 class="title">البيانات الشخصية</h2>
@@ -249,7 +290,17 @@ if (isset($s)) {
                 echo "<li class='mb-3' style='color:#28a745'><span class='text-dark'> حالة الحساب: </span>  مفعل";
               }
               ?></li>
-              <!-- <li class="mb-3"><span class="text-dark"> الوصف: </span> <textarea name="" id="" class='form-control' cols="15" rows="5"></textarea></li> -->
+              <?php
+              if ($data_u['active'] == '1') { ?>
+                <form action="" method="post">
+                  <li class="mb-3"><span class="text-dark"> وصف الحساب: </span> <textarea name="change_desc" id="desc" class='form-control' cols="10" rows="5" readonly><?php echo !empty($data_u['user_desc']) ? $data_u['user_desc'] : 'لا يوجد وصف' ?></textarea></li>
+                  <button type="button" id='c_desc' class='btn-sm btn btn-warning'>تعديل الوصف</button>
+                  <input type="hidden" name="type_user" value='user'>
+                  <input type="hidden" name="user_id" value='<?php echo $_SESSION['user_id'] ?>'>
+                  <button type="submit" name='edit' style='display:none' id='confirm_change' class='btn-sm btn btn-success'>تأكيد التعديل</button>
+                  <a href='my-account.php' id='remove_change' style='display:none' class='btn-sm btn btn-danger'> الغاء التعديل</a>
+                </form>
+              <?php } ?>
             </ul>
           </div>
           <?php if ($data_u['active'] == '1') { ?>
@@ -429,11 +480,11 @@ if (isset($s)) {
 
         <?php
         } elseif (isset($_SESSION['sponsor_id'])) {
-          $query_s = "SELECT sponsor_id,sponsor_name,active from sponsors where sponsor_id='{$_SESSION['sponsor_id']}'";
+          $query_s = "SELECT sponsor_id,sponsor_name,active,sponsor_desc from sponsors where sponsor_id='{$_SESSION['sponsor_id']}'";
           $result_s = mysqli_query($conn, $query_s);
           $data_s = mysqli_fetch_assoc($result_s);
         ?>
-          <div class="col-lg-7 col-12">
+          <div class="col-lg-7 col-12 ">
             <div class="owl-carousel" data-items="1" data-autoplay="true">
               <div class="item">
                 <img class="img-fluid" style='width:55%' src="assets/images/talent1.jpeg" alt="">
@@ -458,7 +509,19 @@ if (isset($s)) {
               <li class='mb-3' style='color:#28a745'><span class='text-dark'> حالة الحساب: </span> مفعل";
               }
               ?></li>
-              <!-- <li class="mb-3"><span class="text-dark"> الوصف: </span> <textarea name="" id="" class='form-control' cols="15" rows="5"></textarea></li> -->
+              <?php
+              if ($data_s['active'] == '1') { ?>
+                <form action="" method="post">
+                  <li class="mb-3"><span class="text-dark"> وصف الحساب: </span> <textarea name="change_desc" id="desc" class='form-control' cols="10" rows="5" readonly><?php echo !empty($data_s['sponsor_desc']) ? $data_s['sponsor_desc'] : 'لا يوجد وصف' ?></textarea></li>
+                  <button type="button" id='c_desc' class='btn-sm btn btn-warning'>تعديل الوصف</button>
+
+                  <input type="hidden" name="type_user" value='sponsor'>
+                  <input type="hidden" name="sponsor_id" value='<?php echo $_SESSION['sponsor_id'] ?>'>
+                  <button type="submit" name='edit' style='display:none' id='confirm_change' class='btn-sm btn btn-success'>تأكيد التعديل</button>
+
+                  <a href='my-account.php' id='remove_change' style='display:none' class='btn-sm btn btn-danger'> الغاء التعديل</a>
+                </form>
+              <?php } ?>
             </ul>
           </div>
           <?php if ($data_s['active'] == '1') { ?>
@@ -634,7 +697,7 @@ if (isset($s)) {
           <?php } ?>
         <?php
         } elseif (isset($_SESSION['merchant_id'])) {
-          $query_m = "SELECT merchant_id,merchant_name,active from merchants where merchant_id='{$_SESSION['merchant_id']}'";
+          $query_m = "SELECT merchant_id,merchant_name,active,merchant_desc from merchants where merchant_id='{$_SESSION['merchant_id']}'";
           $result_m = mysqli_query($conn, $query_m);
           $data_m = mysqli_fetch_assoc($result_m);
         ?>
@@ -646,6 +709,9 @@ if (isset($s)) {
               <!-- <div class="item">
                 <img class="img-fluid" src="assets/images/portfolio/large/02.jpg" alt="">
               </div> -->
+            </div>
+            <div>
+              <!-- <input type="file" name="" id=""> -->
             </div>
           </div>
           <div class="col-lg-5 col-12">
@@ -663,7 +729,20 @@ if (isset($s)) {
               <li class='mb-3' style='color:#28a745'><span class='text-dark'> حالة الحساب: </span> مفعل";
               }
               ?></li>
-              <!-- <li class="mb-3"><span class="text-dark"> الوصف: </span> <textarea name="" id="" class='form-control' cols="15" rows="5"></textarea></li> -->
+              <?php
+              if ($data_m['active'] == '1') { ?>
+                <form action="" method="post">
+                  <li class="mb-3"><span class="text-dark"> وصف الحساب: </span> <textarea name="change_desc" id="desc" class='form-control' cols="10" rows="5" readonly><?php echo !empty($data_m['merchant_desc']) ? $data_m['merchant_desc'] : 'لا يوجد وصف' ?></textarea></li>
+                  <button type="button" id='c_desc' class='btn-sm btn btn-warning'>تعديل الوصف</button>
+
+                  <input type="hidden" name="type_user" value='merchant'>
+                  <input type="hidden" name="merchant_id" value='<?php echo $_SESSION['merchant_id'] ?>'>
+                  <button type="submit" name='edit' style='display:none' id='confirm_change' class='btn-sm btn btn-success'>تأكيد التعديل</button>
+                  <a href='my-account.php' id='remove_change' style='display:none' class='btn-sm btn btn-danger'> الغاء التعديل</a>
+
+                </form>
+              <?php } ?>
+
             </ul>
           </div>
           <?php if ($data_m['active'] == '1') { ?>
@@ -853,3 +932,24 @@ if (isset($s)) {
 <!--body content end-->
 <!--footer start-->
 <?php include_once('includes/footer.php') ?>
+
+<script>
+  $(document).ready(function() {
+    var desc = $('#desc').val();
+
+    $('#c_desc').click(function() {
+      $('#desc').removeAttr('readonly');
+      $("#remove_change").show();
+      $("#confirm_change").show();
+      $('#c_desc').hide();
+    });
+    $('#remove_change').click(function() {
+      $('#desc').attr('readonly', true);
+      $("#remove_change").hide();
+      $("#confirm_change").hide();
+      $('#c_desc').show();
+
+    });
+
+  });
+</script>

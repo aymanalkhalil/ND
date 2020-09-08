@@ -2,7 +2,7 @@
 
 
 if (isset($_POST['register'])) {
-
+  $desc = $_POST['desc'];
   $type = $_POST['type'];
   $address = $_POST['address'];
   $name = $_POST['name'];
@@ -20,8 +20,8 @@ if (isset($_POST['register'])) {
                  <h4><i class='icon fa fa-ban'></i> عذراً البريد الالكتروني مسجل لدينا</h4>
                 </div>";
       } else {
-        $insert = "INSERT INTO users(user_name,user_email,user_password,user_mobile,user_address)VALUES
-      ('$name','$email','$password','$mobile','$address')";
+        $insert = "INSERT INTO users(user_name,user_email,user_password,user_mobile,user_address,user_desc)VALUES
+      ('$name','$email','$password','$mobile','$address','$desc')";
         $result = mysqli_query($conn, $insert);
 
         if ($result) {
@@ -48,8 +48,8 @@ if (isset($_POST['register'])) {
                  <h4><i class='icon fa fa-ban'></i> عذراً البريد الالكتروني مسجل لدينا</h4>
                 </div>";
       } else {
-        $insert = "INSERT INTO merchants(merchant_name,merchant_email,merchant_password,merchant_mobile,merchant_address)VALUES
-      ('$name','$email','$password','$mobile','$address')";
+        $insert = "INSERT INTO merchants(merchant_name,merchant_email,merchant_password,merchant_mobile,merchant_address,merchant_desc)VALUES
+      ('$name','$email','$password','$mobile','$address','$desc')";
         $result = mysqli_query($conn, $insert);
 
         if ($result) {
@@ -75,8 +75,8 @@ if (isset($_POST['register'])) {
                  <h4><i class='icon fa fa-ban'></i> عذراً البريد الالكتروني مسجل لدينا</h4>
                 </div>";
       } else {
-        $insert = "INSERT INTO sponsors(sponsor_name,sponsor_email,sponsor_password,sponsor_mobile,sponsor_address)VALUES
-      ('$name','$email','$password','$mobile','$address')";
+        $insert = "INSERT INTO sponsors(sponsor_name,sponsor_email,sponsor_password,sponsor_mobile,sponsor_address,sponsor_desc)VALUES
+      ('$name','$email','$password','$mobile','$address','$desc')";
         $result = mysqli_query($conn, $insert);
 
         if ($result) {
@@ -126,7 +126,17 @@ if (isset($_POST['register'])) {
   </div>
   <!-- / .container -->
 </section>
+<?php
 
+if (isset($error)) {
+  echo $error;
+}
+
+if (isset($success)) {
+  echo $success;
+}
+
+?>
 
 
 <div class="page-content">
@@ -138,8 +148,8 @@ if (isset($_POST['register'])) {
           <div class="mb-6"> <span class="badge badge-success-soft p-2">
               <i class="la la-exclamation ic-3x rotation"></i>
             </span>
-            <h2 class="mt-3">Simple And Easy To Sign Up</h2>
-            <p class="lead">We use the latest technologies it voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+            <h2 class="mt-3">تسجيل حساب جديد</h2>
+            <!-- <p class="lead">We use the latest technologies it voluptatem accusantium doloremque laudantium, totam rem aperiam.</p> -->
           </div>
         </div>
       </div>
@@ -216,6 +226,13 @@ if (isset($_POST['register'])) {
 
                   </div>
                 </div>
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="">الرجاء كتابة نبذة او وصف للحساب</label>
+                    <textarea name="desc" id="" class='form-control' cols="15" rows="5" required></textarea>
+
+                  </div>
+                </div>
               </div>
 
               <div class="row">
@@ -226,17 +243,7 @@ if (isset($_POST['register'])) {
               </div>
 
             </form>
-            <?php
 
-            if (isset($error)) {
-              echo $error;
-            }
-
-            if (isset($success)) {
-              echo $success;
-            }
-
-            ?>
           </div>
         </div>
       </div>
