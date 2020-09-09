@@ -1,5 +1,6 @@
 <?php include_once('includes/header.php');
 
+////////////////////////// UPLOAD SHARES(AUDIO,VIDEO,SOUNDS) FOR THE 3 USERS TO TABLE UPLOADS START ////////////////////////////////
 if (isset($_POST['add'])) {
   $allowed_types = array('mp3', 'mp4', 'png', 'jpeg', 'jpg', 'svg', '3gp', 'mov');
   if ($_POST['type'] == 'users') {
@@ -145,6 +146,12 @@ if (isset($_GET['s'])) {
                        window.location.href = 'my-account.php';
                        }, 2000);</script>";
 }
+////////////////////////// UPLOAD SHARES(AUDIO,VIDEO,SOUNDS) FOR THE 3 USERS TO TABLE UPLOADS ENDS ////////////////////////////////
+
+
+
+
+////////////////////////////// UPDATE Account DESCRIPTION FOR MERCHANTS & SPONSORS & USERS START /////////////////////////////
 
 if (isset($_POST['edit'])) {
   if ($_POST['type_user'] == 'sponsor') {
@@ -179,9 +186,98 @@ if (isset($_POST['edit'])) {
               </div>";
   }
 }
+////////////////////////////// UPDATE Account DESCRIPTION FOR MERCHANTS & SPONSORS & USERS END ////////////////////////////////////////
+
+
+/////////////////////////////////////////////////// UPLOAD IMAGE FOR MERCHANTS & SPONSORS START ///////////////////////////////////////////
+if (isset($_POST['upload_image'])) {
+  if ($_POST['type'] == 'merchant') {
+    $path = 'assets/merchants_logo/';
+    $check_old = mysqli_query($conn, "SELECT merchant_image from merchants where merchant_id='{$_SESSION['merchant_id']}'");
+    if (mysqli_num_rows($check_old) > 0) {
+      $get_image = mysqli_fetch_assoc($check_old);
+      if (file_exists($path . $get_image['merchant_image'])) {
+        @unlink($path . $get_image['merchant_image']);
+      }
+    }
+    $file_name = strtolower($_FILES['merchant_image']['name']);
+    $allowed_types = array('png', 'jpeg', 'jpg', 'svg');
+    $type = explode('.', $file_name);
+    if (in_array(end($type), $allowed_types)) {
+      $tmp_name = $_FILES['merchant_image']['tmp_name'];
+      $file_extension = time() . strtolower($file_name);
+      move_uploaded_file($tmp_name, $path . $file_extension);
+
+      $upload = mysqli_query($conn, "UPDATE merchants SET merchant_image='$file_extension' WHERE merchant_id='{$_SESSION['merchant_id']}'");
+      if ($upload) {
+        $success
+          = "<div class='alert alert-success text-center mt-2 alert-dismissible text-center'>
+             <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
+               <h4><i class='icon fa fa-check'></i> تم رفع شعار التاجر بنجاح! </h4>
+              </div>
+              <script type='text/Javascript'>
+                       window.setTimeout(function() {
+                       window.location.href = 'my-account.php';
+                       }, 2000);</script>";
+      } else {
+        $error = " <div class='alert alert-danger text-center alert-dismissible text-center'>
+             <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
+               <h4><i class='icon fa fa-ban'></i>عذراً حدث خطأ يرجى المحاولة لاحقاً</h4>
+              </div>";
+      }
+    } else {
+      $error = "<div class='alert alert-danger text-center alert-dismissible text-center'>
+               <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
+                 <h4><i class='icon fa fa-ban'></i>عذراً الملف المرفق غير مسموح يرجى ارفاق الصيغة المناسبة!</h4>
+                </div>";
+    }
+  } elseif ($_POST['type'] == 'sponsors') {
+    $path = 'assets/sponsors_logo/';
+    $check_old = mysqli_query($conn, "SELECT sponsor_image from sponsors where sponsor_id='{$_SESSION['sponsor_id']}'");
+    if (mysqli_num_rows($check_old) > 0) {
+      $get_image = mysqli_fetch_assoc($check_old);
+      if (file_exists($path . $get_image['sponsor_image'])) {
+        @unlink($path . $get_image['sponsor_image']);
+      }
+    }
+    $allowed_types = array('png', 'jpeg', 'jpg', 'svg');
+    $file_name = strtolower($_FILES['sponsor_image']['name']);
+    $type = explode('.', $file_name);
+    if (in_array(end($type), $allowed_types)) {
+      $tmp_name = $_FILES['sponsor_image']['tmp_name'];
+      $file_extension = time() . strtolower($file_name);
+      move_uploaded_file($tmp_name, $path . $file_extension);
+      $upload = mysqli_query($conn, "UPDATE sponsors SET sponsor_image='$file_extension' WHERE sponsor_id='{$_SESSION['sponsor_id']}'");
+      if ($upload) {
+        $success
+          = "<div class='alert alert-success text-center mt-2 alert-dismissible text-center'>
+             <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
+               <h4><i class='icon fa fa-check'></i> تم رفع شعار الراعي بنجاح! </h4>
+              </div>
+              <script type='text/Javascript'>
+                       window.setTimeout(function() {
+                       window.location.href = 'my-account.php';
+                       }, 2000);</script>";
+      } else {
+
+        $error = " <div class='alert alert-danger text-center alert-dismissible text-center'>
+             <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
+               <h4><i class='icon fa fa-ban'></i>عذراً حدث خطأ يرجى المحاولة لاحقاً</h4>
+              </div>";
+      }
+    } else {
+      $error = "<div class='alert alert-danger text-center alert-dismissible text-center'>
+               <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
+                 <h4><i class='icon fa fa-ban'></i>عذراً الملف المرفق غير مسموح يرجى ارفاق الصيغة المناسبة!</h4>
+                </div>";
+    }
+  }
+}
+/////////////////////////////////////////////////// UPLOAD IMAGE FOR MERCHANTS & SPONSORS END ///////////////////////////////////////////
 
 
 
+/////////////////////////////////////////////////// PAGINATION LOGIC START ///////////////////////////////////////////
 
 if (isset($_GET['pageno'])) {
   $pageno = $_GET['pageno'];
@@ -190,6 +286,7 @@ if (isset($_GET['pageno'])) {
 }
 $num_records_per_page = 6;
 $offset = ($pageno - 1) * $num_records_per_page;
+/////////////////////////////////////////////////// PAGINATION LOGIC END ///////////////////////////////////////////
 
 ?>
 
@@ -267,7 +364,7 @@ if (isset($s)) {
           <div class="col-lg-7 col-12 ">
             <div class="owl-carousel" data-items="1" data-autoplay="true">
               <div class="item">
-                <img class="img-fluid" style='width:55%' src="assets/images/talent1.jpeg" alt="">
+                <img class="img-fluid" style='width:55%' src="assets/images/logos/talent1.jpeg" alt="">
               </div>
               <!-- <div class="item">
                 <img class="img-fluid" src="assets/images/portfolio/large/02.jpg" alt="">
@@ -479,20 +576,37 @@ if (isset($s)) {
           <?php } ?>
 
         <?php
+          ///////////////////////////////////////   SPONSOR PART START /////////////////////////////////////////////////
+
         } elseif (isset($_SESSION['sponsor_id'])) {
-          $query_s = "SELECT sponsor_id,sponsor_name,active,sponsor_desc from sponsors where sponsor_id='{$_SESSION['sponsor_id']}'";
+          $query_s = "SELECT sponsor_id,sponsor_name,active,sponsor_desc,sponsor_image from sponsors where sponsor_id='{$_SESSION['sponsor_id']}'";
           $result_s = mysqli_query($conn, $query_s);
           $data_s = mysqli_fetch_assoc($result_s);
         ?>
           <div class="col-lg-7 col-12 ">
             <div class="owl-carousel" data-items="1" data-autoplay="true">
+              <?php if ($data_s['active'] == '1') { ?>
+                <div class="item text-center">
+                  <label for="" class='text-center text-primary'>شعار الحساب</label>
+                  <img class="img-fluid" src="assets/sponsors_logo/<?php echo $data_s['sponsor_image'] ?>" alt="">
+                </div>
+              <?php } ?>
               <div class="item">
-                <img class="img-fluid" style='width:55%' src="assets/images/talent1.jpeg" alt="">
+                <img class="img-fluid" style='width:55%' src="assets/images/logos/talent1.jpeg" alt="">
               </div>
-              <!-- <div class="item">
-                <img class="img-fluid" src="assets/images/portfolio/large/02.jpg" alt="">
-              </div> -->
+
             </div>
+            <?php if ($data_s['active'] == '1') { ?>
+              <div>
+                <form action="" method="post" enctype="multipart/form-data">
+                  <label for="">رفع الشعار </label>
+                  <input type="hidden" name="type" value='sponsors'>
+                  <input type="file" name="sponsor_image" accept="image/*" class='form-control' required>
+                  <br>
+                  <button type="submit" name='upload_image' class='btn btn-success btn-sm'>رفع شعار الراعي</button>
+                </form>
+              </div>
+            <?php  }  ?>
           </div>
           <div class="col-lg-5 col-12">
             <h2 class="title">البيانات الشخصية</h2>
@@ -694,25 +808,43 @@ if (isset($s)) {
               </nav>
             <?php } ?>
             </section>
-          <?php } ?>
+          <?php }
+          ///////////////////////////////////////   SPONSOR PART END /////////////////////////////////////////////////
+
+          ?>
+
         <?php
+          ///////////////////////////////////////   MERCHANT PART START /////////////////////////////////////////////////
+
         } elseif (isset($_SESSION['merchant_id'])) {
-          $query_m = "SELECT merchant_id,merchant_name,active,merchant_desc from merchants where merchant_id='{$_SESSION['merchant_id']}'";
+          $query_m = "SELECT merchant_id,merchant_name,active,merchant_desc,merchant_image from merchants where merchant_id='{$_SESSION['merchant_id']}'";
           $result_m = mysqli_query($conn, $query_m);
           $data_m = mysqli_fetch_assoc($result_m);
         ?>
           <div class="col-lg-7 col-12">
             <div class="owl-carousel" data-items="1" data-autoplay="true">
+              <?php if ($data_m['active'] == '1') { ?>
+                <div class="item text-center">
+                  <label for="" class='text-primary'>شعار الحساب</label>
+                  <img class="img-fluid" src="assets/merchants_logo/<?php echo $data_m['merchant_image'] ?>" alt="">
+                </div>
+              <?php } ?>
               <div class="item">
-                <img class="img-fluid" style='width:55%' src="assets/images/talent1.jpeg" alt="">
+                <img class="img-fluid" style='width:55%' src="assets/images/logos/talent1.jpeg" alt="">
               </div>
-              <!-- <div class="item">
-                <img class="img-fluid" src="assets/images/portfolio/large/02.jpg" alt="">
-              </div> -->
+
             </div>
-            <div>
-              <!-- <input type="file" name="" id=""> -->
-            </div>
+            <?php if ($data_m['active'] == '1') { ?>
+              <div>
+                <form action="" method="post" enctype="multipart/form-data">
+                  <label for="">رفع الشعار </label>
+                  <input type="hidden" name="type" value='merchant'>
+                  <input type="file" name="merchant_image" accept="image/*" class='form-control' required>
+                  <br>
+                  <button type="submit" name='upload_image' class='btn btn-success btn-sm'>رفع شعار التاجر</button>
+                </form>
+              </div>
+            <?php  }  ?>
           </div>
           <div class="col-lg-5 col-12">
             <h2 class="title">البيانات الشخصية</h2>
@@ -932,7 +1064,6 @@ if (isset($s)) {
 <!--body content end-->
 <!--footer start-->
 <?php include_once('includes/footer.php') ?>
-
 <script>
   $(document).ready(function() {
     var desc = $('#desc').val();

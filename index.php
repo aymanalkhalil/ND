@@ -51,7 +51,7 @@
         <div class="container">
             <div class="row align-items-center justify-content-between">
                 <div class="col-12 col-lg-6 mb-8 mb-lg-0 text-center">
-                    <img src="logo2.jpeg" width='400px' alt="Image" class="img-fluid">
+                    <img src="assets/images/logos/logo2.jpeg" width='400px' alt="Image" class="img-fluid">
                 </div>
                 <div class="col-12 col-lg-6 col-xl-5">
                     <div class='text-center'>
@@ -182,7 +182,7 @@
                     <div class="container">
                         <div class="row align-items-center justify-content-between">
                             <div class="col-12 col-lg-6 mb-8 mb-lg-0 text-center">
-                                <img src="flag.jpg" width='400px' alt="Image" class="img-fluid">
+                                <img src="assets/images/logos/flag.jpg" width='400px' alt="Image" class="img-fluid">
                             </div>
                             <div class="col-12 col-lg-6 col-xl-5">
                                 <div class='text-center'>
@@ -208,7 +208,7 @@
                     <div class="container">
                         <div class="row align-items-center justify-content-between">
                             <div class="col-12 col-lg-6 mb-8 mb-lg-0 text-center">
-                                <img src="assets/images/talent1.jpeg" width='400px' alt="Image" class="img-fluid">
+                                <img src="assets/images/logos/talent1.jpeg" width='400px' alt="Image" class="img-fluid">
                             </div>
                             <div class="col-12 col-lg-6 col-xl-5">
                                 <div class='text-center'>
@@ -217,9 +217,11 @@
                                     </span>
                                     <!-- <h2 class="mt-3">بسم الله الرحمن الرحيم</h2> -->
                                     <p class="lead mb-0">
-                                        ‎أنتم الأبطال
+                                        - تأسّست مجموعة يا موهوب لدعم الموهوبين عام ١٤٣٩.<br>
 
-                                        ‎في ظل جائحة الوباء ، و البحث عن السلامة و الدواء ، لن تكفي الإشادة و الثناء لمن اختاروا التصدي للوباء ، للمواطنين الملتزمين و الأطباء المضحيين ، للوزارات و القطاعات ، و الهيئات و المؤسسات ، لمن تفقد الأحوال و لبى المنادي بالسؤال ، شكراً لكم أنتم الأبطال .</p>
+                                        - صُرّحت من جمعيّة الثقافة و الفنون في عام ١٤٤٠.<br>
+
+                                        تهدف لدّعم الموهوبين من مختلف مجالات الفن والابداع، من الكتاب و الشّعراء و مواهب الصوت و المونتاج و الاخراج و التّصوير، والتصاميم و الفنون التشكيلية، الحرف اليدوية و الخط و الفنون الشعبية.</p>
                                 </div>
                             </div>
                         </div>
@@ -228,6 +230,39 @@
             </div>
         </div>
     </section>
+    <!--client start-->
+    <section class="p-0">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <?php
+                    $sp_logos = mysqli_query($conn, "SELECT sponsor_image From sponsors ORDER BY sponsor_id DESC");
+                    if (mysqli_num_rows($sp_logos) == 0) {
+                    } else {
+                    ?>
+                        <h2 class='text-center text-success mb-6'>شركاء النجاح</h2>
+
+                        <div class="owl-carousel no-pb" data-dots="false" data-items="6" data-md-items="4" data-sm-items="3" data-xs-items="2" data-margin="30" data-autoplay="true">
+                            <?php while ($logos = mysqli_fetch_assoc($sp_logos)) { ?>
+                                <div class="item">
+
+
+                                    <div class="clients-logo">
+
+                                        <img class="img-fluid" src="assets/sponsors_logo/<?php echo $logos['sponsor_image'] ?>" width="200px" alt="">
+
+                                    </div>
+
+                                </div>
+                            <?php } ?>
+                        </div>
+
+                </div>
+            <?php } ?>
+            </div>
+        </div>
+    </section>
+    <!--client end-->
 </div>
 <!--body content end-->
 <?php include_once('includes/footer.php') ?>

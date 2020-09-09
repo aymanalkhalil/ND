@@ -2,8 +2,8 @@
 session_start();
 include_once('includes/connection.php');
 // session_destroy();
-ini_set('upload_max_filesize','120M');
-ini_set('post_max_size','120M');
+ini_set('upload_max_filesize', '120M');
+ini_set('post_max_size', '120M');
 ?>
 
 <!DOCTYPE html>
@@ -12,9 +12,9 @@ ini_set('post_max_size','120M');
 <head>
     <!-- meta tags -->
     <meta charset="utf-8">
-    <meta name="keywords" content="منصة اليوم الوطني السعودي ٩٠ , اليوم الوطني السعودي التسعون , مسابقات اليوم الوطني " />
-    <meta name="description" content="منصة اليوم الوطني السعودي التسعون" />
-    <meta name="viewport" content ="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="keywords" content=" احتفالات اليوم الوطني السعودي التسعون, منصة اليوم الوطني السعودي ٩٠ , اليوم الوطني السعودي التسعون , مسابقات اليوم الوطني التسعون" />
+    <meta name="description" content=" منصة اليوم الوطني السعودي ٩٠" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Title -->
     <title><?php require_once('title.php') ?></title>
     <!-- Favicon Icon -->
