@@ -24,9 +24,15 @@ switch ($checkpage) {
     case 'merchants-feed':
         echo "التخفيضات والعروض";
         break;
-        case 'national-feeds':
+    case 'national-feeds':
         echo "المشاركات الوطنية";
-            break;
+        break;
+    case 'users-contest':
+        echo "مسابقات المشتركين";
+        break;
+     case 'voter_register':
+        echo "تسجيل حساب مصوت";
+        break;
     default:
         echo "منصة اليوم الوطني السعودي ٩٠|الرئيسية";
         break;

@@ -12,7 +12,7 @@ if (isset($_POST['upload'])) {
     $file_ext = time() . strtolower($file_name);
     move_uploaded_file($tmp_name, $path . $file_ext);
 
-    $query = mysqli_query($conn, "UPDATE users SET user_upload='$file_ext' where user_id='{$_SESSION['user_id']}'");
+    $query = mysqli_query($conn, "INSERT INTO user_contest(user_id,upload_file)VALUES('{$_SESSION['user_id']}','$file_ext')");
 
     if ($query) {
       $success =
@@ -38,6 +38,16 @@ if (isset($_POST['upload'])) {
   }
 }
 
+/////////////////////////////////////////////////// PAGINATION LOGIC START ///////////////////////////////////////////
+
+if (isset($_GET['pageno'])) {
+  $pageno = $_GET['pageno'];
+} else {
+  $pageno = 1;
+}
+$num_records_per_page = 6;
+$offset = ($pageno - 1) * $num_records_per_page;
+/////////////////////////////////////////////////// PAGINATION LOGIC END ///////////////////////////////////////////
 
 
 ?>
@@ -66,7 +76,9 @@ if (isset($_POST['upload'])) {
     <!-- / .row -->
   </div>
   <!-- / .container -->
+
 </section>
+
 <?php
 if (isset($success)) {
   echo $success;
@@ -82,8 +94,39 @@ if (isset($error)) {
     position: relative !important;
   }
 
+  .product-link a:hover {
+    background: #28a745;
+    color: #ffffff;
+  }
+
   .link-title:hover {
     color: #28a745;
+  }
+
+  .product-link button.add-cart {
+    width: auto;
+    height: auto;
+    padding: 0px 20px;
+    line-height: 36px;
+    font-size: 14px;
+  }
+
+  .product-link button {
+    display: inline-table;
+    width: 36px;
+    height: 36px;
+    background: #fff;
+    border-radius: 60px;
+    line-height: 36px;
+    overflow: hidden;
+    color: #000;
+    position: relative;
+    -webkit-box-shadow: 0 10px 55px 5px rgba(137, 173, 255, .15);
+    box-shadow: 0 10px 55px 5px rgba(137, 173, 255, .15);
+    -webkit-transition: all .4s ease;
+    -o-transition: all .4s ease;
+    transition: all .4s ease;
+    text-align: center;
   }
 </style>
 
@@ -97,10 +140,11 @@ if (isset($error)) {
         <div class="col-lg-9 col-md-12 order-lg-12">
           <div class="row text-center">
             <?php
-            $get_uploads = mysqli_query($conn, "SELECT user_name,user_upload FROM users ORDER BY user_id DESC");
+            $get_uploads = mysqli_query($conn, "SELECT contest_id,user_name,upload_file FROM users INNER JOIN user_contest
+             ON users.user_id=user_contest.user_id where active=1 ORDER BY contest_id DESC");
 
             while ($uploads = mysqli_fetch_assoc($get_uploads)) :
-              $typeArr = explode('.', $uploads['user_upload']);
+              $typeArr = explode('.', $uploads['upload_file']);
               // var_dump(end($typeArr));
               global $type;
               switch (end($typeArr)) {
@@ -128,21 +172,99 @@ if (isset($error)) {
                 <div class="col-lg-4 col-md-6">
                   <div class="product-item">
                     <div class="product-img">
-                      <img class="img-fluid" src="assets/user_contest_uploads/<?php echo $uploads['user_upload'] ?>" alt="">
+                      <a href="assets/user_contest_uploads/<?php echo $uploads['upload_file'] ?>">
+                        <img class="img-fluid" src="assets/user_contest_uploads/<?php echo $uploads['upload_file'] ?>" alt="">
+                      </a>
                     </div>
                     <div class="product-desc">
                       <p class="product-name mt-4 mb-2 d-block link-title">بواسطة: <?php echo $uploads['user_name'] ?></p>
-
-                      <div class="product-link mt-3">
-                        <a class="add-cart " href="#"> <i class="ti-bag ml-2"></i>Add To Cart</a>
-                        <a class="wishlist-btn" href="#"> <i class="ti-heart"></i>
-                        </a>
-                      </div>
+                      <?php if (isset($_SESSION['v_id'])) { ?>
+                        <div class="product-link ">
+                          <form action="" method="post">
+                            <input type="hidden" name="c_id" value='<?php echo $uploads['contest_id'] ?>'>
+                            <button class="add-cart btn-outline-success mt-5"> <i class="ti-star ml-2 mb-1"></i> تصويت كأفضل عمل </button>
+                          </form>
+                          <!-- <a class="wishlist-btn" href="#"> <i class="ti-heart"></i> -->
+                          </a>
+                        </div>
+                      <?php } else { ?>
+                        <div class="product-link mt-3">
+                          <a href="voter_register.php" class='add-cart'><i class="ti-star ml-2 mb-1"></i> تسجيل حساب للتصويت</a>
+                        </div>
+                      <?php   } ?>
                     </div>
                   </div>
                 </div>
+              <?php } elseif ($type == 'video') { ?>
+
+                <div class="col-lg-4 col-md-6">
+                  <div class="product-item">
+                    <div class="product-img">
+                      <a href="assets/user_contest_uploads/<?php echo $uploads['upload_file'] ?>">
+
+                        <video class="img-center w-100" controls>
+                          <source src="assets/user_contest_uploads/<?php echo $uploads['upload_file'] ?>">
+                        </video>
+                      </a>
+                    </div>
+                    <div class="product-desc">
+                      <p class="product-name mt-4 mb-2 d-block link-title">بواسطة: <?php echo $uploads['user_name'] ?></p>
+                      <?php if (isset($_SESSION['v_id'])) { ?>
+                        <div class="product-link mt-3">
+                          <form action="" method="post">
+                            <input type="hidden" name="c_id" value='<?php echo $uploads['contest_id'] ?>'>
+
+                            <button class="add-cart btn-outline-success"> <i class="ti-star ml-2 mb-1"></i> تصويت كأفضل عمل </button>
+                          </form>
+                          <!-- <a class="wishlist-btn" href="#"> <i class="ti-heart"></i> -->
+                          </a>
+                        </div>
+                      <?php } else { ?>
+                        <div class="product-link mt-3">
+
+                          <a href="voter_register.php" class='add-cart'><i class="ti-star ml-2 mb-1"></i> تسجيل حساب للتصويت</a>
+
+                        </div>
+
+                      <?php } ?>
+                    </div>
+                  </div>
+                </div>
+
+
+
+              <?php  } elseif ($type == 'audio') { ?>
+
+                <div class="col-lg-4 col-md-6">
+                  <div class="product-item">
+                    <div class="product-img">
+                      <audio controls class="img-center w-100">
+                        <source src="assets/user_contest_uploads/<?php echo $uploads['upload_file'] ?>">
+                      </audio>
+                    </div>
+                    <div class="product-desc">
+                      <p class="product-name mt-4 mb-2 d-block link-title">بواسطة: <?php echo $uploads['user_name'] ?></p>
+                      <?php if (isset($_SESSION['v_id'])) { ?>
+                        <div class="product-link mt-3">
+                          <input type="hidden" name="c_id" value='<?php echo $uploads['contest_id'] ?>'>
+
+                          <button class="add-cart btn-outline-success"> <i class="ti-star ml-2 mb-1"></i> تصويت كأفضل عمل </button>
+                          <!-- <a class="wishlist-btn" href="#"> <i class="ti-/heart"></i> -->
+                          </a>
+                        </div>
+                      <?php } else {  ?>
+                        <div class="product-link mt-3">
+
+                          <a href="voter_register.php" class='add-cart'><i class="ti-star ml-2 mb-1"></i> تسجيل حساب للتصويت</a>
+
+                        </div>
+                      <?php } ?>
+                    </div>
+                  </div>
+                </div>
+
+
             <?php }
-            // elseif(){}
             endwhile;
 
             ?>
@@ -186,24 +308,27 @@ if (isset($error)) {
         </div>
         <div class="col-lg-3 col-md-12 order-lg-1 sidebar">
           <?php
-          $active = mysqli_query($conn, "SELECT active,user_upload from users where user_id='{$_SESSION['user_id']}'");
-          $check_active = mysqli_fetch_assoc($active);
-          if ($check_active['active'] == '1' && empty($check_active['user_upload'])) {
+          if (isset($_SESSION['user_id'])) {
+            $active = mysqli_query($conn, "SELECT contest_id,users.user_id,active,upload_file from users LEFT JOIN user_contest ON users.user_id=user_contest.user_id  where users.user_id='{$_SESSION['user_id']}'");
+            $check_active = mysqli_fetch_assoc($active);
+            if (($check_active['active'] == '1') && empty($check_active['upload_file'])) {
           ?>
-            <div>
-              <h4 class="mb-5">ارفاق للمسابقة</h4>
-              <ul class="list-unstyled list-group list-group-flush mb-5">
-                <li class="mb-4">
-                  <form action="" method="post" enctype="multipart/form-data">
-                    <input type="file" name='contest_file' class='form-control' name="" id="">
-                    <small class='text-danger'>ملاحظة</small><br>
-                    <button type="submit" name='upload' class='btn btn-success btn-sm'>تأكيد الارفاق</button>
-                  </form>
-                </li>
-              </ul>
-            </div>
+              <div>
+                <h4 class="mb-5">ارفاق للمسابقة</h4>
+                <ul class="list-unstyled list-group list-group-flush mb-5">
+                  <li class="mb-4">
+                    <form action="" method="post" enctype="multipart/form-data">
+                      <input type="file" name='contest_file' class='form-control' required>
+                      <small class='text-danger'>ملاحظة</small><br>
+                      <button type="submit" name='upload' class='btn btn-success btn-sm'>تأكيد الارفاق</button>
+                    </form>
+                  </li>
+                </ul>
+              </div>
 
-          <?php } ?>
+          <?php }
+          }
+          ?>
         </div>
       </div>
     </div>

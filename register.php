@@ -21,7 +21,7 @@ if (isset($_POST['register'])) {
                 </div>";
       } else {
         $insert = "INSERT INTO users(user_name,user_email,user_password,user_mobile,user_address,user_desc)VALUES
-      ('$name','$email','$password','$mobile','$address','$desc')";
+        ('$name','$email','$password','$mobile','$address','$desc')";
         $result = mysqli_query($conn, $insert);
 
         if ($result) {
@@ -35,7 +35,10 @@ if (isset($_POST['register'])) {
              window.location.href = 'register.php';
              }, 2000);</script>";
         } else {
-          echo "error " . mysqli_error($conn);
+          $error = " <div class='alert alert-danger text-center alert-dismissible text-center'>
+               <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
+                 <h4><i class='icon fa fa-ban'></i>عذراً حدث خطأ  الرجاء المحاولة لاحقاً</h4>
+                </div>";
         }
       }
     } elseif ($type == '2') {
@@ -63,7 +66,10 @@ if (isset($_POST['register'])) {
              window.location.href = 'register.php';
              }, 2000);</script>";
         } else {
-          echo "error " . mysqli_error($conn);
+          $error = " <div class='alert alert-danger text-center alert-dismissible text-center'>
+               <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
+                 <h4><i class='icon fa fa-ban'></i>عذراً حدث خطأ  الرجاء المحاولة لاحقاً</h4>
+                </div>";
         }
       }
     } elseif ($type == '3') {
@@ -90,7 +96,10 @@ if (isset($_POST['register'])) {
              window.location.href = 'register.php';
              }, 2000);</script>";
         } else {
-          echo "خطأ " . mysqli_error($conn);
+          $error = " <div class='alert alert-danger text-center alert-dismissible text-center'>
+               <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
+                 <h4><i class='icon fa fa-ban'></i>عذراً حدث خطأ  الرجاء المحاولة لاحقاً</h4>
+                </div>";
         }
       }
     }
