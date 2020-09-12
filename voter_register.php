@@ -108,7 +108,7 @@ if (isset($success)) {
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <input type="text" name="name" class="form-control" placeholder="العمر" required="required" autocomplete="off">
+                                        <input type="text" name="age" class="form-control" placeholder="العمر" required="required" autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -169,7 +169,7 @@ if (isset($success)) {
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <select required name='type' class="form-control">
+                                        <select required name='gender' class="form-control">
                                             <option disabled selected value=''>الرجاء اختيار الجنس </option>
                                             <option value="1">ذكر</option>
                                             <option value="2"> أنثى</option>

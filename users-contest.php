@@ -1,5 +1,5 @@
 <?php include_once('includes/header.php');
-
+////////////////////////////////////////////// UPLOAD CONTEST INSERTION START //////////////////////////////////////////////////////
 if (isset($_POST['upload'])) {
   $allowed_types = array('mp3', 'mp4', 'png', 'jpeg', 'jpg', 'svg', '3gp', 'mov');
 
@@ -37,6 +37,43 @@ if (isset($_POST['upload'])) {
                 </div>";
   }
 }
+////////////////////////////////////////////// UPLOAD CONTEST INSERTION END  //////////////////////////////////////////////////////
+
+
+////////////////////////////////////////////// VOTING CONTEST  START /////////////////////////////////////////////////////////
+
+if (isset($_POST['vote'])) {
+  $contest_id = $_POST['c_id'];
+  $votes = mysqli_query($conn, "SELECT votes from user_contest where contest_id='$contest_id'");
+  $vote_row = mysqli_fetch_assoc($votes);
+  $increment = $vote_row['votes'] + 1;
+
+  mysqli_query($conn, "UPDATE user_contest SET votes='$increment' where contest_id='$contest_id'");
+
+  $v_query = mysqli_query($conn, "INSERT INTO voter_contest(voter_id,contest_id,voted)VALUES('{$_SESSION['voter_id']}','$contest_id',1)");
+  if ($v_query) {
+
+    $success =
+      " <div class='alert alert-success text-center mt-2 alert-dismissible text-center'>
+               <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
+                 <h4><i class='icon fa fa-check'></i> تم التصويت للعمل بنجاح! </h4>
+                </div>
+             <script type='text/Javascript'>
+         window.setTimeout(function() {
+         window.location.href = 'users-contest.php';
+         }, 2000);</script>";
+  } else {
+    $error = " <div class='alert alert-danger text-center alert-dismissible text-center'>
+               <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
+                 <h4><i class='icon fa fa-ban'></i>عذراً حدث خطأ يرجى المحاولة لاحقاً</h4>
+                </div>";
+  }
+}
+
+
+
+////////////////////////////////////////////// VOTING CONTEST  END   //////////////////////////////////////////////////////
+
 
 /////////////////////////////////////////////////// PAGINATION LOGIC START ///////////////////////////////////////////
 
@@ -141,167 +178,132 @@ if (isset($error)) {
           <div class="row text-center">
             <?php
             $get_uploads = mysqli_query($conn, "SELECT contest_id,user_name,upload_file FROM users INNER JOIN user_contest
-             ON users.user_id=user_contest.user_id where active=1 ORDER BY contest_id DESC");
+             ON users.user_id=user_contest.user_id where active=1 ORDER BY contest_id DESC LIMIT $offset, $num_records_per_page ");
+            if (mysqli_num_rows($get_uploads) == 0) {
+            } else {
+              $total_user_contests = mysqli_query($conn, "SELECT * FROM user_contest");
+              $total_rows_s = mysqli_num_rows($total_user_contests);
+              $total_pages_s = ceil($total_rows_s / $num_records_per_page);
+              while ($uploads = mysqli_fetch_assoc($get_uploads)) :
+                $typeArr = explode('.', $uploads['upload_file']);
+                // var_dump(end($typeArr));
+                global $type;
+                switch (end($typeArr)) {
+                  case 'jpeg':
+                  case 'jpg':
+                  case 'svg':
+                  case 'png':
+                    $type = 'image';
+                    break;
+                  case 'mp4':
+                  case 'mov':
+                  case '3gp':
+                    $type = 'video';
+                    break;
+                  case 'm4a':
+                  case 'mp3':
+                    $type = 'audio';
+                    break;
+                  default:
+                    "not defined";
+                    break;
+                }
 
-            while ($uploads = mysqli_fetch_assoc($get_uploads)) :
-              $typeArr = explode('.', $uploads['upload_file']);
-              // var_dump(end($typeArr));
-              global $type;
-              switch (end($typeArr)) {
-                case 'jpeg':
-                case 'jpg':
-                case 'svg':
-                case 'png':
-                  $type = 'image';
-                  break;
-                case 'mp4':
-                case 'mov':
-                case '3gp':
-                  $type = 'video';
-                  break;
-                case 'm4a':
-                case 'mp3':
-                  $type = 'audio';
-                  break;
-                default:
-                  "not defined";
-                  break;
-              }
-              if ($type == 'image') {
             ?>
                 <div class="col-lg-4 col-md-6">
                   <div class="product-item">
                     <div class="product-img">
-                      <a href="assets/user_contest_uploads/<?php echo $uploads['upload_file'] ?>">
-                        <img class="img-fluid" src="assets/user_contest_uploads/<?php echo $uploads['upload_file'] ?>" alt="">
-                      </a>
-                    </div>
-                    <div class="product-desc">
-                      <p class="product-name mt-4 mb-2 d-block link-title">بواسطة: <?php echo $uploads['user_name'] ?></p>
-                      <?php if (isset($_SESSION['v_id'])) { ?>
-                        <div class="product-link ">
-                          <form action="" method="post">
-                            <input type="hidden" name="c_id" value='<?php echo $uploads['contest_id'] ?>'>
-                            <button class="add-cart btn-outline-success mt-5"> <i class="ti-star ml-2 mb-1"></i> تصويت كأفضل عمل </button>
-                          </form>
-                          <!-- <a class="wishlist-btn" href="#"> <i class="ti-heart"></i> -->
-                          </a>
-                        </div>
-                      <?php } else { ?>
-                        <div class="product-link mt-3">
-                          <a href="voter_register.php" class='add-cart'><i class="ti-star ml-2 mb-1"></i> تسجيل حساب للتصويت</a>
-                        </div>
-                      <?php   } ?>
-                    </div>
-                  </div>
-                </div>
-              <?php } elseif ($type == 'video') { ?>
+                      <?php if ($type == 'image') { ?>
 
-                <div class="col-lg-4 col-md-6">
-                  <div class="product-item">
-                    <div class="product-img">
-                      <a href="assets/user_contest_uploads/<?php echo $uploads['upload_file'] ?>">
+                        <a href="assets/user_contest_uploads/<?php echo $uploads['upload_file'] ?>">
+                          <img class="img-fluid" src="assets/user_contest_uploads/<?php echo $uploads['upload_file'] ?>" alt="">
+                        </a>
 
-                        <video class="img-center w-100" controls>
+                      <?php } elseif ($type == 'video') { ?>
+                        <a href="assets/user_contest_uploads/<?php echo $uploads['upload_file'] ?>">
+                          <video class="img-center w-100" controls>
+                            <source src="assets/user_contest_uploads/<?php echo $uploads['upload_file'] ?>">
+                          </video>
+                        </a>
+                      <?php } elseif ($type == 'audio') { ?>
+
+                        <audio controls class="img-center w-100">
                           <source src="assets/user_contest_uploads/<?php echo $uploads['upload_file'] ?>">
-                        </video>
-                      </a>
+                        </audio>
+                      <?php } ?>
                     </div>
                     <div class="product-desc">
                       <p class="product-name mt-4 mb-2 d-block link-title">بواسطة: <?php echo $uploads['user_name'] ?></p>
-                      <?php if (isset($_SESSION['v_id'])) { ?>
+                      <?php if (isset($_SESSION['voter_id'])) {
+                        $check_voted = mysqli_query($conn, "SELECT voted,contest_id from voter_contest where voter_id='{$_SESSION['voter_id']}'");
+
+                      ?>
                         <div class="product-link mt-3">
                           <form action="" method="post">
                             <input type="hidden" name="c_id" value='<?php echo $uploads['contest_id'] ?>'>
+                            <?php
+                            global $v;
+                            $votes = array();
+                            while ($vot = mysqli_fetch_assoc($check_voted)) {
+                              array_push($votes, $vot['contest_id']);
+                              if (in_array($uploads['contest_id'], $votes)) {
+                                $v = 1;
+                              } else {
+                                $v = 0;
+                              }
+                            }
+                            if ($v == 1) {
+                            ?>
 
-                            <button class="add-cart btn-outline-success"> <i class="ti-star ml-2 mb-1"></i> تصويت كأفضل عمل </button>
+                              <div class='mb-2'>
+                                <button type="button" class="add-cart" style='color:red'><i class="ti-star ml-2 mb-1"></i>تم التصويت على هذا العمل</button>
+                              </div>
+                            <?php
+                            } else {
+                            ?>
+                              <div class='mb-2'>
+                                <button type="submit" class="add-cart btn-outline-success" name='vote'><i class="ti-star ml-2 mb-1"></i>تصويت كأفضل عمل</button>
+
+                              </div>
+                            <?php
+                            }
+
+                            ?>
                           </form>
-                          <!-- <a class="wishlist-btn" href="#"> <i class="ti-heart"></i> -->
-                          </a>
                         </div>
                       <?php } else { ?>
                         <div class="product-link mt-3">
-
                           <a href="voter_register.php" class='add-cart'><i class="ti-star ml-2 mb-1"></i> تسجيل حساب للتصويت</a>
-
                         </div>
-
-                      <?php } ?>
+                      <?php  } ?>
                     </div>
                   </div>
                 </div>
 
-
-
-              <?php  } elseif ($type == 'audio') { ?>
-
-                <div class="col-lg-4 col-md-6">
-                  <div class="product-item">
-                    <div class="product-img">
-                      <audio controls class="img-center w-100">
-                        <source src="assets/user_contest_uploads/<?php echo $uploads['upload_file'] ?>">
-                      </audio>
-                    </div>
-                    <div class="product-desc">
-                      <p class="product-name mt-4 mb-2 d-block link-title">بواسطة: <?php echo $uploads['user_name'] ?></p>
-                      <?php if (isset($_SESSION['v_id'])) { ?>
-                        <div class="product-link mt-3">
-                          <input type="hidden" name="c_id" value='<?php echo $uploads['contest_id'] ?>'>
-
-                          <button class="add-cart btn-outline-success"> <i class="ti-star ml-2 mb-1"></i> تصويت كأفضل عمل </button>
-                          <!-- <a class="wishlist-btn" href="#"> <i class="ti-/heart"></i> -->
-                          </a>
-                        </div>
-                      <?php } else {  ?>
-                        <div class="product-link mt-3">
-
-                          <a href="voter_register.php" class='add-cart'><i class="ti-star ml-2 mb-1"></i> تسجيل حساب للتصويت</a>
-
-                        </div>
-                      <?php } ?>
-                    </div>
-                  </div>
-                </div>
-
-
-            <?php }
-            endwhile;
-
+            <?php
+              endwhile;
+            }
             ?>
           </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
           <nav aria-label="..." class="mt-8">
             <ul class="pagination">
-              <li class="page-item mr-auto"> <a class="page-link" href="#">Previous</a>
+              <li class="page-item mr-auto <?php if ($pageno <= 1) {
+                                              echo 'disabled';
+                                            }   ?>"> <a class=" page-link" href=" <?php if ($pageno <= 1) {
+                                                                                    echo 'disabled';
+                                                                                  } else {
+                                                                                    echo "?pageno=" . ($pageno - 1);
+                                                                                  } ?>">الصفحة السابقة</a>
+
               </li>
-              <li class="page-item"><a class="page-link border-0 rounded text-dark" href="#">1</a>
-              </li>
-              <li class="page-item active" aria-current="page"> <a class="page-link border-0 rounded" href="#">2 <span class="sr-only">(current)</span></a>
-              </li>
-              <li class="page-item"><a class="page-link border-0 rounded text-dark" href="#">3</a>
-              </li>
-              <li class="page-item"><a class="page-link border-0 rounded text-dark" href="#">...</a>
-              </li>
-              <li class="page-item"><a class="page-link border-0 rounded text-dark" href="#">5</a>
-              </li>
-              <li class="page-item ml-auto"> <a class="page-link" href="#">Next</a>
+              <li class="page-item ml-auto <?php if ($pageno >= $total_pages_s) {
+                                              echo 'disabled';
+                                            }   ?>"> <a class=" page-link" href="<?php if ($pageno >= $total_pages_s) {
+                                                                                    echo '#';
+                                                                                  } else {
+                                                                                    echo "?pageno=" . ($pageno + 1);
+                                                                                  } ?>">الصفحة التالية</a>
               </li>
             </ul>
           </nav>
@@ -319,7 +321,7 @@ if (isset($error)) {
                   <li class="mb-4">
                     <form action="" method="post" enctype="multipart/form-data">
                       <input type="file" name='contest_file' class='form-control' required>
-                      <small class='text-danger'>ملاحظة</small><br>
+                      <!-- <small class='text-danger'>ملاحظة</small><br> -->
                       <button type="submit" name='upload' class='btn btn-success btn-sm'>تأكيد الارفاق</button>
                     </form>
                   </li>

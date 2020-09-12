@@ -16,6 +16,11 @@ switch (key($_GET)) {
         header('location:index.php');
 
         break;
+    case 'v';
+        unset($_SESSION['voter_id'], $_SESSION['voter_name']);
+        header('location:index.php');
+
+        break;
     default:
         # code...
         break;

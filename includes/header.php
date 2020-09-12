@@ -123,12 +123,23 @@ ini_set('post_max_size', '120M');
                                                 </ul>
                                             </li>
                                         <?php
-                                        }
+                                        } elseif (isset($_SESSION['voter_id'])) {
                                         ?>
+                                            <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
+                                                    <?php
+                                                    echo "مرحباً " . $_SESSION['voter_name'];
+                                                    ?>
+                                                </a>
+                                                <ul class="dropdown-menu">
+                                                    <li><a class="dropdown-item" href="logout.php?v=<?php echo $_SESSION['voter_id'] ?>">تسجيل الخروج</a>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                        <?php } ?>
                                     </ul>
                                 </div>
                             </nav>
-                            <?php if (!isset($_SESSION['user_id']) && !isset($_SESSION['merchant_id']) && !isset($_SESSION['sponsor_id'])) { ?>
+                            <?php if (!isset($_SESSION['user_id']) && !isset($_SESSION['merchant_id']) && !isset($_SESSION['sponsor_id']) && !isset($_SESSION['voter_id'])) { ?>
                                 <a class="btn btn-light mr-8 d-none d-lg-block btn-color" href="register.php">تسجيل الان</a>
                             <?php } ?>
                         </div>

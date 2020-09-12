@@ -23,7 +23,7 @@
                     دمتَ يا وطني مجداً ، و فخراً ، و ذخراً ، و أمناً و اماناً ، و سِلماً و سلاماً نجدد في عامنا هذا البيعة ونستعد لاعوام قادمة وبيعات.
                 </p>
                 <!-- Buttons -->
-                <?php if (!isset($_SESSION['user_id']) && !isset($_SESSION['merchant_id']) && !isset($_SESSION['sponsor_id'])) { ?>
+                <?php if (!isset($_SESSION['user_id']) && !isset($_SESSION['merchant_id']) && !isset($_SESSION['sponsor_id']) && !isset($_SESSION['voter_id'])) { ?>
 
                     <a href="login.php" class="btn btn-outline-light ml-1">
                         تسجيل الدخول
@@ -245,14 +245,10 @@
                         <div class="owl-carousel no-pb" data-dots="false" data-items="6" data-md-items="4" data-sm-items="3" data-xs-items="2" data-margin="30" data-autoplay="true">
                             <?php while ($logos = mysqli_fetch_assoc($sp_logos)) { ?>
                                 <div class="item">
-
-
                                     <div class="clients-logo">
-
                                         <img class="img-fluid" src="assets/sponsors_logo/<?php echo $logos['sponsor_image'] ?>" width="200px" alt="">
 
                                     </div>
-
                                 </div>
                             <?php } ?>
                         </div>

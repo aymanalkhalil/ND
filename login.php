@@ -1,5 +1,5 @@
 <?php include_once('includes/header.php');
-if (isset($_SESSION['merchant_id']) or isset($_SESSION['sponsor_id']) or isset($_SESSION['user_id'])) {
+if (isset($_SESSION['merchant_id']) or isset($_SESSION['sponsor_id']) or isset($_SESSION['user_id']) or isset($_SESSION['voter_id'])) {
   echo "<script>window.location.href='index.php'</script>";
 }
 
@@ -51,9 +51,23 @@ if (isset($_POST['login'])) {
                  <h4><i class='icon fa fa-ban'></i>عذراً هذا الحساب غير مسجل لدينا</h4>
                 </div>";
     }
+  } elseif ($type == 4) {
+    $query = "SELECT * from voters where v_email='$email' AND v_password='$password'";
+    $result = mysqli_query($conn, $query);
+    if (mysqli_num_rows($result) > 0) {
+      $row = mysqli_fetch_assoc($result);
+      $_SESSION['voter_id'] = $row['v_id'];
+      $_SESSION['voter_name'] = $row['v_name'];
+
+      echo "<script>window.location.href='index.php'</script>";
+    } else {
+      $error = " <div class='alert alert-danger text-center alert-dismissible text-center'>
+               <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
+                 <h4><i class='icon fa fa-ban'></i>عذراً هذا الحساب غير مسجل لدينا</h4>
+                </div>";
+    }
   }
 }
-
 ?>
 <!--hero section start-->
 
@@ -119,6 +133,8 @@ if (isset($_POST['login'])) {
                   <option value="1">مشارك</option>
                   <option value="2">مبادرات التجار والاسر المنتجة</option>
                   <option value="3">راعي</option>
+                  <option value="4">مصوت</option>
+
                 </select>
 
               </div>
