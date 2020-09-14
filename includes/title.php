@@ -2,7 +2,6 @@
 
 $checkpage = basename($_SERVER['PHP_SELF'], ".php");
 switch ($checkpage) {
-
     case 'register';
         echo "تسجيل حساب";
         break;
@@ -16,7 +15,7 @@ switch ($checkpage) {
         echo "الاشتراكات";
         break;
     case 'view_share';
-        echo " عرض مشاركاتي";
+        echo "عرض مشاركاتي";
         break;
     case 'sponsors-feed':
         echo "شركاء النجاح ";
@@ -30,7 +29,13 @@ switch ($checkpage) {
     case 'users-contest':
         echo "مسابقات المشتركين";
         break;
-     case 'voter_register':
+    case 'merchants-contest':
+        echo "مسابقات اصحاب المنتجات التجارية";
+        break;
+    case 'sponsor-contest':
+        echo "مسابقات الرعاة";
+        break;
+    case 'voter_register':
         echo "تسجيل حساب مصوت";
         break;
     default:

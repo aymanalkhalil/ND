@@ -22,23 +22,28 @@ $offset = ($pageno - 1) * $num_records_per_page;
     <div class="container">
         <div class="row  text-center">
             <div class="col">
-                <h1>شركاء النجاح</h1>
+                <h1> شركاء النجاح والرعايات</h1>
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb justify-content-center bg-transparent p-0 m-0">
                         <li class="breadcrumb-item"><a class="text-dark" href="index.php">الرئيسية</a>
                         </li>
                         <li class="breadcrumb-item active text-success" aria-current="page"> شركاء النجاح والرعايات</li>
-                        <li class="breadcrumb-item"><a class="text-dark" href="sponsor-contests.php">مسابقات </a>
-                        </li>
+                        <?php if (isset($_SESSION['sponsor_id'])) {
+                            $check_active = mysqli_query($conn, "SELECT active from sponsors where sponsor_id='{$_SESSION['sponsor_id']}'");
+                            $result = mysqli_fetch_assoc($check_active);
+                            if ($result['active'] == 1) { ?>
+                                <li class="breadcrumb-item"><a class="text-dark" href="sponsor-contest.php">مسابقات شركاء النجاح</a>
+                                </li>
+                        <?php
+                            }
+                        } ?>
                     </ol>
                 </nav>
             </div>
         </div>
-        <!-- / .row -->
     </div>
-    <!-- / .container -->
 </section>
-<!--blog start-->
+
 
 <section>
     <div class="container">

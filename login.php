@@ -131,7 +131,7 @@ if (isset($_POST['login'])) {
                 <select required name='type' class="form-control">
                   <option disabled selected value=''>الرجاء اختيار نوع المستخدم </option>
                   <option value="1">مشارك</option>
-                  <option value="2">مبادرات التجار والاسر المنتجة</option>
+                  <option value="2">اصحاب المنتجات التجارية</option>
                   <option value="3">راعي</option>
                   <option value="4">مصوت</option>
 

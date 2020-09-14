@@ -6,6 +6,8 @@ if (isset($_POST['register'])) {
     $email = $_POST['email'];
     $password = $_POST['password'];
 
+
+
     $check_email = mysqli_query($conn, "SELECT v_email from voters where v_email='$email'");
     if (mysqli_num_rows($check_email) > 0) {
         $error = " <div class='alert alert-danger text-center alert-dismissible text-center'>
@@ -86,11 +88,10 @@ if (isset($success)) {
         <div class="container">
             <div class="row justify-content-center text-center">
                 <div class="col-lg-8 col-md-12">
-                    <div class="mb-6"> <span class="badge badge-success-soft p-2">
-                            <i class="la la-exclamation ic-3x rotation"></i>
+                    <div class="mb-6"> <span class="badge badge-success-soft p-2 bg-success">
+                            <img src="assets/images/gif/KSA-flag.gif" alt="" srcset="">
                         </span>
                         <h2 class="mt-3">تسجيل حساب للتصويت</h2>
-                        <!-- <p class="lead">We use the latest technologies it voluptatem accusantium doloremque laudantium, totam rem aperiam.</p> -->
                     </div>
                 </div>
             </div>
@@ -184,6 +185,7 @@ if (isset($success)) {
                                         <input type="tel" name="mobile" class="form-control" placeholder="رقم الجوال" required autocomplete="off">
                                     </div>
                                 </div>
+
                             </div>
 
                             <div class="row">
@@ -208,13 +210,14 @@ if (isset($success)) {
 <script>
     $(document).ready(function() {
 
-        $('#reg').click(function() {
-
+        $('#reg').click(function(e) {
             if ($("#password").val() != $('#c_password').val()) {
                 $('.pass').html('عذراً كلمة السر غير متطابقة ');
+                e.preventDefault();
             }
             if ($("#email").val() != $('#c_email').val()) {
                 $('.email').html('عذراً البريد الالكتروني غير متطابق');
+                e.preventDefault();
             }
         });
 

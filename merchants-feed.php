@@ -29,6 +29,8 @@ $offset = ($pageno - 1) * $num_records_per_page;
                         </li>
 
                         <li class="breadcrumb-item active text-success" aria-current="page">التخفيضات والعروض</li>
+                        <li class="breadcrumb-item"><a class="text-dark" href="merchants-contest.php">مسابقات </a>
+
                     </ol>
                 </nav>
             </div>

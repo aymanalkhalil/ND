@@ -154,8 +154,8 @@ if (isset($success)) {
     <div class="container">
       <div class="row justify-content-center text-center">
         <div class="col-lg-8 col-md-12">
-          <div class="mb-6"> <span class="badge badge-success-soft p-2">
-              <i class="la la-exclamation ic-3x rotation"></i>
+          <div class="mb-6"> <span class="badge badge-success-soft p-2 bg-success">
+              <img src="assets/images/gif/KSA-flag.gif" alt="" srcset="">
             </span>
             <h2 class="mt-3">تسجيل حساب جديد</h2>
             <!-- <p class="lead">We use the latest technologies it voluptatem accusantium doloremque laudantium, totam rem aperiam.</p> -->
@@ -229,7 +229,7 @@ if (isset($success)) {
                     <select required name='type' class="form-control">
                       <option disabled selected value=''>الرجاء اختيار نوع المستخدم </option>
                       <option value="1">مشارك</option>
-                      <option value="2">مبادرات التجار والاسر المنتجة</option>
+                      <option value="2">اصحاب المنتجات التجارية</option>
                       <option value="3">راعي</option>
                     </select>
 

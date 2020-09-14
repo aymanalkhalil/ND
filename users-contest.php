@@ -4,7 +4,6 @@ if (isset($_POST['upload'])) {
   $allowed_types = array('mp3', 'mp4', 'png', 'jpeg', 'jpg', 'svg', '3gp', 'mov');
 
   $path = 'assets/user_contest_uploads/';
-
   $file_name = $_FILES['contest_file']['name'];
   $type = explode('.', $file_name);
   if (in_array(end($type), $allowed_types)) {
@@ -18,7 +17,7 @@ if (isset($_POST['upload'])) {
       $success =
         " <div class='alert alert-success text-center mt-2 alert-dismissible text-center'>
                <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
-                 <h4><i class='icon fa fa-check'></i> تم ارفاق المشاركة بنجاح! </h4>
+                 <h4><i class='icon fa fa-check'></i> تم ارفاق المسابقة بنجاح! </h4>
                 </div>
              <script type='text/Javascript'>
          window.setTimeout(function() {
@@ -43,18 +42,21 @@ if (isset($_POST['upload'])) {
 ////////////////////////////////////////////// VOTING CONTEST  START /////////////////////////////////////////////////////////
 
 if (isset($_POST['vote'])) {
-  $contest_id = $_POST['c_id'];
-  $votes = mysqli_query($conn, "SELECT votes from user_contest where contest_id='$contest_id'");
-  $vote_row = mysqli_fetch_assoc($votes);
-  $increment = $vote_row['votes'] + 1;
 
-  mysqli_query($conn, "UPDATE user_contest SET votes='$increment' where contest_id='$contest_id'");
 
-  $v_query = mysqli_query($conn, "INSERT INTO voter_contest(voter_id,contest_id,voted)VALUES('{$_SESSION['voter_id']}','$contest_id',1)");
-  if ($v_query) {
+  if ($_POST['type'] == 'merchant') {
+    $contest_id = $_POST['c_id'];
+    $votes = mysqli_query($conn, "SELECT votes from user_contest where contest_id='$contest_id'");
+    $vote_row = mysqli_fetch_assoc($votes);
+    $increment = $vote_row['votes'] + 1;
 
-    $success =
-      " <div class='alert alert-success text-center mt-2 alert-dismissible text-center'>
+    mysqli_query($conn, "UPDATE user_contest SET votes='$increment' where contest_id='$contest_id'");
+
+    $voter_merchant_query = mysqli_query($conn, "INSERT INTO voters_active_contest(merchant_id,user_contest_id,voted)VALUES('{$_SESSION['merchant_id']}','$contest_id',1)");
+    if ($voter_merchant_query) {
+
+      $success =
+        " <div class='alert alert-success text-center mt-2 alert-dismissible text-center'>
                <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
                  <h4><i class='icon fa fa-check'></i> تم التصويت للعمل بنجاح! </h4>
                 </div>
@@ -62,17 +64,96 @@ if (isset($_POST['vote'])) {
          window.setTimeout(function() {
          window.location.href = 'users-contest.php';
          }, 2000);</script>";
-  } else {
-    $error = " <div class='alert alert-danger text-center alert-dismissible text-center'>
+    } else {
+      $error = " <div class='alert alert-danger text-center alert-dismissible text-center'>
                <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
                  <h4><i class='icon fa fa-ban'></i>عذراً حدث خطأ يرجى المحاولة لاحقاً</h4>
                 </div>";
+    }
+  } elseif ($_POST['type'] == 'sponsor') {
+    $contest_id = $_POST['c_id'];
+    $votes = mysqli_query($conn, "SELECT votes from user_contest where contest_id='$contest_id'");
+    $vote_row = mysqli_fetch_assoc($votes);
+    $increment = $vote_row['votes'] + 1;
+
+    mysqli_query($conn, "UPDATE user_contest SET votes='$increment' where contest_id='$contest_id'");
+
+    $voter_sponsor_query = mysqli_query($conn, "INSERT INTO voters_active_contest(sponsor_id,user_contest_id,voted)VALUES('{$_SESSION['sponsor_id']}','$contest_id',1)");
+    if ($voter_sponsor_query) {
+
+      $success =
+        " <div class='alert alert-success text-center mt-2 alert-dismissible text-center'>
+               <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
+                 <h4><i class='icon fa fa-check'></i> تم التصويت للعمل بنجاح! </h4>
+                </div>
+             <script type='text/Javascript'>
+         window.setTimeout(function() {
+         window.location.href = 'users-contest.php';
+         }, 2000);</script>";
+    } else {
+      $error = " <div class='alert alert-danger text-center alert-dismissible text-center'>
+               <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
+                 <h4><i class='icon fa fa-ban'></i>عذراً حدث خطأ يرجى المحاولة لاحقاً</h4>
+                </div>";
+    }
+  } elseif ($_POST['type'] == 'user') {
+    $contest_id = $_POST['c_id'];
+    $votes = mysqli_query($conn, "SELECT votes from user_contest where contest_id='$contest_id'");
+    $vote_row = mysqli_fetch_assoc($votes);
+    $increment = $vote_row['votes'] + 1;
+
+    mysqli_query($conn, "UPDATE user_contest SET votes='$increment' where contest_id='$contest_id'");
+
+    $voter_sponsor_query = mysqli_query($conn, "INSERT INTO voters_active_contest(user_id,user_contest_id,voted)VALUES('{$_SESSION['user_id']}','$contest_id',1)");
+    if ($voter_sponsor_query) {
+
+      $success =
+        " <div class='alert alert-success text-center mt-2 alert-dismissible text-center'>
+               <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
+                 <h4><i class='icon fa fa-check'></i> تم التصويت للعمل بنجاح! </h4>
+                </div>
+             <script type='text/Javascript'>
+         window.setTimeout(function() {
+         window.location.href = 'users-contest.php';
+         }, 2000);</script>";
+    } else {
+      $error = " <div class='alert alert-danger text-center alert-dismissible text-center'>
+               <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
+                 <h4><i class='icon fa fa-ban'></i>عذراً حدث خطأ يرجى المحاولة لاحقاً</h4>
+                </div>";
+    }
+  } else {
+    $contest_id = $_POST['c_id'];
+    $votes = mysqli_query($conn, "SELECT votes from user_contest where contest_id='$contest_id'");
+    $vote_row = mysqli_fetch_assoc($votes);
+    $increment = $vote_row['votes'] + 1;
+
+    mysqli_query($conn, "UPDATE user_contest SET votes='$increment' where contest_id='$contest_id'");
+
+    $v_query = mysqli_query($conn, "INSERT INTO voter_contest(voter_id,contest_id,voted)VALUES('{$_SESSION['voter_id']}','$contest_id',1)");
+    if ($v_query) {
+
+      $success =
+        " <div class='alert alert-success text-center mt-2 alert-dismissible text-center'>
+               <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
+                 <h4><i class='icon fa fa-check'></i> تم التصويت للعمل بنجاح! </h4>
+                </div>
+             <script type='text/Javascript'>
+         window.setTimeout(function() {
+         window.location.href = 'users-contest.php';
+         }, 2000);</script>";
+    } else {
+      $error = " <div class='alert alert-danger text-center alert-dismissible text-center'>
+               <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
+                 <h4><i class='icon fa fa-ban'></i>عذراً حدث خطأ يرجى المحاولة لاحقاً</h4>
+                </div>";
+    }
   }
 }
 
 
 
-////////////////////////////////////////////// VOTING CONTEST  END   //////////////////////////////////////////////////////
+//////////////////////////////////////////////////// VOTING CONTEST  END   //////////////////////////////////////////////////////
 
 
 /////////////////////////////////////////////////// PAGINATION LOGIC START ///////////////////////////////////////////
@@ -99,7 +180,7 @@ $offset = ($pageno - 1) * $num_records_per_page;
   <div class="container">
     <div class="row  text-center">
       <div class="col">
-        <h1>المسابقات</h1>
+        <h1>مسابقات</h1>
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb justify-content-center bg-transparent p-0 m-0">
             <li class="breadcrumb-item"><a class="text-dark" href="#">الرئيسية</a>
@@ -180,6 +261,19 @@ if (isset($error)) {
             $get_uploads = mysqli_query($conn, "SELECT contest_id,user_name,upload_file FROM users INNER JOIN user_contest
              ON users.user_id=user_contest.user_id where active=1 ORDER BY contest_id DESC LIMIT $offset, $num_records_per_page ");
             if (mysqli_num_rows($get_uploads) == 0) {
+              echo "
+            <section class='col-lg-12'>
+              <div class='container'>
+                <div class='row justify-content-center text-center'>
+                  <div class='col-lg-8 col-md-12'>
+                    <div class='mb-6'>";
+
+              echo "<h5 class='text-danger'>لا توجد مسابقات بعد  !</h5>
+                  </div>
+                  </div>
+                </div>
+                </div>
+            </section>";
             } else {
               $total_user_contests = mysqli_query($conn, "SELECT * FROM user_contest");
               $total_rows_s = mysqli_num_rows($total_user_contests);
@@ -241,6 +335,8 @@ if (isset($error)) {
                         <div class="product-link mt-3">
                           <form action="" method="post">
                             <input type="hidden" name="c_id" value='<?php echo $uploads['contest_id'] ?>'>
+                            <input type="hidden" name="type" value='voter'>
+
                             <?php
                             global $v;
                             $votes = array();
@@ -271,11 +367,176 @@ if (isset($error)) {
                             ?>
                           </form>
                         </div>
-                      <?php } else { ?>
+                        <?php } elseif (isset($_SESSION['merchant_id'])) {
+                        $check_voted_merchant = mysqli_query($conn, "SELECT voted,merchant_id,user_contest_id from voters_active_contest where merchant_id='{$_SESSION['merchant_id']}'");
+
+                        $merchant_active = mysqli_query($conn, "SELECT active from merchants where merchant_id='{$_SESSION['merchant_id']}'");
+                        $checked = mysqli_fetch_assoc($merchant_active);
+                        if ($checked['active'] == 1) { ?>
+
+                          <div class="product-link mt-3">
+                            <form action="" method="post">
+                              <input type="hidden" name="c_id" value='<?php echo $uploads['contest_id'] ?>'>
+                              <input type="hidden" name="type" value='merchant'>
+                              <?php
+                              global $v;
+                              $votes_merchants = array();
+                              while ($vot = mysqli_fetch_assoc($check_voted_merchant)) {
+                                array_push($votes_merchants, $vot['user_contest_id']);
+                                if (in_array($uploads['contest_id'], $votes_merchants)) {
+                                  $v = 1;
+                                } else {
+                                  $v = 0;
+                                }
+                              }
+                              if ($v == 1) {
+                              ?>
+
+                                <div class='mb-2'>
+                                  <button type="button" class="add-cart" style='color:red'><i class="ti-star ml-2 mb-1"></i>تم التصويت على هذا العمل</button>
+                                </div>
+                              <?php
+                              } else {
+                              ?>
+                                <div class='mb-2'>
+                                  <button type="submit" class="add-cart btn-outline-success" name='vote'><i class="ti-star ml-2 mb-1"></i>تصويت كأفضل عمل</button>
+
+                                </div>
+                              <?php
+                              }
+
+                              ?>
+                            </form>
+                          </div>
+                        <?php
+                        } else { ?>
+                          <div class="product-link mt-3">
+                            <a href="voter_register.php" class='add-cart'><i class="ti-star ml-2 mb-1"></i> تسجيل حساب للتصويت</a>
+                          </div>
+                        <?php
+                        }
+
+                        ?>
+
+                        <?php  } elseif (isset($_SESSION['sponsor_id'])) {
+                        $check_voted_sponsor = mysqli_query($conn, "SELECT voted,sponsor_id,user_contest_id from voters_active_contest where sponsor_id='{$_SESSION['sponsor_id']}'");
+
+                        $sponsor_active = mysqli_query($conn, "SELECT active from sponsors where sponsor_id='{$_SESSION['sponsor_id']}'");
+                        $checked = mysqli_fetch_assoc($sponsor_active);
+                        if ($checked['active'] == 1) { ?>
+
+                          <div class="product-link mt-3">
+                            <form action="" method="post">
+                              <input type="hidden" name="c_id" value='<?php echo $uploads['contest_id'] ?>'>
+                              <input type="hidden" name="type" value='sponsor'>
+                              <?php
+                              global $v;
+                              $votes_sponsors = array();
+                              while ($vot = mysqli_fetch_assoc($check_voted_sponsor)) {
+                                array_push($votes_sponsors, $vot['user_contest_id']);
+                                if (in_array($uploads['contest_id'], $votes_sponsors)) {
+                                  $v = 1;
+                                } else {
+                                  $v = 0;
+                                }
+                              }
+                              if ($v == 1) {
+                              ?>
+
+                                <div class='mb-2'>
+                                  <button type="button" class="add-cart" style='color:red'><i class="ti-star ml-2 mb-1"></i>تم التصويت على هذا العمل</button>
+                                </div>
+                              <?php
+                              } else {
+                              ?>
+                                <div class='mb-2'>
+                                  <button type="submit" class="add-cart btn-outline-success" name='vote'><i class="ti-star ml-2 mb-1"></i>تصويت كأفضل عمل</button>
+                                </div>
+                              <?php
+                              }
+
+                              ?>
+                            </form>
+                          </div>
+                        <?php
+                        } else { ?>
+                          <div class="product-link mt-3">
+                            <a href="voter_register.php" class='add-cart'><i class="ti-star ml-2 mb-1"></i> تسجيل حساب للتصويت</a>
+                          </div>
+                        <?php
+
+                        }
+                      } elseif (isset($_SESSION['user_id'])) {
+                        $check_voted_user = mysqli_query($conn, "SELECT voted,user_id,user_contest_id from voters_active_contest where user_id='{$_SESSION['user_id']}'");
+                        $user_active = mysqli_query($conn, "SELECT active from users where user_id='{$_SESSION['user_id']}'");
+                        $checked = mysqli_fetch_assoc($user_active);
+
+                        if ($checked['active'] == 1) { ?>
+
+                          <div class="product-link mt-3">
+                            <form action="" method="post">
+                              <input type="hidden" name="c_id" value='<?php echo $uploads['contest_id'] ?>'>
+                              <input type="hidden" name="type" value='user'>
+                              <?php
+                              global $v;
+                              global $belongs;
+                              $votes_users = array();
+                              $checkbelong = array();
+                              while ($vot = mysqli_fetch_assoc($check_voted_user)) {
+                                array_push($votes_users, $vot['user_contest_id']);
+                                if (in_array($uploads['contest_id'], $votes_users)) {
+                                  $v = 1;
+                                } else {
+                                  $v = 0;
+                                }
+                              }
+                              $check_user = mysqli_query($conn, "SELECT upload_file from user_contest where user_id='{$_SESSION['user_id']}'");
+                              while ($row = mysqli_fetch_assoc($check_user)) {
+                                array_push($checkbelong, $uploads['upload_file']);
+                                if (in_array($row['upload_file'], $checkbelong)) {
+                                  $belongs = 1;
+                                } else {
+                                  $belongs = 0;
+                                }
+                              }
+                              if ($belongs == 1) { ?>
+                                <div class='mb-2'>
+                                  <button type="button" class="add-cart" style='color:red'><i class="ti-star ml-2 mb-1"></i>لا يمكن التصويت على هذا العمل</button>
+                                </div>
+                              <?php
+                              } elseif ($v == 0) { ?>
+
+                                <div class='mb-2'>
+                                  <button type="submit" class="add-cart btn-outline-success" name='vote'><i class="ti-star ml-2 mb-1"></i>تصويت كأفضل عمل</button>
+                                </div>
+                              <?php
+                              } elseif ($v == 1) {
+
+                              ?>
+                                <div class='mb-2'>
+                                  <button type="button" class="add-cart" style='color:red'><i class="ti-star ml-2 mb-1"></i>تم التصويت على هذا العمل</button>
+                                </div>
+                              <?php
+                              }
+                              ?>
+                            </form>
+                          </div>
+                        <?php
+                        } else {  ?>
+                          <div class="product-link mt-3">
+                            <a href="voter_register.php" class='add-cart'><i class="ti-star ml-2 mb-1"></i> تسجيل حساب للتصويت</a>
+                          </div>
+                        <?php
+                        }
+                      } else { ?>
                         <div class="product-link mt-3">
                           <a href="voter_register.php" class='add-cart'><i class="ti-star ml-2 mb-1"></i> تسجيل حساب للتصويت</a>
                         </div>
-                      <?php  } ?>
+
+                      <?php
+                      }
+                      ?>
+
                     </div>
                   </div>
                 </div>
@@ -320,8 +581,10 @@ if (isset($error)) {
                 <ul class="list-unstyled list-group list-group-flush mb-5">
                   <li class="mb-4">
                     <form action="" method="post" enctype="multipart/form-data">
-                      <input type="file" name='contest_file' class='form-control' required>
-                      <!-- <small class='text-danger'>ملاحظة</small><br> -->
+                      <div class="form-group">
+                        <input type="file" name='contest_file' class='form-control' required>
+                        <!-- <small class='text-danger'>ملاحظة</small><br> -->
+                      </div>
                       <button type="submit" name='upload' class='btn btn-success btn-sm'>تأكيد الارفاق</button>
                     </form>
                   </li>
