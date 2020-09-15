@@ -180,13 +180,13 @@ $offset = ($pageno - 1) * $num_records_per_page;
   <div class="container">
     <div class="row  text-center">
       <div class="col">
-        <h1>مسابقات</h1>
+        <h1>المسابقات الوطنية </h1>
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb justify-content-center bg-transparent p-0 m-0">
             <li class="breadcrumb-item"><a class="text-dark" href="#">الرئيسية</a>
             </li>
             <li class="breadcrumb-item">المشاركات الوطنية</li>
-            <li class="breadcrumb-item active text-success" aria-current="page">مسابقات</li>
+            <li class="breadcrumb-item active text-success" aria-current="page">المسابقات الوطنية </li>
           </ol>
         </nav>
       </div>

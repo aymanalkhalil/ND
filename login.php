@@ -52,6 +52,22 @@ if (isset($_POST['login'])) {
                 </div>";
     }
   } elseif ($type == 4) {
+    $query = "SELECT * from sponsors where sponsor_email='$email' AND sponsor_password='$password' AND gold=1";
+    $result = mysqli_query($conn, $query);
+    if (mysqli_num_rows($result) > 0) {
+      $row = mysqli_fetch_assoc($result);
+      $_SESSION['sponsor_id'] = $row['sponsor_id'];
+      $_SESSION['sponsor_name'] = $row['sponsor_name'];
+      $_SESSION['gold'] = $row['gold'];
+
+      echo "<script>window.location.href='index.php'</script>";
+    } else {
+      $error = " <div class='alert alert-danger text-center alert-dismissible text-center'>
+               <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
+                 <h4><i class='icon fa fa-ban'></i>عذراً هذا الحساب غير مسجل لدينا</h4>
+                </div>";
+    }
+  } elseif ($type == 5) {
     $query = "SELECT * from voters where v_email='$email' AND v_password='$password'";
     $result = mysqli_query($conn, $query);
     if (mysqli_num_rows($result) > 0) {
@@ -132,8 +148,9 @@ if (isset($_POST['login'])) {
                   <option disabled selected value=''>الرجاء اختيار نوع المستخدم </option>
                   <option value="1">مشارك</option>
                   <option value="2">اصحاب المنتجات التجارية</option>
-                  <option value="3">راعي</option>
-                  <option value="4">مصوت</option>
+                  <option value="3">شركاء النجاح والرعايات الفضية</option>
+                  <option value="4">شركاء النجاح والرعايات الذهبية</option>
+                  <option value="5">مصوت</option>
 
                 </select>
 

@@ -49,7 +49,7 @@ if (isset($_POST['answer'])) {
                     <ol class="breadcrumb justify-content-center bg-transparent p-0 m-0">
                         <li class="breadcrumb-item"><a class="text-dark" href="index.php">الرئيسية</a>
                         </li>
-                        <li class="breadcrumb-item " aria-current="page"> شركاء النجاح والرعايات</li>
+                        <!-- <li class="breadcrumb-item " aria-current="page"> شركاء النجاح والرعايات الذهبية</li> -->
 
                         <li class="breadcrumb-item active "><a class=" text-success" href="sponsor-contests.php">مسابقات شركاء النجاح </a>
                         </li>
@@ -97,8 +97,12 @@ if (isset($success)) {
                         <form method="POST" action="">
                             <div class="messages"></div>
                             <?php
-                            $get_answers = mysqli_query($conn, "SELECT * FROM sponsor_contest where sponsor_id='{$_SESSION['sponsor_id']}'");
-                            $row = mysqli_fetch_assoc($get_answers);
+                            if (isset($_SESSION['sponsor_id'])) {
+                                $get_answers = mysqli_query($conn, "SELECT * FROM sponsor_contest where sponsor_id='{$_SESSION['sponsor_id']}'");
+                                $row = mysqli_fetch_assoc($get_answers);
+                            }else{
+                                echo "<script>window.location.href='sponsors-feed.php'</script>";
+                            }
                             ?>
                             <div class="row text-dark">
                                 <div class="col-md-12">

@@ -102,6 +102,36 @@ if (isset($_POST['register'])) {
                 </div>";
         }
       }
+    } elseif ($type == '4') {
+      $check_email = "SELECT sponsor_email FROM sponsors WHERE sponsor_email='$email'";
+      $result = mysqli_query($conn, $check_email);
+      if (mysqli_num_rows($result) > 0) {
+        $error = " <div class='alert alert-danger text-center alert-dismissible text-center'>
+               <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
+                 <h4><i class='icon fa fa-ban'></i> عذراً البريد الالكتروني مسجل لدينا</h4>
+                </div>";
+      } else {
+        $insert = "INSERT INTO sponsors(sponsor_name,sponsor_email,sponsor_password,sponsor_mobile,sponsor_address,sponsor_desc,gold)VALUES
+      ('$name','$email','$password','$mobile','$address','$desc',1)";
+        $result = mysqli_query($conn, $insert);
+
+        if ($result) {
+          $success =
+            " <div class='alert alert-success text-center alert-dismissible text-center'>
+               <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
+                 <h4><i class='icon fa fa-check'></i> تم تسجيل الحساب الذهبي بنجاح!</h4>
+                </div>
+                 <script type='text/Javascript'>
+             window.setTimeout(function() {
+             window.location.href = 'register.php';
+             }, 2000);</script>";
+        } else {
+          $error = " <div class='alert alert-danger text-center alert-dismissible text-center'>
+               <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
+                 <h4><i class='icon fa fa-ban'></i>عذراً حدث خطأ  الرجاء المحاولة لاحقاً</h4>
+                </div>";
+        }
+      }
     }
   }
 }
@@ -230,7 +260,9 @@ if (isset($success)) {
                       <option disabled selected value=''>الرجاء اختيار نوع المستخدم </option>
                       <option value="1">مشارك</option>
                       <option value="2">اصحاب المنتجات التجارية</option>
-                      <option value="3">راعي</option>
+                      <option value="3">شركاء النجاح والرعايات الفضية</option>
+                      <option value="4">شركاء النجاح والرعايات الذهبية</option>
+
                     </select>
 
                   </div>

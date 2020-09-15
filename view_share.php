@@ -519,181 +519,114 @@ if (isset($error)) {
     }
 
 
-    if ($type == 'image') {
+
 ?>
 
-        <section class='col-lg-12'>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-7 col-12">
-                        <div class="owl-carousel" data-items="1" data-autoplay="true">
+    <section class='col-lg-12'>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-7 col-12">
+                    <div class="owl-carousel" data-items="1" data-autoplay="true">
+
+                        <?php
+                        if ($type == 'image') { ?>
+
                             <div class="item">
                                 <img class="img-fluid w-100" src="assets/upload_merchants/<?php echo $info_m['upload_merchant_file']  ?>" alt="">
                             </div>
 
-                        </div>
+                        <?php } elseif ($type == 'video') { ?>
+                            <div class="item">
+                                <video class="img-fluid w-100" controls>
+                                    <source src="assets/upload_merchants/<?php echo $info_m['upload_merchant_file']  ?>">
+                                </video>
+                            </div>
+                        <?php } elseif ($type == 'audio') { ?>
+                            <div class="item">
+                                <audio controls class="img-center w-100">
+                                    <source src="assets/upload_merchants/<?php echo $info_m['upload_merchant_file']  ?>">
+                                </audio>
+                            </div>
+                        <?php } ?>
+
+
                     </div>
-                    <div class="col-lg-5 col-12">
-                        <h2 class="title">الصورة المرفقة</h2>
+                </div>
+                <div class="col-lg-5 col-12">
+                    <h2 class="title">
+                        <?php
+                        if ($type == 'image') {
+                            echo "الصورة المرفقة";
+                        } elseif ($type == 'video') {
+                            echo "الفيديو المرفق";
+                        } elseif ($type == 'audio') {
+                            echo "الملف الصوتي المرفق";
+                        } ?>
+
+
+                    </h2>
+                    <?php
+                    if ($type == 'image') { ?>
                         <ul class="cases-meta list-unstyled text-muted">
                             <li class="mb-3"><span class="text-dark"> التعليق المرفق: </span> <?php echo $info_m['upload_merchant_description'] == '' ? 'لا يوجد تعليق مرفق مع الصورة' : $info_m['upload_merchant_description']  ?></li>
                             <li class="mb-3"><span class="text-danger"> لحذف المشاركة : </span> <a href="view_share.php?m_id=<?php echo $info_m['upload_merchant_id'] ?>" class="delete" onclick="return confirm('هل أنت متاكد من حذف هذه المشاركة؟')">اضغط هنا</a>
                             </li>
                             <li class="mb-3"><span class="text-dark"> ملاحظة: </span> لتعديل المشاركة يرجى ارفاق المشاركة الجديدة في نموذج التعديل أدناه.</li>
                         </ul>
-                    </div>
-                </div>
-            </div>
 
-            <div class="container">
-                <div class="row align-items-end">
-                    <div class="col-lg-12">
-                        <div class="mb-5 text-center">
-                            <span class="badge badge-primary-soft p-2">
-                                <i class="la la-bold ic-3x rotation"></i>
-                            </span>
-                            <h2 class="mt-4 mb-0 text-info">نموذج تعديل المشاركة المرفقة</h2>
-                            <!-- <p class="lead mb-0 text-center text-info">نموذج تعديل المشاركة المرفقة</p> -->
-                        </div>
-                        <form class="row" method="post" action="" enctype="multipart/form-data">
-                            <div class="form-group col-md-12">
-                                <label for="">تعديل الملف المرفق</label>
-                                <input type="file" dir='rtl' name="upload" class="form-control">
-                                <small class='text-danger'>ملاحظة : لا يشترط ارفاق ملف جديد في حال رغبتك في تعديل التعليق فقط.</small>
-                            </div>
-                            <div class="form-group col-md-12">
-                                <label for="">اضافة تعليق (ليست اجبارية)</label>
-                                <textarea name="message" dir='rtl' class="form-control" rows="4"></textarea>
-                            </div>
-                            <div class="col-12 text-center mt-4">
-                                <input type="hidden" name="type" value='merchants'>
-
-                                <button type="submit" name='edit' class="btn btn-outline-success btn-block"><span>تعديل المشاركة</span>
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </section>
-    <?php } elseif ($type == 'video') { ?>
-        <section class='col-lg-12'>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-7 col-12">
-                        <div class="owl-carousel" data-items="1" data-autoplay="true">
-                            <div class="item">
-                                <video class="img-fluid w-100" controls>
-                                    <source src="assets/upload_merchants/<?php echo $info_m['upload_merchant_file']  ?>">
-                                </video>
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="col-lg-5 col-12">
-                        <h2 class="title">الفيديو المرفق</h2>
+                    <?php } elseif ($type == 'video') { ?>
                         <ul class="cases-meta list-unstyled text-muted">
                             <li class="mb-3"><span class="text-dark"> التعليق المرفق: </span> <?php echo $info_m['upload_merchant_description'] == '' ? 'لا يوجد تعليق مرفق مع الفيديو' : $info_m['upload_merchant_description']  ?></li>
                             <li class="mb-3"><span class="text-danger"> لحذف المشاركة : </span> <a href="view_share.php?m_id=<?php echo $info_m['upload_merchant_id'] ?>" class="delete" onclick="return confirm('هل أنت متاكد من حذف هذه المشاركة؟')">اضغط هنا</a>
                             </li>
                             <li class="mb-3"><span class="text-dark"> ملاحظة: </span> لتعديل المشاركة يرجى ارفاق المشاركة الجديدة في نموذج التعديل أدناه.</li>
                         </ul>
-                    </div>
-                </div>
-            </div>
+                    <?php } elseif ($type == 'audio') { ?>
 
-            <div class="container">
-                <div class="row align-items-end">
-                    <div class="col-lg-12">
-                        <div class="mb-5 text-center">
-                            <span class="badge badge-primary-soft p-2">
-                                <i class="la la-bold ic-3x rotation"></i>
-                            </span>
-                            <h2 class="mt-4 mb-0 text-info">نموذج تعديل المشاركة المرفقة</h2>
-                            <!-- <p class="lead mb-0 text-center text-info">نموذج تعديل المشاركة المرفقة</p> -->
-                        </div>
-                        <form class="row" method="post" action="" enctype="multipart/form-data">
-                            <div class="form-group col-md-12">
-                                <label for="">تعديل الملف المرفق</label>
-                                <input type="file" dir='rtl' name="upload" class="form-control">
-                                <small class='text-danger'>ملاحظة : لا يشترط ارفاق ملف جديد في حال رغبتك في تعديل التعليق فقط.</small>
-                            </div>
-                            <div class="form-group col-md-12">
-                                <label for="">اضافة تعليق (ليست اجبارية)</label>
-                                <textarea name="message" dir='rtl' class="form-control" rows="4"></textarea>
-                            </div>
-                            <div class="col-12 text-center mt-4">
-                                <input type="hidden" name="type" value='merchants'>
-
-                                <button type="submit" name='edit' class="btn btn-outline-success btn-block"><span>تعديل المشاركة</span>
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </section>
-    <?php
-    } elseif ($type == 'audio') { ?>
-        <section class='col-lg-12'>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-7 col-12">
-                        <div class="owl-carousel" data-items="1" data-autoplay="true">
-
-                            <div class="item">
-                                <audio controls class="img-center w-100">
-                                    <source src="assets/upload_merchants/<?php echo $info_m['upload_merchant_file']  ?>">
-                                </audio>
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="col-lg-5 col-12">
-                        <h2 class="title">الملف الصوتي المرفق</h2>
                         <ul class="cases-meta list-unstyled text-muted">
                             <li class="mb-3"><span class="text-dark"> التعليق المرفق: </span> <?php echo $info_m['upload_merchant_description'] == '' ? 'لا يوجد تعليق مرفق مع المقطع الصوتي' : $info_m['upload_merchant_description']  ?></li>
                             <li class="mb-3"><span class="text-danger"> لحذف المشاركة : </span> <a href="view_share.php?m_id=<?php echo $info_m['upload_merchant_id'] ?>" class="delete" onclick="return confirm('هل أنت متاكد من حذف هذه المشاركة؟')">اضغط هنا</a>
                             </li>
                             <li class="mb-3"><span class="text-dark"> ملاحظة: </span> لتعديل المشاركة يرجى ارفاق المشاركة الجديدة في نموذج التعديل أدناه.</li>
                         </ul>
-                    </div>
+                    <?php } ?>
+
+
                 </div>
             </div>
+        </div>
 
-            <div class="container">
-                <div class="row align-items-end">
-                    <div class="col-lg-12">
-                        <div class="mb-5 text-center">
-                            <span class="badge badge-primary-soft p-2">
-                                <i class="la la-bold ic-3x rotation"></i>
-                            </span>
-                            <h2 class="mt-4 mb-0 text-info">نموذج تعديل المشاركة المرفقة</h2>
-                            <!-- <p class="lead mb-0 text-center text-info">نموذج تعديل المشاركة المرفقة</p> -->
+        <div class="container">
+            <div class="row align-items-end">
+                <div class="col-lg-12">
+                    <div class="mb-5 text-center">
+                        <span class="badge badge-primary-soft p-2  bg-success">
+                            <img src="assets/images/gif/KSA-flag.gif" alt="" srcset="">
+                        </span>
+                        <h2 class="mt-4 mb-0 text-info">نموذج تعديل المشاركة المرفقة</h2>
+                    </div>
+                    <form class="row" method="post" action="" enctype="multipart/form-data">
+                        <div class="form-group col-md-12">
+                            <label for="">تعديل الملف المرفق</label>
+                            <input type="file" dir='rtl' name="upload" class="form-control">
+                            <small class='text-danger'>ملاحظة : لا يشترط ارفاق ملف جديد في حال رغبتك في تعديل التعليق فقط.</small>
                         </div>
-                        <form class="row" method="post" action="" enctype="multipart/form-data">
-                            <div class="form-group col-md-12">
-                                <label for="">تعديل الملف المرفق</label>
-                                <input type="file" dir='rtl' name="upload" class="form-control">
-                                <small class='text-danger'>ملاحظة : لا يشترط ارفاق ملف جديد في حال رغبتك في تعديل التعليق فقط.</small>
-                            </div>
-                            <div class="form-group col-md-12">
-                                <label for="">اضافة تعليق (ليست اجبارية)</label>
-                                <textarea name="message" dir='rtl' class="form-control" rows="4"></textarea>
-                            </div>
-                            <div class="col-12 text-center mt-4">
-                                <input type="hidden" name="type" value='merchants'>
+                        <div class="form-group col-md-12">
+                            <label for="">اضافة تعليق (ليست اجبارية)</label>
+                            <textarea name="message" dir='rtl' class="form-control" rows="4"></textarea>
+                        </div>
+                        <div class="col-12 text-center mt-4">
+                            <input type="hidden" name="type" value='merchants'>
 
-                                <button type="submit" name='edit' class="btn btn-outline-success btn-block"><span>تعديل المشاركة</span>
-                                </button>
-                            </div>
-                        </form>
-                    </div>
+                            <button type="submit" name='edit' class="btn btn-outline-success btn-block"><span>تعديل المشاركة</span>
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
-        </section>
-    <?php
-    }
+        </div>
+    </section>
+<?php
 } elseif (key($_GET) == 'us') {
 
     $info_u = mysqli_fetch_assoc($result_u);
@@ -722,182 +655,109 @@ if (isset($error)) {
             break;
     }
 
+?>
+    <section class='col-lg-12'>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-7 col-12">
+                    <div class="owl-carousel" data-items="1" data-autoplay="true">
+                        <?php
+                        if ($type == 'image') { ?>
 
-    if ($type == 'image') {
-
-    ?>
-
-        <section class='col-lg-12'>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-7 col-12">
-                        <div class="owl-carousel" data-items="1" data-autoplay="true">
                             <div class="item">
                                 <img class="img-fluid w-100" src="assets/upload_users/<?php echo $info_u['upload_user_file']  ?>" alt="">
                             </div>
 
-                        </div>
+                        <?php } elseif ($type == 'video') { ?>
+                            <div class="item">
+                                <video class="img-center w-100" controls>
+                                    <source src="assets/upload_users/<?php echo $info_u['upload_user_file'] ?>">
+                                </video>
+                            </div>
+                        <?php } elseif ($type == 'audio') { ?>
+                            <div class="item">
+                                <audio controls class="img-center w-100">
+                                    <source src="assets/upload_users/<?php echo $info_u['upload_user_file']  ?>">
+                                </audio>
+                            </div>
+                        <?php } ?>
+
                     </div>
-                    <div class="col-lg-5 col-12">
-                        <h2 class="title">الصورة المرفقة</h2>
+                </div>
+                <div class="col-lg-5 col-12">
+                    <h2 class="title">
+                        <?php
+                        if ($type == 'image') {
+                            echo "الصورة المرفقة";
+                        } elseif ($type == 'video') {
+                            echo "الفيديو المرفق";
+                        } elseif ($type == 'audio') {
+                            echo "الملف الصوتي المرفق";
+                        } ?>
+                    </h2>
+                    <?php
+                    if ($type == 'image') { ?>
                         <ul class="cases-meta list-unstyled text-muted">
                             <li class="mb-3"><span class="text-dark"> التعليق المرفق: </span> <?php echo $info_u['upload_user_description'] == '' ? 'لا يوجد تعليق مرفق مع الصورة' : $info_u['upload_user_description']  ?></li>
                             <li class="mb-3"><span class="text-danger"> لحذف المشاركة : </span><a href="view_share.php?us_id=<?php echo $info_u['upload_user_id'] ?>" class="delete" onclick="return confirm('هل أنت متاكد من حذف هذه المشاركة؟')">اضغط هنا</a>
                             </li>
                             <li class="mb-3"><span class="text-dark"> ملاحظة: </span> لتعديل المشاركة يرجى ارفاق المشاركة الجديدة في نموذج التعديل أدناه.</li>
                         </ul>
-                    </div>
-                </div>
-            </div>
 
-            <div class="container">
-                <div class="row align-items-end">
-                    <div class="col-lg-12">
-                        <div class="mb-5 text-center">
-                            <span class="badge badge-primary-soft p-2">
-                                <i class="la la-bold ic-3x rotation"></i>
-                            </span>
-                            <h2 class="mt-4 mb-0 text-info">نموذج تعديل المشاركة المرفقة</h2>
-                            <!-- <p class="lead mb-0 text-center text-info">نموذج تعديل المشاركة المرفقة</p> -->
-                        </div>
-                        <form class="row" method="post" action="" enctype="multipart/form-data">
-                            <div class="form-group col-md-12">
-                                <label for="">تعديل الملف المرفق</label>
-                                <input type="file" dir='rtl' name="upload" class="form-control">
-                                <small class='text-danger'>ملاحظة : لا يشترط ارفاق ملف جديد في حال رغبتك في تعديل التعليق فقط.</small>
-                            </div>
-                            <div class="form-group col-md-12">
-                                <label for="">اضافة تعليق (ليست اجبارية)</label>
-                                <textarea name="message" dir='rtl' class="form-control" rows="4"></textarea>
-                            </div>
-                            <div class="col-12 text-center mt-4">
-                                <input type="hidden" name="type" value='users'>
-
-                                <button type="submit" name='edit' class="btn btn-outline-success btn-block"><span>تعديل المشاركة</span>
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </section>
-    <?php } elseif ($type == 'video') { ?>
-        <section class='col-lg-12'>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-7 col-12">
-                        <div class="owl-carousel" data-items="1" data-autoplay="true">
-                            <div class="item">
-                                <video class="img-center w-100" controls>
-                                    <source src="assets/upload_users/<?php echo $info_u['upload_user_file'] ?>">
-                                </video>
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="col-lg-5 col-12">
-                        <h2 class="title">الفيديو المرفق</h2>
+                    <?php } elseif ($type == 'video') { ?>
                         <ul class="cases-meta list-unstyled text-muted">
                             <li class="mb-3"><span class="text-dark"> التعليق المرفق: </span> <?php echo $info_u['upload_user_description'] == '' ? 'لا يوجد تعليق مرفق مع الفيديو' : $info_u['upload_user_description']  ?></li>
                             <li class="mb-3"><span class="text-danger"> لحذف المشاركة : </span> <a href="view_share.php?us_id=<?php echo $info_u['upload_user_id'] ?>" class="delete" onclick="return confirm('هل أنت متاكد من حذف هذه المشاركة؟')">اضغط هنا</a>
                             </li>
                             <li class="mb-3"><span class="text-dark"> ملاحظة: </span> لتعديل المشاركة يرجى ارفاق المشاركة الجديدة في نموذج التعديل أدناه.</li>
                         </ul>
-                    </div>
-                </div>
-            </div>
+                    <?php } elseif ($type == 'audio') { ?>
 
-            <div class="container">
-                <div class="row align-items-end">
-                    <div class="col-lg-12">
-                        <div class="mb-5 text-center">
-                            <span class="badge badge-primary-soft p-2">
-                                <i class="la la-bold ic-3x rotation"></i>
-                            </span>
-                            <h2 class="mt-4 mb-0 text-info">نموذج تعديل المشاركة المرفقة</h2>
-                            <!-- <p class="lead mb-0 text-center text-info">نموذج تعديل المشاركة المرفقة</p> -->
-                        </div>
-                        <form class="row" method="post" action="" enctype="multipart/form-data">
-                            <div class="form-group col-md-12">
-                                <label for="">تعديل الملف المرفق</label>
-                                <input type="file" dir='rtl' name="upload" class="form-control">
-                                <small class='text-danger'>ملاحظة : لا يشترط ارفاق ملف جديد في حال رغبتك في تعديل التعليق فقط.</small>
-                            </div>
-                            <div class="form-group col-md-12">
-                                <label for="">اضافة تعليق (ليست اجبارية)</label>
-                                <textarea name="message" dir='rtl' class="form-control" rows="4"></textarea>
-                            </div>
-                            <div class="col-12 text-center mt-4">
-                                <input type="hidden" name="type" value='users'>
-
-                                <button type="submit" name='edit' class="btn btn-outline-success btn-block"><span>تعديل المشاركة</span>
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-    <?php } elseif ($type == 'audio') { ?>
-        <section class='col-lg-12'>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-7 col-12">
-                        <div class="owl-carousel" data-items="1" data-autoplay="true">
-                            <div class="item">
-                                <audio controls class="img-center w-100">
-                                    <source src="assets/upload_users/<?php echo $info_u['upload_user_file']  ?>">
-                                </audio>
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="col-lg-5 col-12">
-                        <h2 class="title">الملف الصوتي المرفق</h2>
                         <ul class="cases-meta list-unstyled text-muted">
                             <li class="mb-3"><span class="text-dark"> التعليق المرفق: </span> <?php echo $info_u['upload_user_description'] == '' ? 'لا يوجد تعليق مرفق مع المقطع الصوتي' : $info_u['upload_user_description']  ?></li>
                             <li class="mb-3"><span class="text-danger"> لحذف المشاركة : </span> <a href="view_share.php?us_id=<?php echo $info_u['upload_user_id'] ?>" class="delete" onclick="return confirm('هل أنت متاكد من حذف هذه المشاركة؟')">اضغط هنا</a>
                             </li>
                             <li class="mb-3"><span class="text-dark"> ملاحظة: </span> لتعديل المشاركة يرجى ارفاق المشاركة الجديدة في نموذج التعديل أدناه.</li>
                         </ul>
-                    </div>
+                    <?php } ?>
+
+
                 </div>
             </div>
-
-            <div class="container">
-                <div class="row align-items-end">
-                    <div class="col-lg-12">
-                        <div class="mb-5 text-center">
-                            <span class="badge badge-primary-soft p-2">
-                                <i class="la la-bold ic-3x rotation"></i>
-                            </span>
-                            <h2 class="mt-4 mb-0 text-info">نموذج تعديل المشاركة المرفقة</h2>
-                            <!-- <p class="lead mb-0 text-center text-info">نموذج تعديل المشاركة المرفقة</p> -->
+        </div>
+        <div class="container">
+            <div class="row align-items-end">
+                <div class="col-lg-12">
+                    <div class="mb-5 text-center">
+                        <span class="badge badge-primary-soft p-2 bg-success">
+                            <img src="assets/images/gif/KSA-flag.gif" alt="" srcset="">
+                        </span>
+                        <h2 class="mt-4 mb-0 text-info">نموذج تعديل المشاركة المرفقة</h2>
+                    </div>
+                    <form class="row" method="post" action="" enctype="multipart/form-data">
+                        <div class="form-group col-md-12">
+                            <label for="">تعديل الملف المرفق</label>
+                            <input type="file" dir='rtl' name="upload" class="form-control">
+                            <small class='text-danger'>ملاحظة : لا يشترط ارفاق ملف جديد في حال رغبتك في تعديل التعليق فقط.</small>
                         </div>
-                        <form class="row" method="post" action="" enctype="multipart/form-data">
-                            <div class="form-group col-md-12">
-                                <label for="">تعديل الملف المرفق</label>
-                                <input type="file" dir='rtl' name="upload" class="form-control">
-                                <small class='text-danger'>ملاحظة : لا يشترط ارفاق ملف جديد في حال رغبتك في تعديل التعليق فقط.</small>
-                            </div>
-                            <div class="form-group col-md-12">
-                                <label for="">اضافة تعليق (ليست اجبارية)</label>
-                                <textarea name="message" dir='rtl' class="form-control" rows="4"></textarea>
-                            </div>
-                            <div class="col-12 text-center mt-4">
-                                <input type="hidden" name="type" value='users'>
+                        <div class="form-group col-md-12">
+                            <label for="">اضافة تعليق (ليست اجبارية)</label>
+                            <textarea name="message" dir='rtl' class="form-control" rows="4"></textarea>
+                        </div>
+                        <div class="col-12 text-center mt-4">
+                            <input type="hidden" name="type" value='users'>
 
-                                <button type="submit" name='edit' class="btn btn-outline-success btn-block"><span>تعديل المشاركة</span>
-                                </button>
-                            </div>
-                        </form>
-                    </div>
+                            <button type="submit" name='edit' class="btn btn-outline-success btn-block"><span>تعديل المشاركة</span>
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
-        </section>
-    <?php
-    }
+        </div>
+    </section>
+
+<?php
+
 } elseif (key($_GET) == 'sp') {
     $info_s = mysqli_fetch_assoc($result_s);
     $typeArr = explode('.', $info_s['upload_sponsor_file']);
@@ -924,179 +784,108 @@ if (isset($error)) {
             break;
     }
 
-    if ($type == 'image') {
-    ?>
-        <section class='col-lg-12'>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-7 col-12">
-                        <div class="owl-carousel" data-items="1" data-autoplay="true">
+
+?>
+    <section class='col-lg-12'>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-7 col-12">
+                    <div class="owl-carousel" data-items="1" data-autoplay="true">
+                        <?php
+                        if ($type == 'image') { ?>
+
                             <div class="item">
                                 <img class="img-fluid w-100" src="assets/upload_sponsors/<?php echo $info_s['upload_sponsor_file']  ?>" alt="">
                             </div>
 
-                        </div>
+                        <?php } elseif ($type == 'video') { ?>
+                            <div class="item">
+                                <video class="img-center w-100" controls>
+                                    <source src="assets/upload_sponsors/<?php echo $info_s['upload_sponsor_file'] ?>">
+                                </video>
+                            </div>
+                        <?php } elseif ($type == 'audio') { ?>
+                            <div class="item">
+                                <audio controls class="img-center w-100">
+                                    <source src="assets/upload_sponsors/<?php echo $info_s['upload_sponsor_file']  ?>">
+                                </audio>
+                            </div>
+                        <?php } ?>
+
                     </div>
-                    <div class="col-lg-5 col-12">
-                        <h2 class="title">الصورة المرفقة</h2>
+                </div>
+                <div class="col-lg-5 col-12">
+                    <h2 class="title">
+                        <?php
+                        if ($type == 'image') {
+                            echo "الصورة المرفقة";
+                        } elseif ($type == 'video') {
+                            echo "الفيديو المرفق";
+                        } elseif ($type == 'audio') {
+                            echo "الملف الصوتي المرفق";
+                        } ?>
+
+                    </h2>
+
+                    <?php
+                    if ($type == 'image') { ?>
                         <ul class="cases-meta list-unstyled text-muted">
                             <li class="mb-3"><span class="text-dark"> التعليق المرفق: </span> <?php echo $info_s['upload_sponsor_description'] == '' ? 'لا يوجد تعليق مرفق مع الصورة' : $info_s['upload_sponsor_description']  ?></li>
                             <li class="mb-3"><span class="text-danger"> لحذف المشاركة : </span> <a href="view_share.php?sp_id=<?php echo $info_s['upload_sponsor_id'] ?>" class="delete" onclick="return confirm('هل أنت متاكد من حذف هذه المشاركة؟')">اضغط هنا</a>
                             </li>
                             <li class="mb-3"><span class="text-dark"> ملاحظة: </span> لتعديل المشاركة يرجى ارفاق المشاركة الجديدة في نموذج التعديل أدناه.</li>
                         </ul>
-                    </div>
-                </div>
-            </div>
 
-            <div class="container">
-                <div class="row align-items-end">
-                    <div class="col-lg-12">
-                        <div class="mb-5 text-center">
-                            <span class="badge badge-primary-soft p-2">
-                                <i class="la la-bold ic-3x rotation"></i>
-                            </span>
-                            <h2 class="mt-4 mb-0 text-info">نموذج تعديل المشاركة المرفقة</h2>
-                            <!-- <p class="lead mb-0 text-center text-info">نموذج تعديل المشاركة المرفقة</p> -->
-                        </div>
-                        <form class="row" method="post" action="" enctype="multipart/form-data">
-                            <div class="form-group col-md-12">
-                                <label for="">تعديل الملف المرفق</label>
-                                <input type="file" dir='rtl' name="upload" class="form-control">
-                                <small class='text-danger'>ملاحظة : لا يشترط ارفاق ملف جديد في حال رغبتك في تعديل التعليق فقط.</small>
-                            </div>
-                            <div class="form-group col-md-12">
-                                <label for="">اضافة تعليق (ليست اجبارية)</label>
-                                <textarea name="message" dir='rtl' class="form-control" rows="4"></textarea>
-                            </div>
-                            <div class="col-12 text-center mt-4">
-                                <input type="hidden" name="type" value='sponsors'>
-
-                                <button type="submit" name='edit' class="btn btn-outline-success btn-block"><span>تعديل المشاركة</span>
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-    <?php } elseif ($type == 'video') { ?>
-        <section class='col-lg-12'>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-7 col-12">
-                        <div class="owl-carousel" data-items="1" data-autoplay="true">
-                            <div class="item">
-                                <video class="img-center w-100" controls>
-                                    <source src="assets/upload_sponsors/<?php echo $info_s['upload_sponsor_file'] ?>">
-                                </video>
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="col-lg-5 col-12">
-                        <h2 class="title">الفيديو المرفق</h2>
+                    <?php } elseif ($type == 'video') { ?>
                         <ul class="cases-meta list-unstyled text-muted">
                             <li class="mb-3"><span class="text-dark"> التعليق المرفق: </span> <?php echo $info_s['upload_sponsor_description'] == '' ? 'لا يوجد تعليق مرفق مع الفيديو' : $info_s['upload_sponsor_description']  ?></li>
                             <li class="mb-3"><span class="text-danger"> لحذف المشاركة : </span> <a href="view_share.php?sp_id=<?php echo $info_s['upload_sponsor_id'] ?>" class="delete" onclick="return confirm('هل أنت متاكد من حذف هذه المشاركة؟')">اضغط هنا</a>
                             </li>
                             <li class="mb-3"><span class="text-dark"> ملاحظة: </span> لتعديل المشاركة يرجى ارفاق المشاركة الجديدة في نموذج التعديل أدناه.</li>
                         </ul>
-                    </div>
-                </div>
-            </div>
+                    <?php } elseif ($type == 'audio') { ?>
 
-            <div class="container">
-                <div class="row align-items-end">
-                    <div class="col-lg-12">
-                        <div class="mb-5 text-center">
-                            <span class="badge badge-primary-soft p-2">
-                                <i class="la la-bold ic-3x rotation"></i>
-                            </span>
-                            <h2 class="mt-4 mb-0 text-info">نموذج تعديل المشاركة المرفقة</h2>
-                            <!-- <p class="lead mb-0 text-center text-info">نموذج تعديل المشاركة المرفقة</p> -->
-                        </div>
-                        <form class="row" method="post" action="" enctype="multipart/form-data">
-                            <div class="form-group col-md-12">
-                                <label for="">تعديل الملف المرفق</label>
-                                <input type="file" dir='rtl' name="upload" class="form-control">
-                                <small class='text-danger'>ملاحظة : لا يشترط ارفاق ملف جديد في حال رغبتك في تعديل التعليق فقط.</small>
-                            </div>
-                            <div class="form-group col-md-12">
-                                <label for="">اضافة تعليق (ليست اجبارية)</label>
-                                <textarea name="message" dir='rtl' class="form-control" rows="4"></textarea>
-                            </div>
-                            <div class="col-12 text-center mt-4">
-                                <input type="hidden" name="type" value='sponsors'>
-
-                                <button type="submit" name='edit' class="btn btn-outline-success btn-block"><span>تعديل المشاركة</span>
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-    <?php } elseif ($type == 'audio') { ?>
-        <section class='col-lg-12'>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-7 col-12">
-                        <div class="owl-carousel" data-items="1" data-autoplay="true">
-                            <div class="item">
-                                <audio controls class="img-center w-100">
-                                    <source src="assets/upload_sponsors/<?php echo $info_s['upload_sponsor_file']  ?>">
-                                </audio>
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="col-lg-5 col-12">
-                        <h2 class="title">الملف الصوتي المرفق</h2>
                         <ul class="cases-meta list-unstyled text-muted">
                             <li class="mb-3"><span class="text-dark"> التعليق المرفق: </span> <?php echo $info_s['upload_sponsor_description'] == '' ? 'لا يوجد تعليق مرفق مع المقطع الصوتي' : $info_s['upload_sponsor_description']  ?></li>
                             <li class="mb-3"><span class="text-danger"> لحذف المشاركة : </span> <a href="view_share.php?sp_id=<?php echo $info_s['upload_sponsor_id'] ?>" class="delete" onclick="return confirm('هل أنت متاكد من حذف هذه المشاركة؟')">اضغط هنا</a>
                             </li>
                             <li class="mb-3"><span class="text-dark"> ملاحظة: </span> لتعديل المشاركة يرجى ارفاق المشاركة الجديدة في نموذج التعديل أدناه.</li>
                         </ul>
-                    </div>
+                    <?php } ?>
                 </div>
             </div>
-
-            <div class="container">
-                <div class="row align-items-end">
-                    <div class="col-lg-12">
-                        <div class="mb-5 text-center">
-                            <span class="badge badge-primary-soft p-2">
-                                <i class="la la-bold ic-3x rotation"></i>
-                            </span>
-                            <h2 class="mt-4 mb-0 text-info">نموذج تعديل المشاركة المرفقة</h2>
-                            <!-- <p class="lead mb-0 text-center text-info">نموذج تعديل المشاركة المرفقة</p> -->
+        </div>
+        <div class="container">
+            <div class="row align-items-end">
+                <div class="col-lg-12">
+                    <div class="mb-5 text-center">
+                        <span class="badge badge-primary-soft p-2 bg-success">
+                            <img src="assets/images/gif/KSA-flag.gif" alt="" srcset="">
+                        </span>
+                        <h2 class="mt-4 mb-0 text-info">نموذج تعديل المشاركة المرفقة</h2>
+                    </div>
+                    <form class="row" method="post" action="" enctype="multipart/form-data">
+                        <div class="form-group col-md-12">
+                            <label for="">تعديل الملف المرفق</label>
+                            <input type="file" dir='rtl' name="upload" class="form-control">
+                            <small class='text-danger'>ملاحظة : لا يشترط ارفاق ملف جديد في حال رغبتك في تعديل التعليق فقط.</small>
                         </div>
-                        <form class="row" method="post" action="" enctype="multipart/form-data">
-                            <div class="form-group col-md-12">
-                                <label for="">تعديل الملف المرفق</label>
-                                <input type="file" dir='rtl' name="upload" class="form-control">
-                                <small class='text-danger'>ملاحظة : لا يشترط ارفاق ملف جديد في حال رغبتك في تعديل التعليق فقط.</small>
-                            </div>
-                            <div class="form-group col-md-12">
-                                <label for="">اضافة تعليق (ليست اجبارية)</label>
-                                <textarea name="message" dir='rtl' class="form-control" rows="4"></textarea>
-                            </div>
-                            <div class="col-12 text-center mt-4">
-                                <input type="hidden" name="type" value='sponsors'>
+                        <div class="form-group col-md-12">
+                            <label for="">اضافة تعليق (ليست اجبارية)</label>
+                            <textarea name="message" dir='rtl' class="form-control" rows="4"></textarea>
+                        </div>
+                        <div class="col-12 text-center mt-4">
+                            <input type="hidden" name="type" value='sponsors'>
 
-                                <button type="submit" name='edit' class="btn btn-outline-success btn-block"><span>تعديل المشاركة</span>
-                                </button>
-                            </div>
-                        </form>
-                    </div>
+                            <button type="submit" name='edit' class="btn btn-outline-success btn-block"><span>تعديل المشاركة</span>
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
-        </section>
-<?php }
+        </div>
+    </section>
+<?php
 } ?>
 
 <!--portfolio end-->

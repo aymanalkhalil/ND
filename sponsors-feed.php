@@ -22,17 +22,17 @@ $offset = ($pageno - 1) * $num_records_per_page;
     <div class="container">
         <div class="row  text-center">
             <div class="col">
-                <h1> شركاء النجاح والرعايات</h1>
+                <h1> شركاء النجاح والرعايات الفضية</h1>
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb justify-content-center bg-transparent p-0 m-0">
                         <li class="breadcrumb-item"><a class="text-dark" href="index.php">الرئيسية</a>
                         </li>
-                        <li class="breadcrumb-item active text-success" aria-current="page"> شركاء النجاح والرعايات</li>
+                        <li class="breadcrumb-item active text-success" aria-current="page"> شركاء النجاح والرعايات الفضية</li>
                         <?php if (isset($_SESSION['sponsor_id'])) {
                             $check_active = mysqli_query($conn, "SELECT active from sponsors where sponsor_id='{$_SESSION['sponsor_id']}'");
                             $result = mysqli_fetch_assoc($check_active);
                             if ($result['active'] == 1) { ?>
-                                <li class="breadcrumb-item"><a class="text-dark" href="sponsor-contest.php">مسابقات شركاء النجاح</a>
+                                <li class="breadcrumb-item"><a class="text-dark" href="sponsor-contest.php">مسابقات شركاء النجاح الفضية</a>
                                 </li>
                         <?php
                             }
@@ -52,7 +52,7 @@ $offset = ($pageno - 1) * $num_records_per_page;
             <?php
             $get_sponsor_feeds = mysqli_query($conn, "SELECT upload_sponsor_id,upload_sponsor_file,upload_sponsor_description,uploads_sponsors.sponsor_id,sponsors.sponsor_name
                 FROM sponsors INNER JOIN uploads_sponsors ON uploads_sponsors.sponsor_id=sponsors.sponsor_id
-                ORDER BY upload_sponsor_id DESC LIMIT $offset,$num_records_per_page");
+                where gold is NULL ORDER BY upload_sponsor_id DESC LIMIT $offset,$num_records_per_page");
             if (mysqli_num_rows($get_sponsor_feeds) == 0) {
                 echo "
             <section class='col-lg-12'>
@@ -68,7 +68,8 @@ $offset = ($pageno - 1) * $num_records_per_page;
                 </div>
             </section>";
             } else {
-                $total_sponsor_feeds = mysqli_query($conn, "SELECT * FROM uploads_sponsors");
+                $total_sponsor_feeds = mysqli_query($conn, "SELECT * FROM uploads_sponsors inner join sponsors ON uploads_sponsors.sponsor_id=sponsors.sponsor_id
+                where gold is NULL ");
                 $total_rows_sp = mysqli_num_rows($total_sponsor_feeds);
                 $total_pages_sp = ceil($total_rows_sp / $num_records_per_page);
 

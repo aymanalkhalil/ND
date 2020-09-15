@@ -182,7 +182,7 @@ $offset = ($pageno - 1) * $num_records_per_page;
                     <ol class="breadcrumb justify-content-center bg-transparent p-0 m-0">
                         <li class="breadcrumb-item"><a class="text-dark" href="#">الرئيسية</a>
                         </li>
-                        <li class="breadcrumb-item">التخفيضات والعروض</li>
+                        <li class="breadcrumb-item">اصحاب المنتجات التجارية</li>
                         <li class="breadcrumb-item active text-success" aria-current="page">مسابقات اصحاب المنتجات التجارية</li>
                     </ol>
                 </nav>

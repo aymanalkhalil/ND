@@ -8,31 +8,34 @@
     <div class="container mt-11">
         <div class="row">
             <div class="col-12 col-lg-5 col-xl-4 ml-auto mb-6 mb-lg-0 text-center">
-                <div class="subscribe-form bg-warning-soft p-5 rounded">
-                    <!-- <h5 class="mb-4 text-white">Newsletter</h5>
+                <!-- <div class="subscribe-form bg-warning-soft p-5 rounded"> -->
+                <!-- <h5 class="mb-4 text-white">Newsletter</h5>
                     <h6 class="text-light">Subscribe Our Newsletter</h6>
                     <form id="mc-form" class="group">
                         <input type="email" value="" name="EMAIL" class="email form-control" id="mc-email" placeholder="Email Address" required="" style="height: 60px;">
                         <input class="btn btn-outline-light btn-block mt-3 mb-2" type="submit" name="subscribe" value="Subscribe">
                     </form> <small class="text-light">Get started for 1 Month free trial No Purchace
                         required.</small> -->
-                    <img src="assets/images/mi-logos/hqdefault.png" alt="" width='250px' srcset="">
-                </div>
+                <!-- <img src="assets/images/mi-logos/vision2030.jpg" alt="" width='250px' srcset=""> -->
+                <a href="index.php">
+                    <span><img src="assets/images/primary/nav-gray-logo.png" alt="" style='width: 325px;'></span>
+                </a>
+                <!-- </div> -->
 
             </div>
             <div class="col-12 col-lg-6 col-xl-7 text-center">
                 <div class="row mt-5">
                     <div class="col-12 col-sm-6 text-cneter ">
                         <a class="footer-logo text-white h2 mb-0" href="index.php">
-                            <span><img src="assets/images/primary/nav-gray-logo.png" alt="" style='width: 350px;'></span>
+                            <!-- <span><img src="assets/images/primary/nav-gray-logo.png" alt="" style='width: 350px;'></span> -->
                         </a>
-                        <ul class="list-inline mt-0 text-center">
+                        <ul class="list-inline mt-0 text-center mt-7">
                             <h6 class='text-light'> تواصل معنا عبر منصات التواصل الإجتماعي</h6>
-                            <li class="list-inline-item"><a class="text-light ic-2x" href="#"><i class="la la-facebook"></i></a>
+                            <li class="list-inline-item"><a class="text-light ic-2x" href="https://www.facebook.com/yamohob-691393434647103/"><i class="la la-facebook"></i></a>
                             </li>
-                            <li class="list-inline-item"><a class="text-light ic-2x" href="#"><i class="la la-instagram"></i></a>
+                            <li class="list-inline-item"><a class="text-light ic-2x" href="https://instagram.com/yamohob?igshid=6u4b1cbbabcd"><i class="la la-instagram"></i></a>
                             </li>
-                            <li class="list-inline-item"><a class="text-light ic-2x" href="#"><i class="la la-twitter"></i></a>
+                            <li class="list-inline-item"><a class="text-light ic-2x" href="https://twitter.com/yamohob?s=21"><i class="la la-twitter"></i></a>
                             </li>
                         </ul>
                     </div>
@@ -42,27 +45,13 @@
                         <ul class="navbar-nav list-unstyled mb-0">
                             <li class="mb-3 nav-item"><a class="nav-link" href="subscriptions.php">الاشتراكات</a>
                             </li>
-                            <li class="mb-3 nav-item"><a class="nav-link" href="product-grid.html">Shop</a>
+                            <li class="mb-3 nav-item"><a class="nav-link" href="accounts.php">الحسابات الداعمة</a>
                             </li>
-                            <li class="mb-3 nav-item"><a class="nav-link" href="faq.html">Faq</a>
-                            </li>
-                            <li class="mb-3 nav-item"><a class="nav-link" href="blog-card.html">Blogs</a>
-                            </li>
-                            <li class="nav-item"><a class="nav-link" href="contact-us.html">Contact Us</a>
-                            </li>
+
                         </ul>
                     </div>
                 </div>
-                <!-- <div class="col-12 col-sm-6 mt-6 mt-sm-0">
-                        <ul class="list-inline mt-0 text-center">
-                            <li class="list-inline-item"><a class="text-light ic-2x" href="#"><i class="la la-facebook"></i></a>
-                            </li>
-                            <li class="list-inline-item"><a class="text-light ic-2x" href="#"><i class="la la-instagram"></i></a>
-                            </li>
-                            <li class="list-inline-item"><a class="text-light ic-2x" href="#"><i class="la la-twitter"></i></a>
-                            </li>
-                        </ul>
-                    </div> -->
+
             </div>
         </div>
 

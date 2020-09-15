@@ -406,8 +406,8 @@ if (isset($s)) {
                 <div class="row align-items-end">
                   <div class="col-lg-12">
                     <div class="mb-5 text-center">
-                      <span class="badge badge-primary-soft p-2">
-                        <i class="la la-bold ic-3x rotation"></i>
+                      <span class="badge badge-primary-soft p-2 bg-success">
+                        <img src="assets/images/gif/KSA-flag.gif" alt="" srcset="">
                       </span>
 
                       <h2 class="mt-4 mb-0">مشاركة الأعمال</h2>
@@ -613,7 +613,15 @@ if (isset($s)) {
             <p class="lead mb-5">مرحباً بك في منصة اليوم الوطني السعودي ٩٠ </p>
             <ul class="cases-meta list-unstyled text-muted">
               <li class="mb-3"><span class="text-dark"> الإسم: </span> <?php echo $_SESSION['sponsor_name'] ?></li>
-              <li class="mb-3"><span class="text-dark"> صفة الحساب:</span> <?php echo $_SESSION['sponsor_id'] ? 'راعي' : "" ?></li>
+              <li class="mb-3"><span class="text-dark"> صفة الحساب:</span> <?php
+                                                                            if (isset($_SESSION['sponsor_id'])) {
+                                                                              if (isset($_SESSION['gold']) && $_SESSION['gold'] == 1) {
+                                                                                echo 'شركاء النجاح والرعايات الذهبية';
+                                                                              } else {
+                                                                                echo 'شركاء النجاح والرعايات الفضية';
+                                                                              }
+                                                                            }
+                                                                            ?></li>
               <?php
               if ($data_s['active'] == '0') {
                 echo "<li class='mb-3' style='color:red'><span class='text-dark'> حالة الحساب: </span> غير مفعل (لتفعيل الحساب يرجى زيارة صفحة <a href='subscriptions.php' class='text-success'>الاشتراكات</a>)<br>
@@ -644,8 +652,8 @@ if (isset($s)) {
                 <div class="row align-items-end">
                   <div class="col-lg-12">
                     <div class="mb-5 text-center">
-                      <span class="badge badge-primary-soft p-2">
-                        <i class="la la-bold ic-3x rotation"></i>
+                      <span class="badge badge-primary-soft p-2 bg-success">
+                        <img src="assets/images/gif/KSA-flag.gif" alt="" srcset="">
                       </span>
                       <h2 class="mt-4 mb-0">مشاركة الأعمال</h2>
                       <p class="lead mb-0 text-center">هنا يمكنك مشاركة أعمالك لعرضها في المنصة.</p>
@@ -851,7 +859,7 @@ if (isset($s)) {
             <p class="lead mb-5">مرحباً بك في منصة اليوم الوطني السعودي ٩٠ </p>
             <ul class="cases-meta list-unstyled text-muted">
               <li class="mb-3"><span class="text-dark"> الإسم: </span> <?php echo $_SESSION['merchant_name'] ?></li>
-              <li class="mb-3"><span class="text-dark"> صفة الحساب:</span> <?php echo $_SESSION['merchant_id'] ? 'تاجر' : "" ?></li>
+              <li class="mb-3"><span class="text-dark"> صفة الحساب:</span> <?php echo $_SESSION['merchant_id'] ? 'أصحاب المنتجات التجارية' : "" ?></li>
               <?php
               if ($data_m['active'] == '0') {
                 echo "<li class='mb-3' style='color:red'><span class='text-dark'> حالة الحساب: </span> غير مفعل (لتفعيل الحساب يرجى زيارة صفحة <a href='subscriptions.php' class='text-success'>الاشتراكات</a>)<br>
@@ -883,8 +891,8 @@ if (isset($s)) {
                 <div class="row align-items-end">
                   <div class="col-lg-12">
                     <div class="mb-5 text-center">
-                      <span class="badge badge-primary-soft p-2">
-                        <i class="la la-bold ic-3x rotation"></i>
+                      <span class="badge badge-primary-soft p-2 bg-success">
+                        <img src="assets/images/gif/KSA-flag.gif" alt="" srcset="">
                       </span>
                       <h2 class="mt-4 mb-0">مشاركة الأعمال</h2>
                       <p class="lead mb-0 text-center">هنا يمكنك مشاركة أعمالك لعرضها في المنصة.</p>

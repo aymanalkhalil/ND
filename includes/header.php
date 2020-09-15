@@ -64,18 +64,31 @@ ini_set('post_max_size', '120M');
                                         <li class="nav-item">
                                             <a class="nav-link  active" href="index.php" <?php echo (basename($_SERVER['PHP_SELF'], ".php")) == "index" ? $style  : ""; ?>>الرئيسية</a>
                                         </li>
-                                        <li class="nav-item"> <a class="nav-link" href="sponsors-feed.php" <?php echo (basename($_SERVER['PHP_SELF'], ".php")) == "sponsors-feed" ? $style  : ""; ?>>شركاء النجاح و الرعايات</a>
-                                        </li>
-                                        <li class="nav-item"> <a class="nav-link" href="merchants-feed.php" <?php echo (basename($_SERVER['PHP_SELF'], ".php")) == "merchants-feed" ? $style  : ""; ?>>التخفيضات والعروض
-                                            </a>
-                                        </li>
-
                                         <li class="nav-item"> <a class="nav-link " <?php echo (basename($_SERVER['PHP_SELF'], ".php")) == "national-feeds" ? $style  : ""; ?> href="national-feeds.php"> المشاركات الوطنية
                                             </a>
                                         </li>
+                                        <!-- <li class="nav-item"> <a class="nav-link" href="sponsors-feed.php" <?php echo (basename($_SERVER['PHP_SELF'], ".php")) == "sponsors-feed" ? $style  : ""; ?>>شركاء النجاح و الرعايات</a>
+                                        </li> -->
+
+                                        <li class="nav-item"> <a class="nav-link" href="merchants-feed.php" <?php echo (basename($_SERVER['PHP_SELF'], ".php")) == "merchants-feed" ? $style  : ""; ?>>اصحاب المنتجات التجارية
+                                            </a>
+                                        </li>
+
+
                                         <!-- <li class="nav-item"> <a class="nav-link " <?php echo (basename($_SERVER['PHP_SELF'], ".php")) == "subscriptions" ? $style  : ""; ?> href="subscriptions.php"> الاشتراكات
                                             </a>
                                         </li> -->
+                                        <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
+                                                شركاء النجاح و الرعايات
+                                            </a>
+                                            <ul class="dropdown-menu">
+                                                <li>
+                                                    <a class="dropdown-item" href="gold-feeds.php">شركاء النجاح والرعايات الذهبية</a>
+                                                </li>
+                                                <li><a class="dropdown-item" href="sponsors-feed.php">شركاء النجاح والرعايات الفضية</a>
+                                                </li>
+                                            </ul>
+                                        </li>
                                         <?php
                                         if (isset($_SESSION['user_id'])) {
                                         ?>

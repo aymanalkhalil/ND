@@ -1,12 +1,17 @@
 <?php
 session_start();
+include_once('includes/connection.php');
 switch (key($_GET)) {
     case 'u':
         unset($_SESSION['user_id'], $_SESSION['user_name']);
         header('location:index.php');
         break;
     case 's';
-        unset($_SESSION['sponsor_id'], $_SESSION['sponsor_name']);
+        if (isset($_SESSION['gold'])) {
+            unset($_SESSION['sponsor_id'], $_SESSION['sponsor_name'], $_SESSION['gold']);
+        } else {
+            unset($_SESSION['sponsor_id'], $_SESSION['sponsor_name']);
+        }
         header('location:index.php');
 
         break;

@@ -18,7 +18,10 @@ switch ($checkpage) {
         echo "عرض مشاركاتي";
         break;
     case 'sponsors-feed':
-        echo "شركاء النجاح ";
+        echo " شركاء النجاح والرعايات الفضية";
+        break;
+    case 'gold-feeds':
+        echo "شركاء النجاح والرعايات الذهبية";
         break;
     case 'merchants-feed':
         echo "التخفيضات والعروض";
@@ -33,7 +36,7 @@ switch ($checkpage) {
         echo "مسابقات اصحاب المنتجات التجارية";
         break;
     case 'sponsor-contest':
-        echo "مسابقات الرعاة";
+        echo "مسابقات شركاء النجاح";
         break;
     case 'voter_register':
         echo "تسجيل حساب مصوت";

@@ -29,7 +29,7 @@ $offset = ($pageno - 1) * $num_records_per_page;
                         </li>
 
                         <li class="breadcrumb-item active text-success" aria-current="page">المشاركات الوطنية</li>
-                        <li class="breadcrumb-item"><a class="text-dark" href="users-contest.php">مسابقات </a>
+                        <li class="breadcrumb-item"><a class="text-dark" href="users-contest.php">المسابقات الوطنية </a>
                         </li>
                     </ol>
                 </nav>

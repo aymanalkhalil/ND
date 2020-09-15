@@ -19,7 +19,7 @@
                 </h1> -->
                 <!-- Text -->
                 <p class="lead text-light">
-                    ها نّحن، نقف على مشارف العام التسعين، نعم يا أحبة ، تسعة و ثمانون عام مّرت منذ توحيد هذا الكيان، هذه الحدود، هذه المكانة و هذا القّدر، هذه العلاقات الحميدة، تسعة و ثمانون عام إنجلت، مخلفةً ورائها إنجازات، و سطور كونت كتباً في التاريخ، لا مجرد تواريخ و إنتهت، هنا مجدٌ يخلد، هنا قصص أجداد، هنا خطوات أطفال، هنا إبداع الشبان و الشابات ، هنا ظلال نخلٍ و ثمار و عطاء ، هنا سيفان لو سطّرنا تسعين كتاباً ، إحتوئاً لما قدمه هذا البلد الشامخ لن تكفى الكتب و المجلدات
+                    ها نّحن، نقف على مشارف العام التسعين، نعم يا أحبة ، تسعة و ثمانون عام مّرت منذ توحيد هذا الكيان، هذه الحدود، هذه المكانة و هذا القّدر، هذه العلاقات الحميدة، تسعة و ثمانون عام إنجلت، مخلفةً ورائها إنجازات، و سطور كونت كتباً في التاريخ، لا مجرد تواريخ و إنتهت، هنا مجدٌ يخلد، هنا قصص أجداد، هنا خطوات أطفال، هنا إبداع الشبان و الشابات ، هنا ظلال نخلٍ و ثمار و عطاء ، هنا سيفان لو سطّرنا تسعين كتاباً ، إحتواءً لما قدمه هذا البلد الشامخ لن تكفى الكتب و المجلدات
                     دمتَ يا وطني مجداً ، و فخراً ، و ذخراً ، و أمناً و اماناً ، و سِلماً و سلاماً نجدد في عامنا هذا البيعة ونستعد لاعوام قادمة وبيعات.
                 </p>
                 <!-- Buttons -->
@@ -230,17 +230,16 @@
             </div>
         </div>
     </section>
-    <!--client start-->
     <section class="p-0">
         <div class="container">
             <div class="row">
                 <div class="col-12">
                     <?php
-                    $sp_logos = mysqli_query($conn, "SELECT sponsor_image From sponsors ORDER BY sponsor_id DESC");
+                    $sp_logos = mysqli_query($conn, "SELECT sponsor_image From sponsors where gold=1 ORDER BY sponsor_id DESC");
                     if (mysqli_num_rows($sp_logos) == 0) {
                     } else {
                     ?>
-                        <h2 class='text-center text-success mb-6'>شركاء النجاح</h2>
+                        <h2 class='text-center text-success mb-6'> شركاء النجاح والرعايات الذهبية</h2>
 
                         <div class="owl-carousel no-pb" data-dots="false" data-items="6" data-md-items="4" data-sm-items="3" data-xs-items="2" data-margin="30" data-autoplay="true">
                             <?php while ($logos = mysqli_fetch_assoc($sp_logos)) { ?>
@@ -259,6 +258,37 @@
         </div>
     </section>
     <!--client end-->
+
+
+    <!--client start-->
+    <section class="p-0"><br>
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <?php
+                    $sp_logos = mysqli_query($conn, "SELECT sponsor_image From sponsors where gold is NULL ORDER BY sponsor_id DESC");
+                    if (mysqli_num_rows($sp_logos) == 0) {
+                    } else {
+                    ?>
+                        <h2 class='text-center text-success mb-6'> شركاء النجاح والرعايات الفضية</h2>
+
+                        <div class="owl-carousel no-pb" data-dots="false" data-items="6" data-md-items="4" data-sm-items="3" data-xs-items="2" data-margin="30" data-autoplay="true">
+                            <?php while ($logos = mysqli_fetch_assoc($sp_logos)) { ?>
+                                <div class="item">
+                                    <div class="clients-logo">
+                                        <img class="img-fluid" src="assets/sponsors_logo/<?php echo $logos['sponsor_image'] ?>" width="200px" alt="">
+
+                                    </div>
+                                </div>
+                            <?php } ?>
+                        </div>
+
+                </div>
+            <?php } ?>
+            </div>
+        </div>
+    </section>
+
 </div>
 <!--body content end-->
 <?php include_once('includes/footer.php') ?>
