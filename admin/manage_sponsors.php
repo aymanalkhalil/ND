@@ -16,18 +16,18 @@ if (isset($_POST['add'])) {
     $check_email = "SELECT sponsor_email from sponsors where sponsor_email='$email'";
     $check_email_result = mysqli_query($conn, $check_email);
     if (mysqli_num_rows($check_email_result) > 0) {
-        $error = " <div class='alert alert-danger text-center alert-dismissible'>
+        $error = " <div class='alert alert-danger text-center alert-dismissible text-center'>
                     <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
                     <h4><i class='icon fa fa-ban'></i>Sorry Email is Exist !! </h4>
                 </div>
                ";
     } else {
-        $query = "INSERT INTO sponsors(sponsor_name,sponsor_email,sponsor_password,sponsor_mobile,sponsor_address,active)VALUES
-        ('$name','$email','$password','$mobile','$address','$active')";
+        $query = "INSERT INTO sponsors(sponsor_name,sponsor_email,sponsor_password,sponsor_mobile,sponsor_address,active,sponsor_desc)VALUES
+        ('$name','$email','$password','$mobile','$address','$active','لا يوجد وصف للحساب')";
 
         $result = mysqli_query($conn, $query);
         if ($result) {
-            $error = " <div class='alert alert-success text-center alert-dismissible'>
+            $error = " <div class='alert alert-success text-center alert-dismissible text-center'>
                  <h4><i class='icon fa fa-check'></i> Sponsor Added Successfully ! - تم اضافة بيانات الراعي</h4>
                 </div>
                   <script type='text/Javascript'>
@@ -35,9 +35,9 @@ if (isset($_POST['add'])) {
              window.location.href = 'manage_sponsors.php';
              }, 2000);</script>";
         } else {
-            $error = " <div class='alert alert-danger alert-dismissible'>
+            $error = " <div class='alert alert-danger alert-dismissible text-center'>
                     <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
-                    <h4><i class='icon fa fa-ban'></i>Error in Insert !! </h4>
+                    <h4><i class='icon fa fa-ban'></i>Error in Insert !! " . mysqli_error($conn) .  " </h4>
                 </div>
                ";
         }
@@ -66,7 +66,7 @@ if (isset($_POST['update'])) {
 
     $result = mysqli_query($conn, $query);
     if ($result) {
-        $error = " <div class='alert alert-success text-center alert-dismissible'>
+        $error = " <div class='alert alert-success text-center alert-dismissible text-center'>
                  <h4><i class='icon fa fa-check'></i> Sponsor Edited Successfully ! - تم تعديل بيانات الراعي</h4>
                 </div>
                   <script type='text/Javascript'>
@@ -74,7 +74,7 @@ if (isset($_POST['update'])) {
              window.location.href = 'manage_sponsors.php';
              }, 2000);</script>";
     } else {
-        $error = " <div class='alert alert-danger alert-dismissible'>
+        $error = " <div class='alert alert-danger alert-dismissible text-center'>
                     <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
                     <h4><i class='icon fa fa-ban'></i>Error in Update !!" . mysqli_error($conn) . " </h4>
                 </div>
@@ -89,7 +89,7 @@ if (isset($_POST['delete'])) {
     $query = "DELETE FROM sponsors where sponsor_id='$sponsor_id'";
     $result = mysqli_query($conn, $query);
     if ($result) {
-        $error = " <div class='alert alert-success text-center alert-dismissible'>
+        $error = " <div class='alert alert-success text-center alert-dismissible text-center'>
                  <h4><i class='icon fa fa-check'></i> Sponsor Deleted Successfully ! - تم حذف بيانات الراعي</h4>
                 </div>
                   <script type='text/Javascript'>
@@ -97,7 +97,7 @@ if (isset($_POST['delete'])) {
              window.location.href = 'manage_sponsors.php';
              }, 2000);</script>";
     } else {
-        $error = " <div class='alert alert-danger alert-dismissible'>
+        $error = " <div class='alert alert-danger alert-dismissible text-center'>
                     <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
                     <h4><i class='icon fa fa-ban'></i>Error in Delete !!" . mysqli_error($conn) . " </h4>
                 </div>
@@ -188,8 +188,18 @@ if (isset($_POST['delete'])) {
         <div class="row">
             <div class="col-xs-12">
                 <div class="box">
+
                     <div class="box-header">
                         <h3 class="box-title">Sponsors Information - بيانات الرعاة</h3>
+                        <div class="box-tools">
+                            <div class="input-group input-group-sm hidden-xs" style="width: 150px;">
+                                <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
+
+                                <div class="input-group-btn">
+                                    <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                     <section class="content">
@@ -293,10 +303,39 @@ if (isset($_POST['delete'])) {
                                             </div>
                                         </td>
                                         <td>
-                                            <form action="" method="post">
-                                                <input type="hidden" name="sponsor_id" value="<?php echo $row['sponsor_id'] ?>">
-                                                <button type='submit' name='delete' class='btn btn-danger'><i class="fa fa-trash"></i> </button>
-                                            </form>
+                                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal22<?php echo $i ?>">
+                                                <i class="fa fa-trash"></i>
+                                            </button>
+
+                                            <div class="modal fade" id="exampleModal22<?php echo $i ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header bg-red">
+                                                            <h5 class="modal-title text-center text-bold" id="exampleModalLabel">تأكيد حذف الراعي</h5>
+                                                            <button type="button" class="close bg-light" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+
+                                                        <div class="modal-body">
+                                                            <div class="form-group">
+                                                                <p class='text-danger text-center font-weight-bold'>هل انت متأكد من الحذف ؟</p>
+
+                                                            </div>
+
+                                                        </div>
+                                                        <form action='' method="POST" role="form">
+
+                                                            <div class="modal-footer">
+                                                                <input type="hidden" name="sponsor_id" value="<?php echo $row['sponsor_id'] ?>">
+                                                                <button type="button" class="btn btn-dark col-md-6" data-dismiss="modal">إلغاء الحذف</button>
+                                                                <button type="submit" name='delete' class="btn btn-danger col-md-5">تأكيد الحذف </button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+
                                         </td>
                                     </tr>
 

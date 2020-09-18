@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Sep 14, 2020 at 08:57 PM
+-- Generation Time: Sep 16, 2020 at 03:55 PM
 -- Server version: 5.7.26
 -- PHP Version: 7.4.2
 
@@ -65,7 +65,7 @@ CREATE TABLE `merchants` (
 --
 
 INSERT INTO `merchants` (`merchant_id`, `merchant_name`, `merchant_email`, `merchant_password`, `merchant_mobile`, `merchant_address`, `active`, `merchant_desc`, `merchant_image`) VALUES
-(3, 'تاجر ١', 'merchant@merchant.com', '123456', '22222', '434444', 0, '', '1599661077screen shot 2020-09-06 at 5.51.04 pm.png'),
+(3, 'تاجر ١', 'merchant@merchant.com', '123456', '22222', '434444', 1, '', '1599661077screen shot 2020-09-06 at 5.51.04 pm.png'),
 (6, 'aaa', 'aaaa@aaaccc.com', '123456', '1234567', 'مكة المكرمة', 1, '', NULL),
 (8, 'ayman', 'aa221@aa.com', '123456', '1234567', 'مكة المكرمة', 1, '', NULL),
 (9, 'ayman', 'ayman@ayman.com', '1234567', '123456', 'جدة', 1, 'تحربةتربحر ', NULL),
@@ -86,15 +86,6 @@ CREATE TABLE `merchant_contest` (
   `votes` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `merchant_contest`
---
-
-INSERT INTO `merchant_contest` (`m_contest_id`, `merchant_id`, `upload_file`, `votes`) VALUES
-(1, '3', '1600039077download.jpeg', 3),
-(2, '6', '1600045270file_example_mp3_1mg.mp3', 5),
-(3, '8', '1600045305videoplay.mp4', 4);
-
 -- --------------------------------------------------------
 
 --
@@ -109,6 +100,7 @@ CREATE TABLE `sponsors` (
   `sponsor_mobile` varchar(255) NOT NULL,
   `sponsor_address` varchar(255) NOT NULL,
   `active` tinyint(1) NOT NULL DEFAULT '0',
+  `gold` tinyint(1) DEFAULT NULL,
   `sponsor_desc` text NOT NULL,
   `sponsor_image` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -117,13 +109,13 @@ CREATE TABLE `sponsors` (
 -- Dumping data for table `sponsors`
 --
 
-INSERT INTO `sponsors` (`sponsor_id`, `sponsor_name`, `sponsor_email`, `sponsor_password`, `sponsor_mobile`, `sponsor_address`, `active`, `sponsor_desc`, `sponsor_image`) VALUES
-(3, 'aaa', 'test@test.com', '123', '123', 'aa', 1, 'تعديل الوصف ', NULL),
-(4, 'ايمن', 'aaa@aaaa.com', '123', '123', '123', 1, '', NULL),
-(6, 'ayman', 'aa@aa.com', '123456', '1234567', 'ينبع ', 1, '', NULL),
-(7, 'final', 'final@final.com', '1234567', '123444', 'ينبع ', 1, 'تعديل تعديل ', NULL),
-(8, 'test', 'test2@test.com', '123456', '1234567', 'الرياض', 1, 'تعديل وصف', NULL),
-(9, 'تجربة', 'missa@test.com', '123', '1234567', 'مكة المكرمة', 1, 'ddd', NULL);
+INSERT INTO `sponsors` (`sponsor_id`, `sponsor_name`, `sponsor_email`, `sponsor_password`, `sponsor_mobile`, `sponsor_address`, `active`, `gold`, `sponsor_desc`, `sponsor_image`) VALUES
+(1, 'راعي ذهبي', 'aa@aa.com', '123456', '1234567', 'الرياض', 1, 1, 'حساب ذهبي ', '1600185720screen shot 2020-08-22 at 12.05.21 pm.png'),
+(2, 'حساب فضي', 'test@test.com', '123456', '1234567', 'الرياض', 1, NULL, 'حساب فضي', '1600185677download.jpeg'),
+(3, 'test', 'missa@test.com', '123456', '1234567', 'الرياض', 1, NULL, 'ss', '1600186281screen shot 2020-09-15 at 12.22.29 am.png'),
+(4, 'test', 'a1@a.com', '123', '123', 'الرياض', 1, NULL, '11', NULL),
+(5, 'test', 'a2@a.com', '123', '123', 'الرياض', 1, NULL, 'dd', NULL),
+(6, 'test', 'a3@a.com', '123', '123', 'مكة المكرمة', 1, NULL, '111', NULL);
 
 -- --------------------------------------------------------
 
@@ -140,13 +132,6 @@ CREATE TABLE `sponsor_contest` (
   `question4` text NOT NULL,
   `question5` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `sponsor_contest`
---
-
-INSERT INTO `sponsor_contest` (`spc_id`, `sponsor_id`, `question1`, `question2`, `question3`, `question4`, `question5`) VALUES
-(5, '3', 'test', 'test', 'test', 'test', 'test');
 
 -- --------------------------------------------------------
 
@@ -248,13 +233,6 @@ CREATE TABLE `user_contest` (
   `votes` int(11) DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `user_contest`
---
-
-INSERT INTO `user_contest` (`contest_id`, `user_id`, `upload_file`, `votes`) VALUES
-(1, '9', '1600036136download.jpeg', 2);
-
 -- --------------------------------------------------------
 
 --
@@ -291,15 +269,6 @@ CREATE TABLE `voters_active_contest` (
   `merchant_contest_id` varchar(255) DEFAULT NULL,
   `voted` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `voters_active_contest`
---
-
-INSERT INTO `voters_active_contest` (`v_c_id`, `user_id`, `sponsor_id`, `merchant_id`, `user_contest_id`, `merchant_contest_id`, `voted`) VALUES
-(9, NULL, NULL, '3', NULL, '2', 1),
-(10, NULL, NULL, '3', NULL, '3', 1),
-(11, NULL, '3', NULL, NULL, '2', 1);
 
 -- --------------------------------------------------------
 
@@ -441,19 +410,19 @@ ALTER TABLE `merchants`
 -- AUTO_INCREMENT for table `merchant_contest`
 --
 ALTER TABLE `merchant_contest`
-  MODIFY `m_contest_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `m_contest_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `sponsors`
 --
 ALTER TABLE `sponsors`
-  MODIFY `sponsor_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `sponsor_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `sponsor_contest`
 --
 ALTER TABLE `sponsor_contest`
-  MODIFY `spc_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `spc_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `uploads_admin`
@@ -465,13 +434,13 @@ ALTER TABLE `uploads_admin`
 -- AUTO_INCREMENT for table `uploads_merchants`
 --
 ALTER TABLE `uploads_merchants`
-  MODIFY `upload_merchant_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `upload_merchant_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `uploads_sponsors`
 --
 ALTER TABLE `uploads_sponsors`
-  MODIFY `upload_sponsor_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `upload_sponsor_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `uploads_users`
@@ -489,31 +458,31 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `user_contest`
 --
 ALTER TABLE `user_contest`
-  MODIFY `contest_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `contest_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `voters`
 --
 ALTER TABLE `voters`
-  MODIFY `v_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `v_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `voters_active_contest`
 --
 ALTER TABLE `voters_active_contest`
-  MODIFY `v_c_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `v_c_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `voter_contest`
 --
 ALTER TABLE `voter_contest`
-  MODIFY `v_c_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `v_c_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `voter_merchant_contest`
 --
 ALTER TABLE `voter_merchant_contest`
-  MODIFY `v_m_c_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `v_m_c_id` int(11) NOT NULL AUTO_INCREMENT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

@@ -49,8 +49,6 @@ if (isset($_POST['answer'])) {
                     <ol class="breadcrumb justify-content-center bg-transparent p-0 m-0">
                         <li class="breadcrumb-item"><a class="text-dark" href="index.php">الرئيسية</a>
                         </li>
-                        <!-- <li class="breadcrumb-item " aria-current="page"> شركاء النجاح والرعايات الذهبية</li> -->
-
                         <li class="breadcrumb-item active "><a class=" text-success" href="sponsor-contests.php">مسابقات شركاء النجاح </a>
                         </li>
 
@@ -87,7 +85,6 @@ if (isset($success)) {
                     <div class="mb-6"> <span class="badge badge-success-soft p-2 bg-success">
                             <img src="assets/images/gif/KSA-flag.gif" alt="" srcset="">
                         </span>
-                        <!-- <h2 class="mt-3">تسجيل حساب للتصويت</h2> -->
                     </div>
                 </div>
             </div>
@@ -155,9 +152,6 @@ if (isset($success)) {
                                         <button type='submit' name='answer' class="btn btn-outline-success btn-block ">ارفاق الاجابات !</button>
 
                                     <?php } ?>
-
-
-                                    <!-- <span class="mt-4 d-block">لديك حساب مسبقاً؟ <a href="login.php" class='text-success'><i>سجل دخولك!</i></a></span> -->
                                 </div>
                             </div>
 

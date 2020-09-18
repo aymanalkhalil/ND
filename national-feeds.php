@@ -47,7 +47,7 @@ $offset = ($pageno - 1) * $num_records_per_page;
 
             <?php
             $get_user_feeds = mysqli_query($conn, "SELECT upload_user_id,upload_user_file,upload_user_description,uploads_users.user_id,users.user_name
-                FROM users INNER JOIN uploads_users ON uploads_users.user_id=users.user_id
+                FROM users INNER JOIN uploads_users ON uploads_users.user_id=users.user_id where active=1
                 ORDER BY upload_user_id DESC LIMIT $offset,$num_records_per_page");
             if (mysqli_num_rows($get_user_feeds) == 0) {
                 echo "
@@ -142,20 +142,20 @@ $offset = ($pageno - 1) * $num_records_per_page;
                     <ul class="pagination">
                         <li class="page-item mr-auto <?php if ($pageno <= 1) {
                                                             echo 'disabled';
-                                                        }   ?>"> <a class=" page-link" href=" <?php if ($pageno <= 1) {
-                                                                                                    echo 'disabled';
-                                                                                                } else {
-                                                                                                    echo "?pageno=" . ($pageno - 1);
-                                                                                                } ?>">الصفحة السابقة</a>
+                                                        }   ?>"> <a class="page-link" href="<?php if ($pageno <= 1) {
+                                                                                                echo '#';
+                                                                                            } else {
+                                                                                                echo "?pageno=" . ($pageno - 1);
+                                                                                            } ?>">الصفحة السابقة</a>
 
                         </li>
                         <li class="page-item ml-auto <?php if ($pageno >= $total_pages_sp) {
                                                             echo 'disabled';
-                                                        }   ?>"> <a class=" page-link" href="<?php if ($pageno >= $total_pages_sp) {
-                                                                                                    echo '#';
-                                                                                                } else {
-                                                                                                    echo "?pageno=" . ($pageno + 1);
-                                                                                                } ?>">الصفحة التالية</a>
+                                                        }   ?>"> <a class="page-link" href="<?php if ($pageno >= $total_pages_sp) {
+                                                                                                echo '#';
+                                                                                            } else {
+                                                                                                echo "?pageno=" . ($pageno + 1);
+                                                                                            } ?>">الصفحة التالية</a>
                         </li>
                     </ul>
                 </nav>

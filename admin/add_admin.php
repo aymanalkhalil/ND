@@ -15,7 +15,7 @@ if (isset($_POST['add'])) {
     $check_email = "SELECT admin_email from admin where admin_email='$email'";
     $check_email_result = mysqli_query($conn, $check_email);
     if (mysqli_num_rows($check_email_result) > 0) {
-        $error = " <div class='alert alert-danger text-center alert-dismissible'>
+        $error = " <div class='alert alert-danger text-center alert-dismissible text-center'>
                     <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
                     <h4><i class='icon fa fa-ban'></i>Sorry Email is Exist !! </h4>
                 </div>
@@ -71,7 +71,7 @@ if (isset($_POST['update'])) {
              window.location.href = 'add_admin.php';
              }, 2000);</script>";
     } else {
-        $error = " <div class='alert alert-danger alert-dismissible'>
+        $error = " <div class='alert alert-danger alert-dismissible text-center'>
                     <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
                     <h4><i class='icon fa fa-ban'></i>Error in Update !! </h4>
                 </div>
@@ -86,7 +86,7 @@ if (isset($_POST['delete'])) {
     $query = "DELETE FROM admin where admin_id='$admin_id'";
     $result = mysqli_query($conn, $query);
     if ($result) {
-        $error = " <div class='alert alert-success alert-dismissible'>
+        $error = " <div class='alert alert-success alert-dismissible text-center'>
                  <h4><i class='icon fa fa-check'></i> Admin Deleted Successfully ! - تم حذف بيانات الادمن</h4>
                 </div>
                   <script type='text/Javascript'>
@@ -94,7 +94,7 @@ if (isset($_POST['delete'])) {
              window.location.href = 'add_admin.php';
              }, 2000);</script>";
     } else {
-        $error = " <div class='alert alert-danger alert-dismissible'>
+        $error = " <div class='alert alert-danger alert-dismissible text-center'>
                     <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
                     <h4><i class='icon fa fa-ban'></i>Error in Delete !!</h4>
                 </div>

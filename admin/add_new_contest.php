@@ -31,7 +31,7 @@ if (isset($_POST['add'])) {
              window.location.href = 'add_new_contest.php';
              }, 2000);</script>";
     } else {
-        $error = " <div class='alert alert-danger alert-dismissible'>
+        $error = " <div class='alert alert-danger alert-dismissible text-center'>
                     <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
                     <h4><i class='icon fa fa-ban'></i>Error in Insert !! </h4>
                 </div>
@@ -87,7 +87,7 @@ if (isset($_POST['update'])) {
              window.location.href = 'add_new_contest.php';
              }, 2000);</script>";
     } else {
-        $error = " <div class='alert alert-danger alert-dismissible'>
+        $error = " <div class='alert alert-danger alert-dismissible text-center'>
                     <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
                     <h4><i class='icon fa fa-ban'></i>Error in Update !! </h4>
                 </div>
@@ -113,7 +113,7 @@ if (isset($_POST['delete'])) {
              window.location.href = 'add_new_contest.php';
              }, 2000);</script>";
     } else {
-        $error = " <div class='alert alert-danger alert-dismissible'>
+        $error = " <div class='alert alert-danger alert-dismissible text-center'>
                     <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
                     <h4><i class='icon fa fa-ban'></i>Error in Delete !! </h4>
                 </div>

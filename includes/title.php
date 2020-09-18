@@ -24,7 +24,7 @@ switch ($checkpage) {
         echo "شركاء النجاح والرعايات الذهبية";
         break;
     case 'merchants-feed':
-        echo "التخفيضات والعروض";
+        echo "أصحاب المنتجات التجارية";
         break;
     case 'national-feeds':
         echo "المشاركات الوطنية";
@@ -40,6 +40,9 @@ switch ($checkpage) {
         break;
     case 'voter_register':
         echo "تسجيل حساب مصوت";
+        break;
+    case 'accounts':
+        echo "الحسابات الداعمة";
         break;
     default:
         echo "منصة اليوم الوطني السعودي ٩٠|الرئيسية";

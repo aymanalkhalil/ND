@@ -147,8 +147,8 @@ $offset = ($pageno - 1) * $num_records_per_page;
                     <ul class="pagination">
                         <li class="page-item mr-auto <?php if ($pageno <= 1) {
                                                             echo 'disabled';
-                                                        }   ?>"> <a class=" page-link" href=" <?php if ($pageno <= 1) {
-                                                                                                    echo 'disabled';
+                                                        }   ?>"> <a class="page-link" href="<?php if ($pageno <= 1) {
+                                                                                                    echo '#';
                                                                                                 } else {
                                                                                                     echo "?pageno=" . ($pageno - 1);
                                                                                                 } ?>">الصفحة السابقة</a>
@@ -156,7 +156,7 @@ $offset = ($pageno - 1) * $num_records_per_page;
                         </li>
                         <li class="page-item ml-auto <?php if ($pageno >= $total_pages_sp) {
                                                             echo 'disabled';
-                                                        }   ?>"> <a class=" page-link" href="<?php if ($pageno >= $total_pages_sp) {
+                                                        }   ?>"> <a class="page-link" href="<?php if ($pageno >= $total_pages_sp) {
                                                                                                     echo '#';
                                                                                                 } else {
                                                                                                     echo "?pageno=" . ($pageno + 1);

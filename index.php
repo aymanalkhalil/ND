@@ -44,10 +44,13 @@
     </div>
 </section>
 <!--hero section end-->
+
+
 <!--body content start-->
 <div class="page-content">
     <!--about start-->
     <section>
+
         <div class="container">
             <div class="row align-items-center justify-content-between">
                 <div class="col-12 col-lg-6 mb-8 mb-lg-0 text-center">
@@ -71,6 +74,7 @@
         </div>
     </section>
     <!--about end-->
+
     <!--client start-->
     <section class="p-0">
         <div class="container">
