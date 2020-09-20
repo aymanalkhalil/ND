@@ -71,18 +71,54 @@ $offset = ($pageno - 1) * $num_records_per_page;
 
                                 if (mysqli_num_rows($get_shares) == 0) {
                                     echo "<tr><td colspan='7' class='btn btn-danger col-md-12'> ! لا يوجد تصويت بعد على هذا العمل</td></tr>";
-                                    // echo "<script>window.location.href='view_users_contest.php'</script>";
-
                                 } else {
                                     $i = 1;
                                     while ($row = mysqli_fetch_assoc($get_shares)) {
+                                        $users = $row['users_count'] + $sum;
+                                        $total = $row['sponsor_count'] + $row['merchant_count'] + $users;
 
+                                        $percentage_sponsors = round(10 / 100 * $row['sponsor_count']);
+                                        $percentage_merchants = round(10 / 100 * $row['merchant_count']);
+                                        $percentage_users = round(50 / 100 * $users);
+
+                                        $total_percentage = $percentage_merchants + $percentage_sponsors + $percentage_users;
                                 ?>
                                         <tr>
                                             <td><?php echo $row['sponsor_count']  ?></td>
                                             <td><?php echo $row['merchant_count']  ?></td>
-                                            <td><?php echo $row['users_count'] + $sum  ?></td>
-                                            <td><?php echo $row['sponsor_count'] + $row['merchant_count'] + $row['users_count'] + $sum    ?></td>
+                                            <td><?php echo $users ?></td>
+                                            <td><?php echo $total   ?></td>
+                                        </tr>
+                                        <tr>
+                                            <?php echo "<tr><td colspan='7' dir='rtl' class='col-md-12 text-center btn btn-danger'>
+
+                                             ملاحظة مهمة جداً: النسب المطبقة على مسابقات أصحاب المنتجات التجارية هي
+                                             <br>
+
+                                             10%  لأصحاب المنتجات التجارية
+                                            <br>
+
+                                            10% شركاء النجاح والرعايات
+
+                                            <br>
+
+                                            50%  مصوتين ومستخدمين <br>
+
+                                            30% لمدراء المنصة
+                                            </td></tr>";
+                                            ?>
+
+                                            <?php
+                                            echo "<tr><td colspan='7' dir='rtl' class='col-md-12 text-center btn btn-success'>
+                                                        تفاصيل الأصوات بعد تطبيق النسب المئوية المذكورة أعلاه
+
+                                            </td></tr>";
+                                            ?>
+                                            <td><?php echo  $percentage_sponsors ?></td>
+                                            <td><?php echo  $percentage_merchants ?></td>
+                                            <td><?php echo  $percentage_users  ?></td>
+                                            <td><?php echo  $total_percentage   ?></td>
+
                                         </tr>
 
 
@@ -91,8 +127,6 @@ $offset = ($pageno - 1) * $num_records_per_page;
                                     }
                                 }
                                 ?>
-
-
 
                             </table>
 
@@ -103,6 +137,7 @@ $offset = ($pageno - 1) * $num_records_per_page;
         </div>
     </section>
 </div>
+
 
 <?php
 include_once('includes/footer.php');

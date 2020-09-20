@@ -196,6 +196,11 @@ ini_set('post_max_size', '120M');
                                 <i class="fa fa-upload"></i> <span>عرض أعمال اصحاب المنتجات </span>
                             </a>
                         </li>
+                         <li <?php echo (basename($_SERVER['PHP_SELF'], ".php")) == "view_sponsors_shares" ? "class='active'"  : ""; ?>>
+                            <a href="view_sponsors_shares.php">
+                                <i class="fa fa-upload"></i> <span>عرض مشاركات شركاء النجاح </span>
+                            </a>
+                        </li>
                         <li <?php echo (basename($_SERVER['PHP_SELF'], ".php")) == "view_sponsor_answer" ? "class='active'"  : ""; ?>>
                             <a href="view_sponsor_answer.php">
                                 <i class="fa fa-upload"></i> <span>عرض اجابات شركاء النجاح </span>

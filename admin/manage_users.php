@@ -1,6 +1,5 @@
 <?php
 include_once('includes/header.php');
-
 if (isset($_POST['add'])) {
 
     $name = $_POST['name'];
@@ -18,7 +17,7 @@ if (isset($_POST['add'])) {
     if (mysqli_num_rows($check_email_result) > 0) {
         $error = " <div class='alert alert-danger text-center alert-dismissible text-center'>
                     <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
-                    <h4><i class='icon fa fa-ban'></i>Sorry Email is Exist !! </h4>
+                    <h4><i class='icon fa fa-ban'></i>عذراً البريد الالكتروني مسجل بالفعل</h4>
                 </div>
                ";
     } else {
@@ -192,13 +191,27 @@ if (isset($_POST['delete'])) {
                     <div class="box-header">
                         <h3 class="box-title">Users Information - بيانات المستخدمين</h3>
                         <div class="box-tools">
-                            <div class="input-group input-group-sm hidden-xs" style="width: 150px;">
-                                <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
+                            <?php if ($_SESSION['is_super'] == 1) { ?>
+                                <form action="" method="post">
+                                    <div class="input-group input-group-sm hidden-xs" style="width: 250px;">
+                                        <input type="text" name="table_search" value="<?php echo isset($_POST['search']) ? $_POST['table_search'] : "" ?>" class="form-control pull-right" placeholder="ادخل رقم الهاتف او الاسم">
 
-                                <div class="input-group-btn">
-                                    <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
-                                </div>
-                            </div>
+
+
+                                        <div class="input-group-btn">
+
+                                            <button type="submit" name='search' class="btn btn-default"><i class="fa fa-search"></i></button>
+
+                                        </div>
+
+                                    </div>
+
+                                </form>
+
+                                <?php if (isset($_POST['search'])) { ?>
+                                    <a href="" class='text-danger font-weight-bold'>اعادة تعيين الجدول</a>
+                                <?php } ?>
+                            <?php } ?>
                         </div>
                     </div>
 
@@ -233,11 +246,16 @@ if (isset($_POST['delete'])) {
 
                                     $query = "SELECT * FROM users  where admin_id={$_SESSION['admin_id']} ORDER BY user_id DESC";
                                 }
+
+                                if (isset($_POST['search']) && $_SESSION['is_super'] == 1) {
+                                    $query = "SELECT * FROM users LEFT JOIN admin on users.admin_id=admin.admin_id WHERE user_name
+                                    LIKE '%{$_POST['table_search']}%' or user_mobile LIKE '%{$_POST['table_search']}%'";
+                                }
                                 $result = mysqli_query($conn, $query);
 
                                 $i = 1;
                                 if (mysqli_num_rows($result) == 0) {
-                                    echo "<tr><td colspan='9' class='btn btn-danger col-md-12'> No Users Found ! - لا يوجد مستخدمين</td></tr>";
+                                    echo "<tr><td colspan='9' class='btn btn-danger col-md-12'> لم يتم العثور على نتائج !</td></tr>";
                                 } else {
 
 
@@ -251,7 +269,6 @@ if (isset($_POST['delete'])) {
                                 ?>
                                         <tr>
                                             <td><?php echo $i ?></td>
-
                                             <td><?php echo $row['user_name']  ?></td>
                                             <td><?php echo $row['user_email']  ?></td>
                                             <td><?php echo $row['user_password']  ?></td>

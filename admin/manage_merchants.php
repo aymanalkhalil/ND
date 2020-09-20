@@ -191,13 +191,25 @@ if (isset($_POST['delete'])) {
                     <div class="box-header">
                         <h3 class="box-title">Merchant Information - بيانات التجار</h3>
                         <div class="box-tools">
-                            <div class="input-group input-group-sm hidden-xs" style="width: 150px;">
-                                <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
+                            <form action="" method="post">
+                                <div class="input-group input-group-sm hidden-xs" style="width: 250px;">
+                                    <input type="text" name="table_search" value="<?php echo isset($_POST['search']) ? $_POST['table_search'] : "" ?>" class="form-control pull-right" placeholder="ادخل رقم الهاتف او الاسم">
 
-                                <div class="input-group-btn">
-                                    <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+
+
+                                    <div class="input-group-btn">
+
+                                        <button type="submit" name='search' class="btn btn-default"><i class="fa fa-search"></i></button>
+
+                                    </div>
+
                                 </div>
-                            </div>
+
+                            </form>
+                            <?php if (isset($_POST['search'])) { ?>
+                                <a href="" class='text-danger font-weight-bold'>اعادة تعيين الجدول</a>
+                            <?php } ?>
+
                         </div>
                     </div>
 
@@ -217,128 +229,136 @@ if (isset($_POST['delete'])) {
                                     <th>Delete</th>
                                 </tr>
                                 <?php
+                                if (isset($_POST['search'])) {
+                                    $query = "SELECT * FROM merchants WHERE merchant_name LIKE '%{$_POST['table_search']}%' or merchant_mobile LIKE '%{$_POST['table_search']}%'";
+                                } else {
 
-                                $query = "SELECT * FROM merchants ORDER BY merchant_id DESC";
+                                    $query = "SELECT * FROM merchants ORDER BY merchant_id DESC";
+                                }
                                 $result = mysqli_query($conn, $query);
 
                                 $i = 1;
-                                while ($row = mysqli_fetch_assoc($result)) {
-                                    if ($row['active'] == '1') {
-                                        $style = "'btn btn-success'";
-                                    } else {
-                                        $style = "'btn btn-danger'";
-                                    }
+                                if (mysqli_num_rows($result) == 0) {
+                                    echo "<tr><td colspan='8' class='col-md-12 text-center btn btn-danger'> ! لم يتم العثور على نتائج </td></tr>";
+                                } else {
+                                    while ($row = mysqli_fetch_assoc($result)) {
+                                        if ($row['active'] == '1') {
+                                            $style = "'btn btn-success'";
+                                        } else {
+                                            $style = "'btn btn-danger'";
+                                        }
 
                                 ?>
-                                    <tr>
-                                        <td><?php echo $i ?></td>
+                                        <tr>
+                                            <td><?php echo $i ?></td>
 
-                                        <td><?php echo $row['merchant_name']  ?></td>
-                                        <td><?php echo $row['merchant_email']  ?></td>
-                                        <!-- <td><?php echo $row['merchant_password']  ?></td> -->
-                                        <td><?php echo $row['merchant_mobile'] ?></td>
-                                        <td><?php echo $row['merchant_address'] ?></td>
-                                        <td class=<?php echo  $style ?> style=" width:145px;margin:10px;"><?php echo $row['active'] == '1' ? 'Active - مفعل' : 'Not Active - غير مفعل'  ?></td>
+                                            <td><?php echo $row['merchant_name']  ?></td>
+                                            <td><?php echo $row['merchant_email']  ?></td>
+                                            <!-- <td><?php echo $row['merchant_password']  ?></td> -->
+                                            <td><?php echo $row['merchant_mobile'] ?></td>
+                                            <td><?php echo $row['merchant_address'] ?></td>
+                                            <td class=<?php echo  $style ?> style=" width:145px;margin:10px;"><?php echo $row['active'] == '1' ? 'Active - مفعل' : 'Not Active - غير مفعل'  ?></td>
 
-                                        <td>
-                                            <!-- Button trigger modal -->
-                                            <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#exampleModal<?php echo $i ?>">
-                                                <i class="fa fa-edit"></i>
+                                            <td>
+                                                <!-- Button trigger modal -->
+                                                <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#exampleModal<?php echo $i ?>">
+                                                    <i class="fa fa-edit"></i>
 
-                                            </button>
+                                                </button>
 
-                                            <!-- Modal -->
-                                            <div class="modal fade" id="exampleModal<?php echo $i ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog" role="document">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header bg-primary">
-                                                            <h5 class="modal-title " id="exampleModalLabel">Edit Merchant Information - تعديل بيانات التاجر</h5>
-                                                            <button type="button" class="close text-light" data-dismiss="modal" aria-label="Close">
-                                                                <span aria-hidden="true">&times;</span>
-                                                            </button>
-                                                        </div>
-
-                                                        <div class="modal-body">
-
-                                                            <form action="" method="post" enctype="multipart/form-data">
-                                                                <div class="form-group">
-                                                                    <label for="">Edit merchant name - تعديل الاسم</label>
-                                                                    <input type="text" name='edit_name' class="form-control" value="<?php echo $row['merchant_name'] ?>" autocomplete="off" required>
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <label for="">Edit merchant Email - تعديل البريد الالكتروني</label>
-                                                                    <input type="text" name='edit_email' class="form-control" value="<?php echo $row['merchant_email'] ?>" autocomplete="off" required>
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <label for="">Edit merchant Password - تعديل كلمة السر</label>
-                                                                    <input type="text" name='edit_password' class="form-control" value="<?php echo $row['merchant_password'] ?>" autocomplete="off" required>
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <label for="">Edit merchant Mobile - تعديل رقم الجوال</label>
-                                                                    <input type="text" name='edit_mobile' class="form-control" value="<?php echo $row['merchant_mobile'] ?>" autocomplete="off" required>
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <label for="">Edit merchant Address - تعديل العنوان</label>
-                                                                    <input type="text" name="edit_address" value="<?php echo $row['merchant_address'] ?>" class="form-control">
-                                                                </div>
-
-                                                                <div class="checkbox btn-lg">
-                                                                    <label>
-                                                                        <input type="checkbox" name='active' value="1" <?php echo $row['active'] == '1' ? 'checked' : '' ?>> Active - مفعل
-                                                                    </label>
-                                                                </div>
-
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <input type="hidden" name="merchant_id" value="<?php echo $row['merchant_id'] ?>">
-                                                            <button type="submit" name='update' class="btn btn-primary col-md-12 ">Update Merchant Information - تعديل بيانات التاجر</button>
-                                                        </div>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal22<?php echo $i ?>">
-                                                <i class="fa fa-trash"></i>
-                                            </button>
-
-                                            <div class="modal fade" id="exampleModal22<?php echo $i ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog" role="document">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header bg-red">
-                                                            <h5 class="modal-title text-center text-bold" id="exampleModalLabel">تأكيد حذف التاجر</h5>
-                                                            <button type="button" class="close bg-light" data-dismiss="modal" aria-label="Close">
-                                                                <span aria-hidden="true">&times;</span>
-                                                            </button>
-                                                        </div>
-
-                                                        <div class="modal-body">
-                                                            <div class="form-group">
-                                                                <p class='text-danger text-center font-weight-bold'>هل انت متأكد من الحذف ؟</p>
-
+                                                <!-- Modal -->
+                                                <div class="modal fade" id="exampleModal<?php echo $i ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header bg-primary">
+                                                                <h5 class="modal-title " id="exampleModalLabel">Edit Merchant Information - تعديل بيانات التاجر</h5>
+                                                                <button type="button" class="close text-light" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
                                                             </div>
 
-                                                        </div>
-                                                        <form action='' method="POST" role="form">
+                                                            <div class="modal-body">
 
+                                                                <form action="" method="post" enctype="multipart/form-data">
+                                                                    <div class="form-group">
+                                                                        <label for="">Edit merchant name - تعديل الاسم</label>
+                                                                        <input type="text" name='edit_name' class="form-control" value="<?php echo $row['merchant_name'] ?>" autocomplete="off" required>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="">Edit merchant Email - تعديل البريد الالكتروني</label>
+                                                                        <input type="text" name='edit_email' class="form-control" value="<?php echo $row['merchant_email'] ?>" autocomplete="off" required>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="">Edit merchant Password - تعديل كلمة السر</label>
+                                                                        <input type="text" name='edit_password' class="form-control" value="<?php echo $row['merchant_password'] ?>" autocomplete="off" required>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="">Edit merchant Mobile - تعديل رقم الجوال</label>
+                                                                        <input type="text" name='edit_mobile' class="form-control" value="<?php echo $row['merchant_mobile'] ?>" autocomplete="off" required>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="">Edit merchant Address - تعديل العنوان</label>
+                                                                        <input type="text" name="edit_address" value="<?php echo $row['merchant_address'] ?>" class="form-control">
+                                                                    </div>
+
+                                                                    <div class="checkbox btn-lg">
+                                                                        <label>
+                                                                            <input type="checkbox" name='active' value="1" <?php echo $row['active'] == '1' ? 'checked' : '' ?>> Active - مفعل
+                                                                        </label>
+                                                                    </div>
+
+                                                            </div>
                                                             <div class="modal-footer">
                                                                 <input type="hidden" name="merchant_id" value="<?php echo $row['merchant_id'] ?>">
-                                                                <button type="button" class="btn btn-dark col-md-6" data-dismiss="modal">إلغاء الحذف</button>
-                                                                <button type="submit" name='delete' class="btn btn-danger col-md-5">تأكيد الحذف </button>
+                                                                <button type="submit" name='update' class="btn btn-primary col-md-12 ">Update Merchant Information - تعديل بيانات التاجر</button>
                                                             </div>
-                                                        </form>
+                                                            </form>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal22<?php echo $i ?>">
+                                                    <i class="fa fa-trash"></i>
+                                                </button>
 
-                                        </td>
+                                                <div class="modal fade" id="exampleModal22<?php echo $i ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header bg-red">
+                                                                <h5 class="modal-title text-center text-bold" id="exampleModalLabel">تأكيد حذف التاجر</h5>
+                                                                <button type="button" class="close bg-light" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
 
-                                    </tr>
+                                                            <div class="modal-body">
+                                                                <div class="form-group">
+                                                                    <p class='text-danger text-center font-weight-bold'>هل انت متأكد من الحذف ؟</p>
+
+                                                                </div>
+
+                                                            </div>
+                                                            <form action='' method="POST" role="form">
+
+                                                                <div class="modal-footer">
+                                                                    <input type="hidden" name="merchant_id" value="<?php echo $row['merchant_id'] ?>">
+                                                                    <button type="button" class="btn btn-dark col-md-6" data-dismiss="modal">إلغاء الحذف</button>
+                                                                    <button type="submit" name='delete' class="btn btn-danger col-md-5">تأكيد الحذف </button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </td>
+
+                                        </tr>
 
 
                                 <?php
-                                    $i++;
+                                        $i++;
+                                    }
                                 }
                                 ?>
                             </table>

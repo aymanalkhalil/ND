@@ -83,6 +83,7 @@ if (isset($_POST['update'])) {
 if (isset($_POST['delete'])) {
     $admin_id = $_POST['admin_id'];
 
+
     $query = "DELETE FROM admin where admin_id='$admin_id'";
     $result = mysqli_query($conn, $query);
     if ($result) {
@@ -272,6 +273,7 @@ if (isset($_POST['delete'])) {
                                         </td>
                                         <td>
                                             <form action="" method="post">
+
                                                 <input type="hidden" name="admin_id" value="<?php echo $row['admin_id'] ?>">
                                                 <button type='submit' name='delete' class='btn btn-danger'><i class="fa fa-trash"></i> </button>
                                             </form>
