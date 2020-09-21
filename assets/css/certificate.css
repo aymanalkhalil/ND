@@ -1,19 +1,20 @@
-/* @media print{}} */
 
+* {
 
-@page {
-  size: landscape;
-  margin: 0;
+    font-family: "RB";
 
 }
+
 @media print {
 
-    @page {size: landscape}
-  html, body {
-    margin:0;
-    width: 190mm;
-    height: 150mm;
 
+  @page {
+    size: landscape;
   }
-  /* ... the rest of the rules ... */
+
+
+}
+
+.f-2{
+  font-size:26px;
 }

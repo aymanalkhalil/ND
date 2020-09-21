@@ -13,6 +13,15 @@
 
 }
 
+@media (max-width: 991.98px) {
+
+    .site-header.navbar-dark .navbar-nav .nav-link.active,
+    .site-header.navbar-dark .navbar-nav .nav-link:focus,
+    .site-header.navbar-dark .navbar-nav .nav-link:hover {
+        color: #f94f15;
+    }
+}
+
 #header-wrap {
     background-color: #28a745 !important;
     /* padding: 0px 0;
@@ -73,16 +82,17 @@
     border-color: #28a745;
 }
 
-.page-link{
+.page-link {
     color: #28a745;
 }
 
-.dropdown-item.active, .dropdown-item:active {
+.dropdown-item.active,
+.dropdown-item:active {
     color: #fff;
     text-decoration: none;
     background-color: #28a745;
 }
-    .position-absolute {
-        position: relative !important;
-    }
 
+.position-absolute {
+    position: relative !important;
+}

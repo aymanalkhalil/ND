@@ -92,6 +92,8 @@
                         <a href="#" class="btn btn-block btn-outline-success mt-5">
                             اختيار هذه الفئة
                         </a>
+                        <!-- <a href="#" class="btn btn-block btn-outline-success mt-5">
+لاختيار هذه الفئة يرجى تحويل المبلغ  الى الرقم ٣٢١٤٩٢١٩٨٤١٢٩٨ و التواصل مع مدراء المنصة                        </a> -->
                     </div>
                 </div>
             </div>

@@ -566,6 +566,69 @@ if (isset($error)) {
                 </div>
                 <div class="col-lg-3 col-md-12 order-lg-1 sidebar">
                     <?php
+                    $get_contests_admins = mysqli_query($conn, "SELECT * FROM uploads_admin WHERE for_merchants=1");
+                    if (mysqli_num_rows($get_contests_admins) == 0) {
+                        echo "<h4 class='mb-5 text-danger'> لا يوجد اعلان للمسابقة </h4>";
+                    } else {
+                        while ($row = mysqli_fetch_assoc($get_contests_admins)) {
+                            $typeArr = explode('.', $row['upload_file_admin']);
+                            // var_dump(end($typeArr));
+                            global $type;
+                            switch (end($typeArr)) {
+                                case 'jpeg':
+                                case 'jpg':
+                                case 'svg':
+                                case 'png':
+                                    $type = 'image';
+                                    break;
+                                case 'mp4':
+                                case 'mov':
+                                case '3gp':
+                                    $type = 'video';
+                                    break;
+                                case 'm4a':
+                                case 'mp3':
+                                    $type = 'audio';
+                                    break;
+                                default:
+                                    "not defined";
+                                    break;
+                            }
+                    ?>
+
+                            <h4 class="mb-5 text-success"> اعلان المسابقة </h4>
+                            <ul class="list-unstyled list-group list-group-flush mb-5">
+                                <?php
+                                if ($type == 'image') {
+                                ?>
+                                    <a href="uploads/<?php echo $row['upload_file_admin'] ?>">
+                                        <img class="img-fluid" src="uploads/<?php echo $row['upload_file_admin'] ?>" alt="">
+                                    </a>
+                                <?php
+                                } elseif ($type == 'video') {
+                                ?>
+                                    <a href="uploads/<?php echo $row['upload_file_admin'] ?>">
+                                        <video class="img-center w-100" controls>
+                                            <source src="uploads/<?php echo $row['upload_file_admin'] ?>">
+                                        </video>
+                                    </a>
+                                <?php
+
+                                } elseif ($type == 'audio') {
+                                ?>
+                                    <audio controls class="img-center w-100">
+                                        <source src="uploads/<?php echo $row['upload_file_admin'] ?>">
+                                    </audio>
+                                <?php
+                                }
+                                ?>
+                            </ul>
+                    <?php
+                        }
+                    }
+
+                    ?>
+                    <?php
                     if (isset($_SESSION['merchant_id'])) {
                         $active = mysqli_query($conn, "SELECT m_contest_id,merchants.merchant_id,active,upload_file from merchants LEFT JOIN merchant_contest
                         ON merchants.merchant_id=merchant_contest.merchant_id

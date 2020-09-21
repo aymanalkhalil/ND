@@ -62,7 +62,7 @@ ini_set('post_max_size', '120M');
                                 <div class="collapse navbar-collapse" id="navbarNav">
                                     <ul class="navbar-nav">
                                         <li class="nav-item">
-                                            <a class="nav-link  active" href="index.php" <?php echo (basename($_SERVER['PHP_SELF'], ".php")) == "index" ? $style  : ""; ?>>الرئيسية</a>
+                                            <a class="nav-link  " href="index.php" <?php echo (basename($_SERVER['PHP_SELF'], ".php")) == "index" ? $style  : ""; ?>>الرئيسية</a>
                                         </li>
                                         <li class="nav-item"> <a class="nav-link " <?php echo (basename($_SERVER['PHP_SELF'], ".php")) == "national-feeds" ? $style  : ""; ?> href="national-feeds.php"> المشاركات الوطنية
                                             </a>

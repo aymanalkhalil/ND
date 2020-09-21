@@ -32,6 +32,7 @@
                 }
                 ?>
                 <a href="http://vimeo.com/99025203" class="btn text-white popup-vimeo text-center"> <i class="la la-play-circle mr-1 ic-3x align-middle line-h-0"></i> مشاهدة الفيديو</a>
+                <a href="assets/images/شهادة الزائر.pdf" class="btn text-white popup-vimeo text-center" target="_blank" download> <i class="la la-download mr-1 ic-3x align-middle line-h-0"></i> شهادة الزائر </a>
             </div>
         </div>
         <!-- / .row -->
@@ -193,7 +194,6 @@
                                     <span class="badge badge-success-soft p-2 bg-success">
                                         <img src="assets/images/gif/KSA-flag.gif" alt="" srcset="">
                                     </span>
-                                    <!-- <h2 class="mt-3">بسم الله الرحمن الرحيم</h2> -->
                                     <p class="lead mb-0">
                                         ‎أنتم الأبطال
 
@@ -219,7 +219,6 @@
                                     <span class="badge badge-success-soft p-2 bg-success">
                                         <img src="assets/images/gif/KSA-flag.gif" alt="" srcset="">
                                     </span>
-                                    <!-- <h2 class="mt-3">بسم الله الرحمن الرحيم</h2> -->
                                     <p class="lead mb-0">
                                         - تأسّست مجموعة يا موهوب لدعم الموهوبين عام ١٤٣٩.<br>
 
@@ -233,6 +232,26 @@
                 </section>
             </div>
         </div>
+        <div class="container">
+            <div class="row align-items-center justify-content-center">
+                <section>
+                    <div class="container">
+                        <div class="row align-items-center justify-content-between">
+                            <div class="col-12 col-lg-3 mb-8 mb-lg-0 text-center">
+                                <img src="assets/images/global.jpeg" width='550px' alt="Image" class="img-fluid">
+                            </div>
+                            <div class="col-12 col-lg-3 mb-8 mb-lg-0 text-center">
+                                <img src="assets/images/lit-club.jpeg" width='550px' alt="Image" class="img-fluid">
+                            </div>
+                            <div class="col-12 col-lg-3 mb-8 mb-lg-0 text-center">
+                                <img src="assets/images/logo-ar.jpg" width='550px' alt="Image" class="img-fluid">
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
     </section>
     <section class="p-0">
         <div class="container">
