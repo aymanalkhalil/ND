@@ -50,9 +50,9 @@ ini_set('post_max_size', '120M');
                     <div class="row">
                         <!--menu start-->
                         <div class="col d-flex align-items-center justify-content-between">
-                            <a class="navbar-brand logo text-white h2 mb-0" href="index.php">
-                                <span><img src="assets/images/primary/nav-gray-logo.png" alt="" style='width: 320px;height: 130px;'></span>
-                                <!-- منصة اليوم الوطني <span class="text-light font-weight-bold">السعودي ٩٠</span> -->
+                            <a class="navbar-brand logo text-white h2 mb-0 bs" href="index.php" style="max-width:70%">
+                                <span><img src="assets/images/primary/nav-gray-logo.png" style='width: 300px;height: 130px;'></span>
+
                             </a>
                             <?php $style = "style='color:#f94f15'"; ?>
 

@@ -13,6 +13,18 @@
 
 }
 
+
+
+@media only screen and (max-width: 670px) {
+
+.bs{
+max-width:70%;
+}
+.bs img{
+    width:80% !important;
+}
+}
+
 @media (max-width: 991.98px) {
 
     .site-header.navbar-dark .navbar-nav .nav-link.active,
