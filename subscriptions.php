@@ -87,13 +87,17 @@
 
                         </div>
                         <!-- Text -->
-                        <!-- <p class="text-center text-muted mb-6 mb-md-8">Per user</p> -->
-                        <!-- Button -->
+
                         <a href="#" class="btn btn-block btn-outline-success mt-5">
-                            اختيار هذه الفئة
+                            للإشتراك في هذه الفئة يرجى تحويل مبلغ الاشتراك كما هو موضح أعلاه إلى مصرف الراجحي<br>
+                            رقم الحساب:<br>
+                            335608010990840 <br>رقم الايبان:
+                            <br>SA81 8000 0335 6080 1099 0840<br>
+                            <label for="" class="text-danger">ملاحظة : عند تحويل المبلغ يرجى التواصل على هذا الرقم</label>
+
+
+
                         </a>
-                        <!-- <a href="#" class="btn btn-block btn-outline-success mt-5">
-لاختيار هذه الفئة يرجى تحويل المبلغ  الى الرقم ٣٢١٤٩٢١٩٨٤١٢٩٨ و التواصل مع مدراء المنصة                        </a> -->
                     </div>
                 </div>
             </div>
@@ -148,7 +152,7 @@
                         </div>
                         <!-- Badge -->
                         <div class="text-center my-5"> <span class="badge shadow badge-light">
-                                <span class="h6 text-uppercase">الرعايات</span>
+                                <span class="h6 text-uppercase">شركاء النجاح والرعايات</span>
                             </span>
                         </div>
                         <!-- Price -->
@@ -158,8 +162,13 @@
                         </div>
                         <!-- Text -->
 
-                        <!-- Button --> <a href="#" class="btn btn-block btn-outline-light mt-5">
-                            اختيار هذه الفئة
+                        <a href="#" class="btn btn-block btn-outline-light mt-5">
+                            للإشتراك في هذه الفئة يرجى تحويل مبلغ الاشتراك كما هو موضح أعلاه إلى مصرف الراجحي<br>
+                            رقم الحساب:<br>
+                            335608010990840 <br>رقم الايبان:
+                            <br>SA81 8000 0335 6080 1099 0840
+                            <label for="" class="text-danger">ملاحظة : عند تحويل المبلغ يرجى التواصل على هذا الرقم</label>
+
                         </a>
                     </div>
                 </div>
@@ -216,7 +225,7 @@
                         </div>
                         <!-- Badge -->
                         <div class="text-center my-5"> <span class="badge shadow badge-success">
-                                <span class="h6 text-uppercase"> مبادرات التجار والاسر المنتجة
+                                <span class="h6 text-uppercase"> أصحاب المنتجات التجارية
 
                                 </span>
                             </span>
@@ -228,8 +237,14 @@
                         </div>
                         <!-- Text -->
 
-                        <!-- Button --> <a href="#" class="btn btn-block btn-outline-success mt-5">
-                            اختيار هذه الفئة
+                        <a href="#" class="btn btn-block btn-outline-success mt-5">
+                            للإشتراك في هذه الفئة يرجى تحويل مبلغ الاشتراك كما هو موضح أعلاه إلى مصرف الراجحي<br>
+                            رقم الحساب:<br>
+                            335608010990840 <br>رقم الايبان:
+                            <br>SA81 8000 0335 6080 1099 0840
+                            <label for="" class="text-danger">ملاحظة : عند تحويل المبلغ يرجى التواصل على هذا الرقم</label>
+
+
                         </a>
                     </div>
                 </div>

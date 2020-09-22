@@ -238,14 +238,16 @@
                     <div class="container">
                         <div class="row align-items-center justify-content-between">
                             <div class="col-12 col-lg-3 mb-8 mb-lg-0 text-center">
-                                <img src="assets/images/global.jpeg" width='550px' alt="Image" class="img-fluid">
+                                <img src="assets/images/logo-ar.jpeg" width='550px' alt="Image" class="img-fluid">
                             </div>
                             <div class="col-12 col-lg-3 mb-8 mb-lg-0 text-center">
                                 <img src="assets/images/lit-club.jpeg" width='550px' alt="Image" class="img-fluid">
                             </div>
                             <div class="col-12 col-lg-3 mb-8 mb-lg-0 text-center">
-                                <img src="assets/images/logo-ar.jpg" width='550px' alt="Image" class="img-fluid">
+                                <img src="assets/images/global.jpeg" width='550px' alt="Image" class="img-fluid">
                             </div>
+
+
                         </div>
                     </div>
                 </section>
