@@ -379,8 +379,10 @@ if (isset($s)) {
             <ul class="cases-meta list-unstyled text-muted">
               <li class="mb-3"><span class="text-dark"> الإسم: </span> <?php echo $_SESSION['user_name'] ?></li>
               <li class="mb-3"><span class="text-dark"> صفة الحساب:</span> <?php echo $_SESSION['user_id'] ? 'مشارك' : "" ?></li>
-              <li class="mb-3"><span class="text-dark"> الشهادة:</span><a class='text-primary' href="certificate.php?u=<?php echo $_SESSION['user_id'] ?>" target="_blank"> طباعة الشهادة</a></li>
+              <?php if ($data_u['active'] == 1) { ?>
+                <li class="mb-3"><span class="text-dark"> الشهادة:</span><a class='text-primary' href="certificate.php?u=<?php echo $_SESSION['user_id'] ?>" target="_blank"> طباعة الشهادة</a></li>
               <?php
+              }
               if ($data_u['active'] == '0') {
                 echo "<li class='mb-3' style='color:red'><span class='text-dark'> حالة الحساب: </span> غير مفعل (لتفعيل الحساب يرجى زيارة صفحة <a href='subscriptions.php' class='text-success'>الاشتراكات</a>)<br>
                 في حالة تفعيل الحساب سيكون هناك مساحة في هذه الصفحة لارفاق مشاركاتك في المنصة.";
@@ -614,8 +616,9 @@ if (isset($s)) {
             <p class="lead mb-5">مرحباً بك في منصة اليوم الوطني السعودي ٩٠ </p>
             <ul class="cases-meta list-unstyled text-muted">
               <li class="mb-3"><span class="text-dark"> الإسم: </span> <?php echo $_SESSION['sponsor_name'] ?></li>
-              <li class="mb-3"><span class="text-dark"> الشهادة:</span><a class='text-primary' href="certificate.php?s=<?php echo $_SESSION['sponsor_id'] ?>" target="_blank"> طباعة الشهادة</a></li>
-
+              <?php if ($data_s['active'] == 1) { ?>
+                <li class="mb-3"><span class="text-dark"> الشهادة:</span><a class='text-primary' href="certificate.php?s=<?php echo $_SESSION['sponsor_id'] ?>" target="_blank"> طباعة الشهادة</a></li>
+              <?php } ?>
               <li class="mb-3"><span class="text-dark"> صفة الحساب:</span> <?php
                                                                             if (isset($_SESSION['sponsor_id'])) {
                                                                               if (isset($_SESSION['gold']) && $_SESSION['gold'] == 1) {
@@ -862,10 +865,13 @@ if (isset($s)) {
             <p class="lead mb-5">مرحباً بك في منصة اليوم الوطني السعودي ٩٠ </p>
             <ul class="cases-meta list-unstyled text-muted">
               <li class="mb-3"><span class="text-dark"> الإسم: </span> <?php echo $_SESSION['merchant_name'] ?></li>
+
               <li class="mb-3"><span class="text-dark"> صفة الحساب:</span> <?php echo $_SESSION['merchant_id'] ? 'أصحاب المنتجات التجارية' : "" ?></li>
-              <li class="mb-3"><span class="text-dark"> الشهادة:</span><a class='text-primary' href="certificate.php?m=<?php echo $_SESSION['merchant_id'] ?>" target="_blank"> طباعة الشهادة</a></li>
+              <?php if ($data_m['active'] == 1) { ?>
+                <li class="mb-3"><span class="text-dark"> الشهادة:</span><a class='text-primary' href="certificate.php?m=<?php echo $_SESSION['merchant_id'] ?>" target="_blank"> طباعة الشهادة</a></li>
 
               <?php
+              }
               if ($data_m['active'] == '0') {
                 echo "<li class='mb-3' style='color:red'><span class='text-dark'> حالة الحساب: </span> غير مفعل (لتفعيل الحساب يرجى زيارة صفحة <a href='subscriptions.php' class='text-success'>الاشتراكات</a>)<br>
                 في حالة تفعيل الحساب سيكون هناك مساحة في هذه الصفحة لارفاق مشاركاتك في المنصة.";
