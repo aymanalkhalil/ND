@@ -40,7 +40,6 @@
 
 <section class="p-0">
     <div class="container">
-        <h1 class='text-center text-success'><i class="fa fa-newspaper"></i>الصحافة<i class="fa fa-newspaper"></i></h1><br><br>
 
         <div class="row">
             <div class="col-12">
@@ -194,84 +193,127 @@
 <section class="p-0">
 
     <div class="container">
-        <h1 class='text-center text-success'><i class="fa fa-snapchat"></i>حسابات سناب شات<i class="fa fa-snapchat"></i></h1><br><br>
 
         <div class="row">
             <div class="col-12">
                 <div class="owl-carousel no-pb" data-dots="false" data-items="6" data-md-items="4" data-sm-items="3" data-xs-items="2" data-margin="30" data-autoplay="true">
-                    <div class="item">
-                        <div class="clients-logo">
-                            <img class="img-fluid" src="assets/images/snap-code/1.jpeg" alt="">
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="clients-logo">
-                            <img class="img-fluid" src="assets/images/snap-code/13.jpeg" alt="">
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="clients-logo">
-                            <img class="img-fluid" src="assets/images/snap-code/8.jpeg" alt="">
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="clients-logo">
-                            <img class="img-fluid" src="assets/images/snap-code/9.jpeg" alt="">
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="clients-logo">
-                            <img class="img-fluid" src="assets/images/snap-code/11.jpeg" alt="">
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="clients-logo">
-                            <img class="img-fluid" src="assets/images/snap-code/3.jpeg" alt="">
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="clients-logo">
-                            <img class="img-fluid" src="assets/images/snap-code/4.jpeg" alt="">
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="clients-logo">
-                            <img class="img-fluid" src="assets/images/snap-code/5.jpeg" alt="">
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="clients-logo">
-                            <img class="img-fluid" src="assets/images/snap-code/6.jpeg" alt="">
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="clients-logo">
-                            <img class="img-fluid" src="assets/images/snap-code/7.jpeg" alt="">
-                        </div>
-                    </div>
 
                     <div class="item">
                         <div class="clients-logo">
-                            <img class="img-fluid" src="assets/images/snap-code/10.jpeg" alt="">
+                            <img class="img-fluid" src="assets/images/snap-code/1.png" alt="">
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="clients-logo">
+                            <img class="img-fluid" src="assets/images/snap-code/2.png" alt="">
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="clients-logo">
+                            <img class="img-fluid" src="assets/images/snap-code/3.png" alt="">
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="clients-logo">
+                            <img class="img-fluid" src="assets/images/snap-code/4.png" alt="">
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="clients-logo">
+                            <img class="img-fluid" src="assets/images/snap-code/5.png" alt="">
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="clients-logo">
+                            <img class="img-fluid" src="assets/images/snap-code/6.png" alt="">
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="clients-logo">
+                            <img class="img-fluid" src="assets/images/snap-code/7.png" alt="">
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="clients-logo">
+                            <img class="img-fluid" src="assets/images/snap-code/8.png" alt="">
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="clients-logo">
+                            <img class="img-fluid" src="assets/images/snap-code/9.png" alt="">
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="clients-logo">
+                            <img class="img-fluid" src="assets/images/snap-code/10.png" alt="">
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="clients-logo">
+                            <img class="img-fluid" src="assets/images/snap-code/11.png" alt="">
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="clients-logo">
+                            <img class="img-fluid" src="assets/images/snap-code/12.png" alt="">
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="clients-logo">
+                            <img class="img-fluid" src="assets/images/snap-code/13.png" alt="">
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="clients-logo">
+                            <img class="img-fluid" src="assets/images/snap-code/14.png" alt="">
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="clients-logo">
+                            <img class="img-fluid" src="assets/images/snap-code/15.png" alt="">
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="clients-logo">
+                            <img class="img-fluid" src="assets/images/snap-code/16.png" alt="">
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="clients-logo">
+                            <img class="img-fluid" src="assets/images/snap-code/17.png" alt="">
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="clients-logo">
+                            <img class="img-fluid" src="assets/images/snap-code/18.png" alt="">
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="clients-logo">
+                            <img class="img-fluid" src="assets/images/snap-code/19.png" alt="">
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="clients-logo">
+                            <img class="img-fluid" src="assets/images/snap-code/20.png" alt="">
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="clients-logo">
+                            <img class="img-fluid" src="assets/images/snap-code/21.png" alt="">
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="clients-logo">
+                            <img class="img-fluid" src="assets/images/snap-code/22.png" alt="">
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="clients-logo">
+                            <img class="img-fluid mt-3" src="assets/images/snap-code/23.png" alt="">
                         </div>
                     </div>
 
-                    <div class="item">
-                        <div class="clients-logo">
-                            <img class="img-fluid" src="assets/images/snap-code/12.jpeg" alt="">
-                        </div>
-                    </div>
-
-                    <div class="item">
-                        <div class="clients-logo">
-                            <img class="img-fluid" src="assets/images/snap-code/14.jpeg" alt="">
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="clients-logo">
-                            <img class="img-fluid" src="assets/images/snap-code/15.jpeg" alt="">
-                        </div>
-                    </div>
 
 
                 </div>
