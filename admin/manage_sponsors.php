@@ -13,6 +13,12 @@ if (isset($_POST['add'])) {
     } else {
         $active = '1';
     }
+
+    if (empty($_POST['gold'])) {
+        $gold = 0;
+    } else {
+        $gold = 1;
+    }
     $check_email = "SELECT sponsor_email from sponsors where sponsor_email='$email'";
     $check_email_result = mysqli_query($conn, $check_email);
     if (mysqli_num_rows($check_email_result) > 0) {
@@ -22,8 +28,8 @@ if (isset($_POST['add'])) {
                 </div>
                ";
     } else {
-        $query = "INSERT INTO sponsors(sponsor_name,sponsor_email,sponsor_password,sponsor_mobile,sponsor_address,active,sponsor_desc)VALUES
-        ('$name','$email','$password','$mobile','$address','$active','لا يوجد وصف للحساب')";
+        $query = "INSERT INTO sponsors(sponsor_name,sponsor_email,sponsor_password,sponsor_mobile,sponsor_address,active,gold,sponsor_desc)VALUES
+        ('$name','$email','$password','$mobile','$address','$active',$gold,'لا يوجد وصف للحساب')";
 
         $result = mysqli_query($conn, $query);
         if ($result) {
@@ -58,10 +64,15 @@ if (isset($_POST['update'])) {
     } else {
         $active = '1';
     }
+    if (empty($_POST['gold'])) {
+        $gold = '0';
+    } else {
+        $gold = '1';
+    }
     // var_dump($_POST);die;
 
     $query = "UPDATE sponsors SET sponsor_name='$edit_name',sponsor_email='$edit_email',sponsor_password='$edit_password'
-        ,sponsor_mobile='$edit_mobile',sponsor_address='$edit_address',active='$active' WHERE sponsor_id='$sponsor_id'";
+        ,sponsor_mobile='$edit_mobile',sponsor_address='$edit_address',active='$active',gold='$gold' WHERE sponsor_id='$sponsor_id'";
 
 
     $result = mysqli_query($conn, $query);
@@ -105,10 +116,27 @@ if (isset($_POST['delete'])) {
     }
 }
 
+if (isset($_GET['pageno'])) {
+    $pageno = $_GET['pageno'];
+} else {
+    $pageno = 1;
+}
+$num_records_per_page = 10;
+$offset = ($pageno - 1) * $num_records_per_page;
 
 
 ?>
-
+<style>
+    .pagination>li>a:focus,
+    .pagination>li>a:hover,
+    .pagination>li>span:focus,
+    .pagination>li>span:hover {
+        z-index: 2;
+        color: #fff;
+        background-color: #28a745;
+        border-color: #ddd;
+    }
+</style>
 
 
 <!-- Content Wrapper. Contains page content -->
@@ -171,8 +199,12 @@ if (isset($_POST['delete'])) {
                             <div class="checkbox btn-lg col-lg-6">
                                 <label>
                                     <input type="checkbox" name='active' value="1" checked> Active - مفعل
+                                </label>&nbsp; &nbsp;
+                                <label>
+                                    <input type="checkbox" name='gold' value="1"> راعي ذهبي
                                 </label>
                             </div>
+
                         </div>
                         <!-- /.box-body -->
                         <div class="box-footer">
@@ -224,7 +256,6 @@ if (isset($_POST['delete'])) {
                                         <th>ID</th>
                                         <th>Sponsor Name</th>
                                         <th>Sponsor Email</th>
-                                        <!-- <th>Sponsor password</th> -->
                                         <th>Sponsor Mobile</th>
                                         <th>Sponsor Address</th>
                                         <th>Active</th>
@@ -236,7 +267,7 @@ if (isset($_POST['delete'])) {
                                         $query = "SELECT * FROM sponsors WHERE sponsor_name LIKE '%{$_POST['table_search']}%' or sponsor_mobile LIKE '%{$_POST['table_search']}%'";
                                     } else {
 
-                                        $query = "SELECT * FROM sponsors ORDER BY sponsor_id DESC";
+                                        $query = "SELECT * FROM sponsors  ORDER BY sponsor_id DESC LIMIT $offset,$num_records_per_page";
                                     }
                                     $result = mysqli_query($conn, $query);
 
@@ -244,11 +275,20 @@ if (isset($_POST['delete'])) {
                                     if (mysqli_num_rows($result) == 0) {
                                         echo "<tr><td colspan='8' class='col-md-12 text-center btn btn-danger'> ! لم يتم العثور على نتائج </td></tr>";
                                     } else {
+                                        $total_user_feeds = mysqli_query($conn, "SELECT * FROM sponsors");
+                                        $total_rows_merc = mysqli_num_rows($total_user_feeds);
+                                        $total_pages_shares_users = ceil($total_rows_merc / $num_records_per_page);
+
                                         while ($row = mysqli_fetch_assoc($result)) {
                                             if ($row['active'] == '1') {
                                                 $style = "'btn btn-success'";
                                             } else {
                                                 $style = "'btn btn-danger'";
+                                            }
+                                            if ($row['gold'] == '1') {
+                                                $gold = "'btn btn-warning'";
+                                            } else {
+                                                $gold = "'btn btn-info'";
                                             }
 
                                     ?>
@@ -257,10 +297,11 @@ if (isset($_POST['delete'])) {
 
                                                 <td><?php echo $row['sponsor_name']  ?></td>
                                                 <td><?php echo $row['sponsor_email']  ?></td>
-                                                <!-- <td><?php echo $row['sponsor_password']  ?></td> -->
                                                 <td><?php echo $row['sponsor_mobile'] ?></td>
                                                 <td><?php echo $row['sponsor_address'] ?></td>
                                                 <td class=<?php echo  $style ?>style=" width:145px;margin:10px;"><?php echo $row['active'] == '1' ? 'Active - مفعل' : 'Not Active - غير مفعل'  ?></td>
+                                                <td class=<?php echo  $gold ?>style=" width:145px;margin:10px;"><?php echo $row['gold'] == '1' ? 'ذهبي' : 'فضي'  ?></td>
+
                                                 <td>
                                                     <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#exampleModal<?php echo $i ?>">
                                                         <i class="fa fa-edit"></i>
@@ -303,6 +344,11 @@ if (isset($_POST['delete'])) {
                                                                         <div class="checkbox btn-lg">
                                                                             <label>
                                                                                 <input type="checkbox" name='active' value="1" <?php echo $row['active'] == '1' ? 'checked' : '' ?>> Active - مفعل
+                                                                            </label>
+                                                                            &nbsp; &nbsp;
+                                                                            <label>
+                                                                                <input type="checkbox" name='gold' value="1" <?php echo $row['gold'] == '1' ? 'checked' : '' ?>> راعي ذهبي
+
                                                                             </label>
                                                                         </div>
 
@@ -359,6 +405,25 @@ if (isset($_POST['delete'])) {
                                         }
                                     }
                                     ?>
+                                    <div class="box-footer clearfix">
+                                        <ul class="pagination pagination-sm no-margin pull-right">
+
+                                            <li class="<?php if ($pageno <= 1) {
+                                                            echo 'disabled';
+                                                        }   ?>"> <a class="page-link text-primary" href="<?php if ($pageno <= 1) {
+                                                                                                                echo '#';
+                                                                                                            } else {
+                                                                                                                echo "?pageno=" . ($pageno - 1);
+                                                                                                            } ?>">الصفحة السابقة</a></li>
+                                            <li class="<?php if ($pageno >= $total_pages_shares_users) {
+                                                            echo 'disabled';
+                                                        }   ?>"> <a class="page-link text-success" href="<?php if ($pageno >= $total_pages_shares_users) {
+                                                                                                                echo '#';
+                                                                                                            } else {
+                                                                                                                echo "?pageno=" . ($pageno + 1);
+                                                                                                            } ?>">الصفحة التالية</a></li>
+                                        </ul>
+                                    </div>
                                 </table>
                             </div>
                             <div id="row2"></div>

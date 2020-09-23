@@ -28,6 +28,9 @@
     .position-absolute {
         position: relative !important;
     }
+    .w{
+        font-size:70px;
+    }
 </style>
 <section>
     <div class="container">
@@ -88,13 +91,13 @@
                         </div>
                         <!-- Text -->
 
-                        <a href="#" class="btn btn-block btn-outline-success mt-5">
+                        <a href="https://wa.me/966545503047" target="_blank" class="btn btn-block btn-outline-success mt-5">
                             للإشتراك في هذه الفئة يرجى تحويل مبلغ الاشتراك كما هو موضح أعلاه إلى مصرف الراجحي<br>
                             رقم الحساب:<br>
                             335608010990840 <br>رقم الايبان:
                             <br>SA81 8000 0335 6080 1099 0840<br>
-                            <label for="" class="text-danger">ملاحظة : عند تحويل المبلغ يرجى التواصل على هذا الرقم</label>
-                            <label for="" class="text-dark">0545503047</label>
+                            <label for="" class="text-danger">ملاحظة : عند تحويل المبلغ يرجى التواصل على الواتس اب</label>
+                            <i class="fa fa-whatsapp w"></i>
 
 
 
@@ -163,15 +166,13 @@
                         </div>
                         <!-- Text -->
 
-                        <a href="#" class="btn btn-block btn-outline-light mt-5">
+                        <a href="https://wa.me/966545503047" target="_blank" class="btn btn-block btn-outline-light mt-5">
                             للإشتراك في هذه الفئة يرجى تحويل مبلغ الاشتراك كما هو موضح أعلاه إلى مصرف الراجحي<br>
                             رقم الحساب:<br>
                             335608010990840 <br>رقم الايبان:
                             <br>SA81 8000 0335 6080 1099 0840
-                            <label for="" class="text-danger"> ملاحظة : عند تحويل المبلغ يرجى التواصل على هذا الرقم</label>
-                            <label for="" class="text-dark">0545503047</label>
-
-
+                            <label for="" class="text-danger">ملاحظة : عند تحويل المبلغ يرجى التواصل على الواتس اب</label>
+                            <i class="fa fa-whatsapp w"></i>
                         </a>
                     </div>
                 </div>
@@ -240,14 +241,13 @@
                         </div>
                         <!-- Text -->
 
-                        <a href="#" class="btn btn-block btn-outline-success mt-5">
+                        <a href="https://wa.me/966545503047" target="_blank" class="btn btn-block btn-outline-success mt-5">
                             للإشتراك في هذه الفئة يرجى تحويل مبلغ الاشتراك كما هو موضح أعلاه إلى مصرف الراجحي<br>
                             رقم الحساب:<br>
                             335608010990840 <br>رقم الايبان:
                             <br>SA81 8000 0335 6080 1099 0840
-                            <label for="" class="text-danger">ملاحظة : عند تحويل المبلغ يرجى التواصل على هذا الرقم</label>
-                            <label for="" class="text-dark">0545503047</label>
-
+                            <label for="" class="text-danger">ملاحظة : عند تحويل المبلغ يرجى التواصل على الواتس اب</label>
+                            <i class="fa fa-whatsapp w"></i>
 
                         </a>
                     </div>

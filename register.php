@@ -81,8 +81,8 @@ if (isset($_POST['register'])) {
                  <h4><i class='icon fa fa-ban'></i> عذراً البريد الالكتروني مسجل لدينا</h4>
                 </div>";
       } else {
-        $insert = "INSERT INTO sponsors(sponsor_name,sponsor_email,sponsor_password,sponsor_mobile,sponsor_address,sponsor_desc)VALUES
-      ('$name','$email','$password','$mobile','$address','$desc')";
+        $insert = "INSERT INTO sponsors(sponsor_name,sponsor_email,sponsor_password,sponsor_mobile,sponsor_address,gold,sponsor_desc)VALUES
+      ('$name','$email','$password','$mobile','$address',0,'$desc')";
         $result = mysqli_query($conn, $insert);
 
         if ($result) {

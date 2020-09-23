@@ -105,10 +105,29 @@ if (isset($_POST['delete'])) {
 }
 
 
+if (isset($_GET['pageno'])) {
+    $pageno = $_GET['pageno'];
+} else {
+    $pageno = 1;
+}
+$num_records_per_page = 15;
+$offset = ($pageno - 1) * $num_records_per_page;
+
+
 
 ?>
 
-
+<style>
+    .pagination>li>a:focus,
+    .pagination>li>a:hover,
+    .pagination>li>span:focus,
+    .pagination>li>span:hover {
+        z-index: 2;
+        color: #fff;
+        background-color: #28a745;
+        border-color: #ddd;
+    }
+</style>
 
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -241,10 +260,12 @@ if (isset($_POST['delete'])) {
                                 </tr>
                                 <?php
                                 if ($_SESSION['is_super'] == 1) {
-                                    $query = "SELECT * FROM users left JOIN admin on users.admin_id=admin.admin_id  ORDER BY user_id DESC";
+                                    $query = "SELECT * FROM users left JOIN admin on users.admin_id=admin.admin_id
+                                      ORDER BY user_id DESC LIMIT $offset,$num_records_per_page";
                                 } else {
 
-                                    $query = "SELECT * FROM users  where admin_id={$_SESSION['admin_id']} ORDER BY user_id DESC";
+                                    $query = "SELECT * FROM users  where admin_id={$_SESSION['admin_id']} ORDER BY user_id DESC
+                                    DESC LIMIT $offset,$num_records_per_page ";
                                 }
 
                                 if (isset($_POST['search']) && $_SESSION['is_super'] == 1) {
@@ -257,7 +278,9 @@ if (isset($_POST['delete'])) {
                                 if (mysqli_num_rows($result) == 0) {
                                     echo "<tr><td colspan='9' class='btn btn-danger col-md-12'> لم يتم العثور على نتائج !</td></tr>";
                                 } else {
-
+                                    $total_user_feeds = mysqli_query($conn, "SELECT * FROM users");
+                                    $total_rows_merc = mysqli_num_rows($total_user_feeds);
+                                    $total_pages_shares_users = ceil($total_rows_merc / $num_records_per_page);
 
                                     while ($row = mysqli_fetch_assoc($result)) {
                                         if ($row['active'] == '1') {
@@ -385,6 +408,25 @@ if (isset($_POST['delete'])) {
                                     }
                                 }
                                 ?>
+                                <div class="box-footer clearfix">
+                                    <ul class="pagination pagination-sm no-margin pull-right">
+
+                                        <li class="<?php if ($pageno <= 1) {
+                                                        echo 'disabled';
+                                                    }   ?>"> <a class="page-link text-primary" href="<?php if ($pageno <= 1) {
+                                                                                                                echo '#';
+                                                                                                            } else {
+                                                                                                                echo "?pageno=" . ($pageno - 1);
+                                                                                                            } ?>">الصفحة السابقة</a></li>
+                                        <li class="<?php if ($pageno >= $total_pages_shares_users) {
+                                                        echo 'disabled';
+                                                    }   ?>"> <a class="page-link text-success" href="<?php if ($pageno >= $total_pages_shares_users) {
+                                                                                                                echo '#';
+                                                                                                            } else {
+                                                                                                                echo "?pageno=" . ($pageno + 1);
+                                                                                                            } ?>">الصفحة التالية</a></li>
+                                    </ul>
+                                </div>
                             </table>
 
                         </div>

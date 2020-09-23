@@ -107,6 +107,23 @@ include_once('includes/header.php');
         <div class="col-lg-3 col-xs-6">
           <!-- small box -->
           <?php
+          $tot_u = mysqli_query($conn, "SELECT * from users where admin_id is null");
+
+          ?>
+          <div class="small-box bg-olive-active">
+            <div class="inner">
+              <h3 class='text-center'><?php echo mysqli_num_rows($tot_u) ?></h3>
+
+              <p class='text-center'> المستخدمين المسجلين من المنصة</p>
+            </div>
+
+            <a href="manage_users.php" class="small-box-footer">عرض التفاصيل<i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <?php
           $tot_u_s = mysqli_query($conn, "SELECT * from uploads_users");
 
           ?>
@@ -181,7 +198,7 @@ include_once('includes/header.php');
               <p class='text-center'>عدد مشاركات شركاء النجاح</p>
             </div>
 
-            <a href="view_merchants_contest.php" class="small-box-footer">عرض التفاصيل <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="view_sponsors_shares.php" class="small-box-footer">عرض التفاصيل <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <div class="col-lg-3 col-xs-6">

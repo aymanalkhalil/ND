@@ -286,7 +286,7 @@
             <div class="row">
                 <div class="col-12">
                     <?php
-                    $sp_logos = mysqli_query($conn, "SELECT sponsor_image From sponsors where gold is NULL ORDER BY sponsor_id DESC");
+                    $sp_logos = mysqli_query($conn, "SELECT sponsor_image From sponsors where gold=0 ORDER BY sponsor_id DESC");
                     if (mysqli_num_rows($sp_logos) == 0) {
                     } else {
                     ?>

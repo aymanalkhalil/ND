@@ -316,7 +316,7 @@ $offset = ($pageno - 1) * $num_records_per_page;
                                             <td><?php echo $all_contests['sponsor_name']  ?></td>
                                             <td><?php echo $all_contests['sponsor_mobile']  ?></td>
                                             <td><?php echo $all_contests['sponsor_email']  ?></td>
-                                            <td><?php echo !empty($row['upload_sponsor_description']) ? $row['upload_sponsor_description'] : 'لا يوجد تعليق مرفق' ?></td>
+                                            <td><?php echo !empty($all_contests['upload_sponsor_description']) ? $all_contests['upload_sponsor_description'] : 'لا يوجد تعليق مرفق' ?></td>
                                             <td>
 
                                                 <?php if ($type == 'image') { ?>

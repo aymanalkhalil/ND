@@ -134,11 +134,7 @@
                         </div>
                     </div>
 
-                    <div class="item">
-                        <div class="clients-logo">
-                            <img class="img-fluid" src="assets/images/press_photo/11.jpeg" alt="">
-                        </div>
-                    </div>
+
                     <div class="item">
                         <div class="clients-logo">
                             <img class="img-fluid" src="assets/images/press_photo/25.jpeg" alt="">
@@ -147,6 +143,11 @@
                     <div class="item">
                         <div class="clients-logo">
                             <img class="img-fluid" src="assets/images/press_photo/26.jpeg" alt="">
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="clients-logo">
+                            <img class="img-fluid mt-3" src="assets/images/press_photo/11.jpeg" alt="">
                         </div>
                     </div>
                     <div class="item">
@@ -225,7 +226,7 @@
                     </div>
                     <div class="item">
                         <div class="clients-logo">
-                            <img class="img-fluid" src="assets/images/snap-code/6.png" alt="">
+                            <img class="img-fluid " src="assets/images/snap-code/6.png" alt="">
                         </div>
                     </div>
                     <div class="item">
@@ -311,6 +312,11 @@
                     <div class="item">
                         <div class="clients-logo">
                             <img class="img-fluid mt-3" src="assets/images/snap-code/23.png" alt="">
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="clients-logo">
+                            <img class="img-fluid mt-3" src="assets/images/snap-code/24.jpeg" alt="">
                         </div>
                     </div>
 
