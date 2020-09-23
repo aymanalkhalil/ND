@@ -52,7 +52,7 @@ $offset = ($pageno - 1) * $num_records_per_page;
             <?php
             $get_sponsor_feeds = mysqli_query($conn, "SELECT upload_sponsor_id,upload_sponsor_file,upload_sponsor_description,uploads_sponsors.sponsor_id,sponsors.sponsor_name
                 FROM sponsors INNER JOIN uploads_sponsors ON uploads_sponsors.sponsor_id=sponsors.sponsor_id
-                where gold is NULL AND active=1 ORDER BY upload_sponsor_id DESC LIMIT $offset,$num_records_per_page");
+                where gold=0 AND active=1 ORDER BY upload_sponsor_id DESC LIMIT $offset,$num_records_per_page");
             if (mysqli_num_rows($get_sponsor_feeds) == 0) {
                 echo "
             <section class='col-lg-12'>
@@ -69,7 +69,7 @@ $offset = ($pageno - 1) * $num_records_per_page;
             </section>";
             } else {
                 $total_sponsor_feeds = mysqli_query($conn, "SELECT * FROM uploads_sponsors inner join sponsors ON uploads_sponsors.sponsor_id=sponsors.sponsor_id
-                where gold is NULL ");
+                where gold=0");
                 $total_rows_sp = mysqli_num_rows($total_sponsor_feeds);
                 $total_pages_sp = ceil($total_rows_sp / $num_records_per_page);
 

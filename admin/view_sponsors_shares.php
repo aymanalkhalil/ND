@@ -274,7 +274,7 @@ $offset = ($pageno - 1) * $num_records_per_page;
                                 <?php
 
                                 $contest_information = mysqli_query($conn, "SELECT * FROM uploads_sponsors INNER JOIN sponsors on uploads_sponsors.sponsor_id=sponsors.sponsor_id
-                                where gold IS NULL ORDER BY upload_sponsor_id DESC LIMIT $offset,$num_records_per_page");
+                                where gold=0 ORDER BY upload_sponsor_id DESC LIMIT $offset,$num_records_per_page");
 
 
                                 if (mysqli_num_rows($contest_information) == 0) {

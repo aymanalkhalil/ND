@@ -30,7 +30,7 @@
                 <?php
                 }
                 ?>
-                <a href="http://vimeo.com/99025203" class="btn text-white popup-vimeo text-center"> <i class="la la-play-circle mr-1 ic-3x align-middle line-h-0"></i> الإستماع للمقطع </a>
+                <a href="" class="btn text-white popup-vimeo text-center"> <i class="la la-play-circle mr-1 ic-3x align-middle line-h-0"></i> الإستماع للمقطع </a>
                 <a href="assets/images/شهادة الزائر.pdf" class="btn text-white popup-vimeo text-center" target="_blank" download> <i class="la la-download mr-1 ic-3x align-middle line-h-0"></i> شهادة الزائر </a>
             </div>
         </div>
@@ -227,27 +227,27 @@
                 </section>
             </div>
         </div>
-        <div class="container">
-            <div class="row align-items-center justify-content-center">
-                <section>
-                    <div class="container">
-                        <div class="row align-items-center justify-content-between">
-                            <div class="col-12 col-lg-3 mb-8 mb-lg-0 text-center">
-                                <img src="assets/images/logo-ar.jpeg" width='550px' alt="Image" class="img-fluid">
-                            </div>
-                            <div class="col-12 col-lg-3 mb-8 mb-lg-0 text-center">
-                                <img src="assets/images/lit-club.jpeg" width='550px' alt="Image" class="img-fluid">
-                            </div>
-                            <div class="col-12 col-lg-3 mb-8 mb-lg-0 text-center">
-                                <img src="assets/images/global.jpeg" width='550px' alt="Image" class="img-fluid">
-                            </div>
+        <!--<div class="container">-->
+        <!--    <div class="row align-items-center justify-content-center">-->
+        <!--        <section>-->
+        <!--            <div class="container">-->
+        <!--                <div class="row align-items-center justify-content-between">-->
+        <!--                    <div class="col-12 col-lg-3 mb-8 mb-lg-0 text-center">-->
+        <!--                        <img src="assets/images/logo-ar.jpeg" width='550px' alt="Image" class="img-fluid">-->
+        <!--                    </div>-->
+        <!--                    <div class="col-12 col-lg-3 mb-8 mb-lg-0 text-center">-->
+        <!--                        <img src="assets/images/lit-club.jpeg" width='550px' alt="Image" class="img-fluid">-->
+        <!--                    </div>-->
+        <!--                    <div class="col-12 col-lg-3 mb-8 mb-lg-0 text-center">-->
+        <!--                        <img src="assets/images/global.jpeg" width='550px' alt="Image" class="img-fluid">-->
+        <!--                    </div>-->
 
 
-                        </div>
-                    </div>
-                </section>
-            </div>
-        </div>
+        <!--                </div>-->
+        <!--            </div>-->
+        <!--        </section>-->
+        <!--    </div>-->
+        <!--</div>-->
 
     </section>
     <section class="p-0">
@@ -255,25 +255,26 @@
             <div class="row">
                 <div class="col-12">
                     <?php
-                    $sp_logos = mysqli_query($conn, "SELECT sponsor_image From sponsors where gold=1 ORDER BY sponsor_id DESC");
-                    if (mysqli_num_rows($sp_logos) == 0) {
-                    } else {
+                    $sp_logos_gold = mysqli_query($conn, "SELECT sponsor_image From sponsors where gold=1 ORDER BY sponsor_id DESC");
+                    // if (mysqli_num_rows($sp_logos_gold) == 0) {
+                    // } else {
                     ?>
-                        <h2 class='text-center text-success mb-6'> شركاء النجاح والرعايات الذهبية</h2>
+                    <h2 class='text-center text-success mb-6'> شركاء النجاح والرعايات الذهبية</h2>
 
-                        <div class="owl-carousel no-pb" data-dots="false" data-items="6" data-md-items="4" data-sm-items="3" data-xs-items="2" data-margin="30" data-autoplay="true">
-                            <?php while ($logos = mysqli_fetch_assoc($sp_logos)) { ?>
-                                <div class="item">
-                                    <div class="clients-logo">
-                                        <img class="img-fluid" src="assets/sponsors_logo/<?php echo $logos['sponsor_image'] ?>" width="200px" alt="">
+                    <div class="owl-carousel no-pb" data-dots="false" data-items="6" data-md-items="4" data-sm-items="3" data-xs-items="2" data-margin="30" data-autoplay="true">
+                        <?php while ($logos_gold = mysqli_fetch_assoc($sp_logos_gold)) { ?>
+                            <div class="item">
+                                <div class="clients-logo">
+                                    <img class="img-fluid" src="assets/sponsors_logo/<?php echo $logos_gold['sponsor_image'] ?>" width="200px" alt="">
 
-                                    </div>
                                 </div>
-                            <?php } ?>
-                        </div>
+                            </div>
+                        <?php } ?>
+                    </div>
 
                 </div>
-            <?php } ?>
+                <?php //}
+                ?>
             </div>
         </div>
     </section>
@@ -293,10 +294,10 @@
                         <h2 class='text-center text-success mb-6'> شركاء النجاح والرعايات الفضية</h2>
 
                         <div class="owl-carousel no-pb" data-dots="false" data-items="6" data-md-items="4" data-sm-items="3" data-xs-items="2" data-margin="30" data-autoplay="true">
-                            <?php while ($logos = mysqli_fetch_assoc($sp_logos)) { ?>
+                            <?php while ($logos_silver = mysqli_fetch_assoc($sp_logos)) { ?>
                                 <div class="item">
                                     <div class="clients-logo">
-                                        <img class="img-fluid" src="assets/sponsors_logo/<?php echo $logos['sponsor_image'] ?>" width="200px" alt="">
+                                        <img class="img-fluid" src="assets/sponsors_logo/<?php echo $logos_silver['sponsor_image'] ?>" width="200px" alt="">
 
                                     </div>
                                 </div>
