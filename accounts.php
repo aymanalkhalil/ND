@@ -44,11 +44,13 @@
         <div class="row">
             <div class="col-12">
                 <div class="owl-carousel no-pb" data-dots="false" data-items="6" data-md-items="4" data-sm-items="3" data-xs-items="2" data-margin="30" data-autoplay="true">
+
                     <div class="item">
                         <div class="clients-logo">
                             <img class="img-fluid mt-5" src="assets/images/press_photo/17.jpeg" alt="">
                         </div>
                     </div>
+
                     <div class="item">
                         <div class="clients-logo">
                             <img class="img-fluid mt-5" src="assets/images/press_photo/24.jpeg" alt="">
@@ -62,7 +64,22 @@
                     </div>
                     <div class="item">
                         <div class="clients-logo">
+                            <img class="img-fluid" src="assets/images/press_photo/33.jpeg" alt="">
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="clients-logo">
+                            <img class="img-fluid" src="assets/images/press_photo/29.jpeg" alt="">
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="clients-logo">
                             <img class="img-fluid" src="assets/images/press_photo/2.jpeg" alt="">
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="clients-logo">
+                            <img class="img-fluid" src="assets/images/press_photo/31.jpeg" alt="">
                         </div>
                     </div>
                     <div class="item">
@@ -81,9 +98,10 @@
                             <img class="img-fluid" src="assets/images/press_photo/12.jpeg" alt="">
                         </div>
                     </div>
+
                     <div class="item">
                         <div class="clients-logo">
-                            <img class="img-fluid" src="assets/images/press_photo/13.jpeg" alt="">
+                            <img class="img-fluid mb-2" src="assets/images/press_photo/13.jpeg" alt="">
                         </div>
                     </div>
                     <div class="item">
@@ -93,7 +111,17 @@
                     </div>
                     <div class="item">
                         <div class="clients-logo">
+                            <img class="img-fluid" src="assets/images/press_photo/32.jpeg" alt="">
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="clients-logo">
                             <img class="img-fluid" src="assets/images/press_photo/15.jpeg" alt="">
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="clients-logo">
+                            <img class="img-fluid" src="assets/images/press_photo/30.jpeg" alt="">
                         </div>
                     </div>
                     <div class="item">
@@ -111,6 +139,7 @@
                             <img class="img-fluid" src="assets/images/press_photo/10.jpeg" alt="">
                         </div>
                     </div>
+
                     <div class="item">
                         <div class="clients-logo">
                             <img class="img-fluid" src="assets/images/press_photo/16.jpeg" alt="">
@@ -143,6 +172,11 @@
                     <div class="item">
                         <div class="clients-logo">
                             <img class="img-fluid" src="assets/images/press_photo/26.jpeg" alt="">
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="clients-logo">
+                            <img class="img-fluid" src="assets/images/press_photo/28.jpeg" alt="">
                         </div>
                     </div>
                     <div class="item">
@@ -231,6 +265,11 @@
                     </div>
                     <div class="item">
                         <div class="clients-logo">
+                            <img class="img-fluid " src="assets/images/snap-code/f.jpeg" alt="">
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="clients-logo">
                             <img class="img-fluid" src="assets/images/snap-code/7.png" alt="">
                         </div>
                     </div>
@@ -259,11 +298,7 @@
                             <img class="img-fluid" src="assets/images/snap-code/12.png" alt="">
                         </div>
                     </div>
-                    <div class="item">
-                        <div class="clients-logo">
-                            <img class="img-fluid" src="assets/images/snap-code/13.png" alt="">
-                        </div>
-                    </div>
+
                     <div class="item">
                         <div class="clients-logo">
                             <img class="img-fluid" src="assets/images/snap-code/14.png" alt="">

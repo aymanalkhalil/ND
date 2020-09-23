@@ -29,7 +29,7 @@
                             </li>
                             <li class="list-inline-item"><a class="text-light ic-2x" target="_blank" href="https://twitter.com/yamohob?s=21"><i class="la la-twitter"></i></a>
                             </li>
-                            <li class="list-inline-item"><a class="text-light ic-2x" target="_blank" href="https://wa.me/966545503047"><i class="fa fa-whatsapp"></i></a>
+                            <li class="list-inline-item"><a class="text-light ic-2x" target="_blank" href="https://wa.me/966564699437"><i class="fa fa-whatsapp"></i></a>
                             </li>
                         </ul>
                     </div>
