@@ -30,7 +30,7 @@
                 <?php
                 }
                 ?>
-                <a href="" class="btn text-white popup-vimeo text-center"> <i class="la la-play-circle mr-1 ic-3x align-middle line-h-0"></i> الإستماع للمقطع </a>
+                <!-- <a href="" class="btn text-white popup-vimeo text-center"> <i class="la la-play-circle mr-1 ic-3x align-middle line-h-0"></i> الإستماع للمقطع </a> -->
                 <a href="assets/images/شهادة الزائر.pdf" class="btn text-white popup-vimeo text-center" target="_blank" download> <i class="la la-download mr-1 ic-3x align-middle line-h-0"></i> شهادة الزائر </a>
             </div>
         </div>

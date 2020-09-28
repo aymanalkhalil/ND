@@ -7,7 +7,7 @@ if (isset($_GET['pageno'])) {
 } else {
     $pageno = 1;
 }
-$num_records_per_page = 6;
+$num_records_per_page = 12;
 $offset = ($pageno - 1) * $num_records_per_page;
 
 ?>
@@ -39,6 +39,15 @@ $offset = ($pageno - 1) * $num_records_per_page;
                         } ?>
                     </ol>
                 </nav>
+                <?php
+                if (isset($_SESSION['sponsor_id'])) {
+                    $check_active = mysqli_query($conn, "SELECT active from sponsors where sponsor_id='{$_SESSION['sponsor_id']}'");
+                    $result = mysqli_fetch_assoc($check_active);
+                    if ($result['active'] == 1) { ?>
+                        <h2 class='text-center'> عزيزي شريك النجاح/ة للمشاركة بمسابقة شركاء النجاح <a href="sponsor-contest.php">اضغط هنا</a></h2>
+                <?php
+                    }
+                } ?>
             </div>
         </div>
     </div>
@@ -50,7 +59,7 @@ $offset = ($pageno - 1) * $num_records_per_page;
         <div class="row">
 
             <?php
-            $get_sponsor_feeds = mysqli_query($conn, "SELECT upload_sponsor_id,upload_sponsor_file,upload_sponsor_description,uploads_sponsors.sponsor_id,sponsors.sponsor_name
+            $get_sponsor_feeds = mysqli_query($conn, "SELECT sponsor_desc,upload_sponsor_id,upload_sponsor_file,upload_sponsor_description,uploads_sponsors.sponsor_id,sponsors.sponsor_name
                 FROM sponsors INNER JOIN uploads_sponsors ON uploads_sponsors.sponsor_id=sponsors.sponsor_id
                 where gold=0 AND active=1 ORDER BY upload_sponsor_id DESC LIMIT $offset,$num_records_per_page");
             if (mysqli_num_rows($get_sponsor_feeds) == 0) {
@@ -129,6 +138,8 @@ $offset = ($pageno - 1) * $num_records_per_page;
                             <div class="card-body pt-5"> <label class="d-inline-block text-info mb-2">بواسطة: <?php echo  $all_feeds['sponsor_name'] ?></label>
                                 <h2 class="h5 font-weight-medium">
                                     <p class="link-title <?php echo !empty($all_feeds['upload_sponsor_description']) ? "text-success" : 'text-danger' ?>"><label class='text-secondary'>تعليق صاحب المشاركة : </label><?php echo !empty($all_feeds['upload_sponsor_description']) ? $all_feeds['upload_sponsor_description'] : "لا يوجد تعليق" ?></p>
+                                    <p class="link-title <?php echo $all_feeds['sponsor_desc'] == 'لا يوجد وصف للحساب' ? "text-danger" : 'text-success' ?>"><label class='text-secondary'> وصف حساب شريك النجاح : </label><?php echo !empty($all_feeds['sponsor_desc']) ? $all_feeds['sponsor_desc'] : "لا يوجد وصف لحساب شريك النجاح" ?></p>
+
                                 </h2>
                                 <!-- <p>Businesses need access to development resources serspiciatis unde omnis iste natus error.</p> -->
                             </div>
@@ -148,19 +159,19 @@ $offset = ($pageno - 1) * $num_records_per_page;
                         <li class="page-item mr-auto <?php if ($pageno <= 1) {
                                                             echo 'disabled';
                                                         }   ?>"> <a class="page-link" href="<?php if ($pageno <= 1) {
-                                                                                                    echo '#';
-                                                                                                } else {
-                                                                                                    echo "?pageno=" . ($pageno - 1);
-                                                                                                } ?>">الصفحة السابقة</a>
+                                                                                                echo '#';
+                                                                                            } else {
+                                                                                                echo "?pageno=" . ($pageno - 1);
+                                                                                            } ?>">الصفحة السابقة</a>
 
                         </li>
                         <li class="page-item ml-auto <?php if ($pageno >= $total_pages_sp) {
                                                             echo 'disabled';
                                                         }   ?>"> <a class="page-link" href="<?php if ($pageno >= $total_pages_sp) {
-                                                                                                    echo '#';
-                                                                                                } else {
-                                                                                                    echo "?pageno=" . ($pageno + 1);
-                                                                                                } ?>">الصفحة التالية</a>
+                                                                                                echo '#';
+                                                                                            } else {
+                                                                                                echo "?pageno=" . ($pageno + 1);
+                                                                                            } ?>">الصفحة التالية</a>
                         </li>
                     </ul>
                 </nav>

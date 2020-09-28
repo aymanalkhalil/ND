@@ -53,7 +53,8 @@
     <div class="row text-white text-center mt-8">
         <div class="col">
             <hr class="mb-8">جميع الحقوق محفوظة<u><a class="text-white" href=""></a></u> | منصة اليوم الوطني السعودي
-            ٩٠
+            ٩٠<br>
+            تطوير وإدارة :<a href="https://www.instagram.com/it.graduation/" target="_blank" class='text-light' dir="ltr">@it.graduation</a>
         </div>
     </div>
     </div>

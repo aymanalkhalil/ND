@@ -7,7 +7,7 @@ if (isset($_GET['pageno'])) {
 } else {
     $pageno = 1;
 }
-$num_records_per_page = 6;
+$num_records_per_page = 12;
 $offset = ($pageno - 1) * $num_records_per_page;
 
 ?>
@@ -33,6 +33,8 @@ $offset = ($pageno - 1) * $num_records_per_page;
 
                     </ol>
                 </nav>
+                <h2 class='text-center'> عزيزي صاحب/ة المنتج التجاري للمشاركة بمسابقة أصحاب المنتجات التجارية <a href="merchants-contest.php">اضغط هنا</a></h2>
+
             </div>
         </div>
         <!-- / .row -->
@@ -46,7 +48,7 @@ $offset = ($pageno - 1) * $num_records_per_page;
         <div class="row">
 
             <?php
-            $get_merchant_feeds = mysqli_query($conn, "SELECT upload_merchant_id,upload_merchant_file,upload_merchant_description,uploads_merchants.merchant_id,merchants.merchant_name
+            $get_merchant_feeds = mysqli_query($conn, "SELECT merchant_desc,upload_merchant_id,upload_merchant_file,upload_merchant_description,uploads_merchants.merchant_id,merchants.merchant_name
                 FROM merchants INNER JOIN uploads_merchants ON uploads_merchants.merchant_id=merchants.merchant_id WHERE active=1
                 ORDER BY upload_merchant_id DESC LIMIT $offset,$num_records_per_page");
             if (mysqli_num_rows($get_merchant_feeds) == 0) {
@@ -124,6 +126,8 @@ $offset = ($pageno - 1) * $num_records_per_page;
                             <div class="card-body pt-5"> <label class="d-inline-block text-info mb-2">بواسطة: <?php echo  $all_feeds['merchant_name'] ?></label>
                                 <h2 class="h5 font-weight-medium">
                                     <p class="link-title <?php echo !empty($all_feeds['upload_merchant_description']) ? "text-success" : 'text-danger' ?>"><label class='text-secondary'>تعليق صاحب المشاركة : </label><?php echo !empty($all_feeds['upload_merchant_description']) ? $all_feeds['upload_merchant_description'] : "لا يوجد تعليق" ?></p>
+                                    <p class="link-title <?php echo $all_feeds['merchant_desc'] == 'لا يوجد وصف للحساب' ? "text-danger" : 'text-success' ?>"><label class='text-secondary'> وصف حساب صاحب المنتج التجاري : </label><?php echo !empty($all_feeds['merchant_desc']) ? $all_feeds['merchant_desc'] : "لا يوجد وصف لحساب صاحب المنتج التجاري" ?></p>
+
                                 </h2>
                                 <!-- <p>Businesses need access to development resources serspiciatis unde omnis iste natus error.</p> -->
                             </div>
@@ -143,19 +147,19 @@ $offset = ($pageno - 1) * $num_records_per_page;
                         <li class="page-item mr-auto <?php if ($pageno <= 1) {
                                                             echo 'disabled';
                                                         }   ?>"> <a class="page-link" href="<?php if ($pageno <= 1) {
-                                                                                                    echo '#';
-                                                                                                } else {
-                                                                                                    echo "?pageno=" . ($pageno - 1);
-                                                                                                } ?>">الصفحة السابقة</a>
+                                                                                                echo '#';
+                                                                                            } else {
+                                                                                                echo "?pageno=" . ($pageno - 1);
+                                                                                            } ?>">الصفحة السابقة</a>
 
                         </li>
                         <li class="page-item ml-auto <?php if ($pageno >= $total_pages_sp) {
                                                             echo 'disabled';
                                                         }   ?>"> <a class="page-link" href="<?php if ($pageno >= $total_pages_sp) {
-                                                                                                    echo '#';
-                                                                                                } else {
-                                                                                                    echo "?pageno=" . ($pageno + 1);
-                                                                                                } ?>">الصفحة التالية</a>
+                                                                                                echo '#';
+                                                                                            } else {
+                                                                                                echo "?pageno=" . ($pageno + 1);
+                                                                                            } ?>">الصفحة التالية</a>
                         </li>
                     </ul>
                 </nav>

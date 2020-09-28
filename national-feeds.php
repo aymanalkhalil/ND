@@ -7,7 +7,7 @@ if (isset($_GET['pageno'])) {
 } else {
     $pageno = 1;
 }
-$num_records_per_page = 6;
+$num_records_per_page = 12;
 $offset = ($pageno - 1) * $num_records_per_page;
 
 ?>
@@ -33,20 +33,25 @@ $offset = ($pageno - 1) * $num_records_per_page;
                         </li>
                     </ol>
                 </nav>
+                <h2 class='text-center'> عزيزي المشارك/ة للمشاركة بالمسابقة الوطنية <a href="users-contest.php">اضغط هنا</a></h2>
+
             </div>
+
         </div>
         <!-- / .row -->
+
     </div>
     <!-- / .container -->
 </section>
 <!--blog start-->
 
 <section>
+
     <div class="container">
         <div class="row">
 
             <?php
-            $get_user_feeds = mysqli_query($conn, "SELECT upload_user_id,upload_user_file,upload_user_description,uploads_users.user_id,users.user_name
+            $get_user_feeds = mysqli_query($conn, "SELECT user_desc,upload_user_id,upload_user_file,upload_user_description,uploads_users.user_id,users.user_name
                 FROM users INNER JOIN uploads_users ON uploads_users.user_id=users.user_id where active=1
                 ORDER BY upload_user_id DESC LIMIT $offset,$num_records_per_page");
             if (mysqli_num_rows($get_user_feeds) == 0) {
@@ -124,10 +129,14 @@ $offset = ($pageno - 1) * $num_records_per_page;
                             <div class="card-body pt-5"> <label class="d-inline-block text-info mb-2">بواسطة: <?php echo  $all_feeds['user_name'] ?></label>
                                 <h2 class="h5 font-weight-medium">
                                     <p class="link-title <?php echo !empty($all_feeds['upload_user_description']) ? "text-success" : 'text-danger' ?>"><label class='text-secondary'>تعليق صاحب المشاركة : </label><?php echo !empty($all_feeds['upload_user_description']) ? $all_feeds['upload_user_description'] : "لا يوجد تعليق" ?></p>
+                                    <p class="link-title <?php echo $all_feeds['user_desc'] == 'لا يوجد وصف للحساب' ? "text-danger" : 'text-success' ?>"><label class='text-secondary'> وصف حساب المشارك : </label><?php echo !empty($all_feeds['user_desc']) ? $all_feeds['user_desc'] : "لا يوجد وصف لحساب المشارك" ?></p>
+
                                 </h2>
-                                <!-- <p>Businesses need access to development resources serspiciatis unde omnis iste natus error.</p> -->
                             </div>
-                            <div></div>
+                            <div class="card-body ">
+
+                            </div>
+                            <!-- <div></div> -->
                         </div>
                     </div>
                     <!-- End Blog Card -->
